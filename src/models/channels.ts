@@ -1,6 +1,6 @@
 export let channels = {
-    "Allgemein": {
-        'headline': '',
+    "channel": {
+        'headline': 'General',
         'participants': [],
         "messages": {
             "message1": {
@@ -15,21 +15,5 @@ export let channels = {
             }
         }
     },
-    "Lerngruppe": {
-        'headline': '',
-        'participants': [],
-        "messages": {
-            "message1": {
-                "creator": "",
-                "text": "",
-                "date": 2151351351
-            },
-            "message2": {
-                "creator": "",
-                "text": "",
-                "date": 2151351351
-            }
-        }
-    }
 
 } 

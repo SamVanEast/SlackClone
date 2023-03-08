@@ -17,7 +17,7 @@ export class SlackOverviewComponent {
 
   constructor(private router: Router, private firestore: AngularFirestore, private route: ActivatedRoute) {
     this.router.navigateByUrl('jj4t8IgMOtkZR97thoti');
-    
+
     this.route.params.subscribe((params) => {
       this.currentUserId = params['id'];
     });
@@ -35,9 +35,9 @@ export class SlackOverviewComponent {
 
 
     // this.generateChannelDoc();
-    // this.generateUserDoc();
     // this.generateGoupsDoc();
     // this.generateDirectMesssageDoc();
+    // this.generateUserDoc();
   }
 
   generateChannelDoc(){
