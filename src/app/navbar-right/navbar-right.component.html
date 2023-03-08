@@ -1,17 +1,31 @@
 <mat-card class="navbar-right-container">
-    <mat-card-header>
-        <div mat-card-avatar class="example-header-image"></div>
-        <mat-card-title>Profil</mat-card-title>
+    <mat-card-header class="title-close-container">
+        <mat-card-title>Profile</mat-card-title>
         <button mat-icon-button matTooltip="Basic">
             <mat-icon>close</mat-icon>
         </button>
     </mat-card-header>
     <img mat-card-image src="../../assets/img/blank-profile.png" alt="Photo of a Shiba Inu">
-    <mat-card-content>
+    <mat-card-content class="edit-user-btn">
         <p>Name</p>
+        <button mat-button color="primary">Bearbeiten</button>
     </mat-card-content>
-    <mat-card-actions>
-        <button mat-button>LIKE</button>
-        <button mat-button>SHARE</button>
-    </mat-card-actions>
+    <mat-card-content class="edit-contactdata-btn">
+        <p>Contact data</p>
+        <button mat-button color="primary">Bearbeiten</button>
+    </mat-card-content>
+    <div class="email-phone">
+        <mat-icon fontIcon="mail"></mat-icon>
+        <div>
+            <p>E-mail-address</p>
+            <a href="#">test@test.de</a>
+        </div>
+    </div>
+    <div class="email-phone">
+        <mat-icon fontIcon="call"></mat-icon>
+        <div>
+            <p>Tel.:</p>
+            <a href="#">0123456789</a>
+        </div>
+    </div>
 </mat-card>
