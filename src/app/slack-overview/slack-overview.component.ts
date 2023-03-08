@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener, ViewChild } from '@angular/core';
 import { user } from 'src/models/user';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { channels } from 'src/models/channels';
@@ -14,6 +14,8 @@ import { doc, getDoc } from '@angular/fire/firestore';
   styleUrls: ['./slack-overview.component.scss']
 })
 export class SlackOverviewComponent {
+  @ViewChild('header') header;
+  showNavbar = true;
   currentUserId;
 
 
@@ -54,6 +56,18 @@ export class SlackOverviewComponent {
 
     console.log(docSnap.data())
   }
+
+  @HostListener('window:click')
+
+  onClick() {
+    this.showNavbar = this.header.openNavbar;
+  }
+
+
+
+
+
+
 
 
   generateChannelDoc() {
