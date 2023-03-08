@@ -14,6 +14,17 @@ mat-icon {
     color: white;
 }
 
+.collapse-menu {
+    cursor: pointer;
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 50px;
+}
+
+
 .header-mid {
     display: flex;
     align-items: center;

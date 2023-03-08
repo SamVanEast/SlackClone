@@ -1,8 +1,8 @@
 <mat-toolbar class="toolbar-header">
-
-    <a routerLink="/">Slack Clone</a>
-    <button (click)="openNavbarLeft()"></button>
-
+    <div class="header-left">
+        <a routerLink="/">Slack Clone</a>
+        <mat-icon class="collapse-menu" (click)="openNavbarLeft()">close_fullscreen</mat-icon>
+    </div>
     <div class="header-mid">
         <mat-icon>schedule</mat-icon>
         <form class="search-bar" ngNativeValidate (submit)="sub()">
@@ -17,7 +17,7 @@
 
     <div class="header-right">
         <mat-icon>help</mat-icon>
-            <img class="profile-pic" src="../../assets/img/blank-profile.png">     
+        <img class="profile-pic" src="../../assets/img/blank-profile.png">
     </div>
 
 </mat-toolbar>
