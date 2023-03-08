@@ -16,22 +16,22 @@ export class SlackOverviewComponent {
 
 
   constructor(private router: Router, private firestore: AngularFirestore, private route: ActivatedRoute) {
+    this.router.navigateByUrl('jj4t8IgMOtkZR97thoti');
+    
     this.route.params.subscribe((params) => {
       this.currentUserId = params['id'];
     });
 
     // console.log(this.firestore.collection('users'))
-    this.router.navigateByUrl('jj4t8IgMOtkZR97thoti');
-    this.firestore.collection('directMessage').add(directMessages).then((user) => {
-    })
+
 
 
     this.firestore.collection('users').valueChanges({ idField: 'docId' }).subscribe((changes: any) => {
       console.log(changes);
     })
 
-    this.firestore.collection('users').doc(this.currentUserId).update(user).then((user) => {
-    })
+    // this.firestore.collection('users').doc(this.currentUserId).update(user).then((user) => {
+    // })
 
 
     // this.generateChannelDoc();
