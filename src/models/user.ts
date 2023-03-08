@@ -1,14 +1,15 @@
 export let user = {
     "userInfos": {
-        "Vormane": "Samuel",
-        "Nachmane": "Haas",
+        "firstName": "Samuel",
+        "lastName": "Haas",
         "email": "asdfa@sd.com",
-        "passwort": 123456,
-        "ist er angemeldet": false
+        "password": 123456,
+        "phone": 123456789,
+        "isLoggedIn": false
     },
     "masseges": {
-        "alleAllgemeineChannels": ['BKBJGJTFZGVJHF', 'BLJGUZFJTFJTFZTF'],
-        "alle Gruppen": ['GKHGFJFGHVJCT', 'KJHVHVJHGVJHCG'],
-        "alle private chats": ['GKJHVKGVJT', 'VKVKTKTNLKBOZ']
+        "channels": ['BKBJGJTFZGVJHF', 'BLJGUZFJTFJTFZTF'],
+        "groups": ['GKHGFJFGHVJCT', 'KJHVHVJHGVJHCG'],
+        "chats": ['GKJHVKGVJT', 'VKVKTKTNLKBOZ']
     }
 }

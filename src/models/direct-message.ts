@@ -2,33 +2,33 @@ export let directMessages = {
     'headline': '',
     "directMessage1": {
         'headline': '',
-        'Teilnehmer': [],
-        "Chats": {
-            "Chat 1": {
-                "Ersteller": "",
+        'participants': [],
+        "messages": {
+            "message1": {
+                "creator": "",
                 "text": "",
-                "datum": 2151351351
+                "date": 2151351351
             },
-            "Chat 2": {
-                "Ersteller": "",
+            "message2": {
+                "creator": "",
                 "text": "",
-                "datum": 2151351351
+                "date": 2151351351
             }
         }
     },
     "directMessage2": {
         'headline': '',
-        'Teilnehmer': [],
-        "Chats": {
-            "Chat 1": {
-                "Ersteller": "",
+        'participants': [],
+        "messages": {
+            "message1": {
+                "creator": "",
                 "text": "",
-                "datum": 2151351351
+                "date": 2151351351
             },
-            "Chat 2": {
-                "Ersteller": "",
+            "message2": {
+                "creator": "",
                 "text": "",
-                "datum": 2151351351
+                "date": 2151351351
             }
         }
     }

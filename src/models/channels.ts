@@ -1,33 +1,33 @@
 export let channels = {
     "Allgemein": {
         'headline': '',
-        'Teilnehmer': [],
-        "Chats": {
-            "Chat 1": {
-                "Ersteller": "",
+        'participants': [],
+        "messages": {
+            "message1": {
+                "creator": "",
                 "text": "",
-                "datum": 2151351351
+                "date": 2151351351
             },
-            "Chat 2": {
-                "Ersteller": "",
+            "message2": {
+                "creator": "",
                 "text": "",
-                "datum": 2151351351
+                "date": 2151351351
             }
         }
     },
     "Lerngruppe": {
         'headline': '',
-        'Teilnehmer': [],
-        "Chats": {
-            "Chat 1": {
-                "Ersteller": "",
+        'participants': [],
+        "messages": {
+            "message1": {
+                "creator": "",
                 "text": "",
-                "datum": 2151351351
+                "date": 2151351351
             },
-            "Chat 2": {
-                "Ersteller": "",
+            "message2": {
+                "creator": "",
                 "text": "",
-                "datum": 2151351351
+                "date": 2151351351
             }
         }
     }
