@@ -7,7 +7,7 @@ export let user = {
         "phone": 123456789,
         "isLoggedIn": false
     },
-    "masseges": {
+    "messages": {
         "channels": ['BKBJGJTFZGVJHF', 'BLJGUZFJTFJTFZTF'],
         "groups": ['GKHGFJFGHVJCT', 'KJHVHVJHGVJHCG'],
         "chats": ['GKJHVKGVJT', 'VKVKTKTNLKBOZ']

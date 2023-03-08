@@ -6,7 +6,7 @@ import { groups } from 'src/models/groups';
 import { directMessages } from 'src/models/direct-message';
 import { ActivatedRoute, Router } from '@angular/router';
 import { getFirestore } from "firebase/firestore";
-import { doc, getDoc } from '@angular/fire/firestore';
+import { collection, doc, getDoc, getDocs } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-slack-overview',
@@ -36,7 +36,7 @@ export class SlackOverviewComponent {
 
 
     this.firestore.collection('users').valueChanges({ idField: 'docId' }).subscribe((changes: any) => {
-      console.log(changes);
+      // console.log(changes);
     })
 
     // this.firestore.collection('users').doc(this.currentUserId).update(user).then((user) => {
@@ -51,10 +51,14 @@ export class SlackOverviewComponent {
 
   async getAllIds() {
     const db = getFirestore();
-    const docRef = doc(db, 'users', 'jj4t8IgMOtkZR97thoti');
-    const docSnap = await getDoc(docRef);
+    const docRef = collection(db, 'users');
+    const docSnap = await getDocs(docRef);
 
-    console.log(docSnap.data())
+    // console.log(docSnap)
+    docSnap.forEach((doc) => {
+      // console.log(doc)
+
+    })
   }
 
   @HostListener('window:click')
@@ -83,7 +87,7 @@ export class SlackOverviewComponent {
     })
   }
   generateDirectMesssageDoc() {
-    this.firestore.collection('directMessage').add(directMessages).then((user) => {
+    this.firestore.collection('directMessages').add(directMessages).then((user) => {
     })
   }
 }
