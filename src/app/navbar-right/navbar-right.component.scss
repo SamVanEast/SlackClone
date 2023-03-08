@@ -15,10 +15,12 @@
     justify-content: space-between;
     align-items: center;
     flex-direction: row;
+    margin-top: 16px;
     padding-right: 0;
 
     p {
         margin-bottom: 0;
+        font-size: 18px;
     }
 }
 
@@ -27,11 +29,13 @@
     justify-content: space-between;
     align-items: center;
     flex-direction: row;
+    margin-top: 16px;
     padding-right: 0;
     border-top: 1px solid rgba($color: rgb(0, 0, 0), $alpha: 0.1);
 
     p {
         margin-bottom: 0;
+        font-size: 16px;
     }
 }
 
