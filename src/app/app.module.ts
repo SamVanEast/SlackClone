@@ -6,7 +6,6 @@ import { AppComponent } from './app.component';
 import { SlackOverviewComponent } from './slack-overview/slack-overview.component';
 import { HeaderComponent } from './header/header.component';
 import { NavbarLeftComponent } from './navbar-left/navbar-left.component';
-import { MassagesHistoryComponent } from './massages-history/massages-history.component';
 import { NavbarRightComponent } from './navbar-right/navbar-right.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -35,7 +34,8 @@ import { provideFirestore,getFirestore } from '@angular/fire/firestore';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore/'; 
 import { FormsModule }   from '@angular/forms';
-import { ReactiveFormsModule } from '@angular/forms'
+import { ReactiveFormsModule } from '@angular/forms';
+import { MessagesHistoryComponent } from './messages-history/messages-history.component';
 
 @NgModule({
   declarations: [
@@ -43,8 +43,8 @@ import { ReactiveFormsModule } from '@angular/forms'
     SlackOverviewComponent,
     HeaderComponent,
     NavbarLeftComponent,
-    MassagesHistoryComponent,
-    NavbarRightComponent
+    NavbarRightComponent,
+    MessagesHistoryComponent,
   ],
   imports: [
     BrowserModule,
