@@ -2,10 +2,24 @@
     background-color: #2B092A;
     min-height: 50px;
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
 
     a {
         text-decoration: none;
         color: white
     }
+}
+
+mat-icon {
+    color: white;
+}
+
+.header-mid {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+mat-form-field {
+    background-color: white;
 }
