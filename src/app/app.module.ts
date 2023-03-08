@@ -36,6 +36,7 @@ import { AngularFirestoreModule } from '@angular/fire/compat/firestore/';
 import { FormsModule }   from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MessagesHistoryComponent } from './messages-history/messages-history.component';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +46,7 @@ import { MessagesHistoryComponent } from './messages-history/messages-history.co
     NavbarLeftComponent,
     NavbarRightComponent,
     MessagesHistoryComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
