@@ -1,0 +1,90 @@
+.container-login {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100vh;
+}
+
+h1 {
+    font-size: 48px;
+}
+
+p {
+    font-size: 18px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+.buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.login {
+  color: white;
+  font-size: 18px;
+  font-weight: 700;
+  background-color: #611f69;
+  border-radius: 4px;
+  border: unset;
+  padding: 15px 5px;
+  cursor: pointer;
+
+  &:hover {
+    opacity: 0.95;
+  }
+}
+
+.guest {
+  color: #611f69;
+  font-size: 18px;
+  font-weight: 700;
+  background-color: white;
+  border-radius: 4px;
+  border: 2px solid #611f69;
+  padding: 15px 5px;
+  cursor: pointer;
+
+  &:hover {
+    border: 2px solid #86358f;
+    opacity: 0.75;
+  }
+}
+
+.new-user-link {
+    padding-top: 16px;
+
+    span {
+        font-weight: 700;
+        color: #86358f;
+        cursor: pointer;
+    }
+}
+
+// css for create new User 
+
+
+.container-new-user {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    z-index: 1;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.go-back {
+    position: absolute;
+    right: 30px;
+    top: 30px;
+}

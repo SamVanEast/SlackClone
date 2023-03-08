@@ -1,1 +1,89 @@
-<p>login works!</p>
+<div class="container-login">
+
+    <h1>Welcome to Slack</h1>
+
+    <p>We suggest using the <b>email address that you use at work.</b></p>
+
+    <form class="example-form">
+        <mat-form-field class="example-full-width">
+          <mat-label>Email</mat-label>
+          <input type="email" matInput [formControl]="emailFormControl" [errorStateMatcher]="matcher"
+                 placeholder="Ex. pat@example.com">
+          <mat-hint></mat-hint>
+          <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+            Please enter a valid email address
+          </mat-error>
+          <mat-error *ngIf="emailFormControl.hasError('required')">
+            Email is <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+
+        <div class="example-container">
+            <mat-form-field appearance="fill">
+              <mat-label>Enter your password</mat-label>
+              <input matInput [type]="hide ? 'password' : 'text'">
+              <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+              </button>
+            </mat-form-field>
+        </div>    
+
+        <div class="buttons">
+            <button class="login">Login</button>
+            <button (click)="guestLogin()" class="guest">Guest Login</button>
+        </div>
+        
+
+      </form>
+
+      <div class="new-user-link">
+        <p>You don't have an account ? <span (click)="NewUserOverview()" >Here</span> you can create a new account </p>
+      </div>
+
+</div>
+
+<div *ngIf="newUser" class="container-new-user">
+
+    <h1>Create a new User</h1>
+
+    <mat-form-field class="example-full-width">
+          <mat-label>Email</mat-label>
+          <input type="email" matInput [formControl]="emailFormControl" [errorStateMatcher]="matcher"
+                 placeholder="Ex. pat@example.com">
+          <mat-hint></mat-hint>
+          <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+            Please enter a valid email address
+          </mat-error>
+          <mat-error *ngIf="emailFormControl.hasError('required')">
+            Email is <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+
+
+    <form class="example-form">
+    <div class="example-container">
+        <mat-form-field appearance="fill">
+          <mat-label>Enter your password</mat-label>
+          <input matInput [type]="hide ? 'password' : 'text'">
+          <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </button>
+        </mat-form-field>
+    </div>
+
+    <div class="example-container">
+        <mat-form-field appearance="fill">
+          <mat-label>Enter your password</mat-label>
+          <input matInput [type]="hide ? 'password' : 'text'">
+          <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </button>
+        </mat-form-field>
+    </div>
+</form>
+
+    <button mat-fab matTooltip="Go back" color="primary" aria-label="Example fab with a heart icon" class="go-back" (click)="showLogin()">
+        <mat-icon>arrow_back</mat-icon>
+    </button>
+
+</div>
