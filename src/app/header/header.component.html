@@ -4,7 +4,7 @@
 
     <div class="header-mid">
         <mat-icon>schedule</mat-icon>
-        <form class="search-bar">
+        <form class="search-bar" ngNativeValidate (submit)="sub()">
             <input type="text" name="" placeholder="Search Slack Clone">
 
             <button>
@@ -15,16 +15,7 @@
 
     <div class="header-right">
         <mat-icon>help</mat-icon>
-            <img matBadge="3" class="profile-pic" src="../../assets/img/blank-profile.png">
-            
-        
+            <img class="profile-pic" src="../../assets/img/blank-profile.png">     
     </div>
 
 </mat-toolbar>
-
-<!-- <div class="demo-section">
-    Button toggles badge visibility
-    <button mat-raised-button matBadge="7" [matBadgeHidden]="hidden" (click)="toggleBadgeVisibility()">
-        Hide
-    </button>
-  </div> -->
