@@ -5,6 +5,8 @@ import { channels } from 'src/models/channels';
 import { groups } from 'src/models/groups';
 import { directMessages } from 'src/models/direct-message';
 import { ActivatedRoute, Router } from '@angular/router';
+import { getFirestore } from "firebase/firestore";
+import { doc, getDoc } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-slack-overview',
@@ -13,17 +15,22 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class SlackOverviewComponent {
   currentUserId;
-  openedSidebar = true;
 
-  constructor(private router: Router, private firestore: AngularFirestore, private route: ActivatedRoute) {
+
+  constructor(private router: Router, private firestore: AngularFirestore, private route: ActivatedRoute,) {
     this.router.navigateByUrl('jj4t8IgMOtkZR97thoti');
 
     this.route.params.subscribe((params) => {
       this.currentUserId = params['id'];
     });
 
-    // console.log(this.firestore.collection('users'))
+    this.getAllIds();
 
+
+    // this.firestore.collection('users').doc('').then(() => {
+
+    // })
+    // Object.keys(Films)
 
 
     this.firestore.collection('users').valueChanges({ idField: 'docId' }).subscribe((changes: any) => {
@@ -40,19 +47,28 @@ export class SlackOverviewComponent {
     // this.generateUserDoc();
   }
 
-  generateChannelDoc(){
+  async getAllIds() {
+    const db = getFirestore();
+    const docRef = doc(db, 'users', 'jj4t8IgMOtkZR97thoti');
+    const docSnap = await getDoc(docRef);
+
+    console.log(docSnap.data())
+  }
+
+
+  generateChannelDoc() {
     this.firestore.collection('channels').add(channels).then((user) => {
     })
   }
-  generateUserDoc(){
+  generateUserDoc() {
     this.firestore.collection('users').add(user).then((user) => {
     })
   }
-  generateGoupsDoc(){
+  generateGoupsDoc() {
     this.firestore.collection('groups').add(groups).then((user) => {
     })
   }
-  generateDirectMesssageDoc(){
+  generateDirectMesssageDoc() {
     this.firestore.collection('directMessage').add(directMessages).then((user) => {
     })
   }
