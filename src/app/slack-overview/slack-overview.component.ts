@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { user } from 'src/models/user';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 
 @Component({
   selector: 'app-slack-overview',
@@ -7,8 +8,7 @@ import { user } from 'src/models/user';
   styleUrls: ['./slack-overview.component.scss']
 })
 export class SlackOverviewComponent {;
-  constructor() { 
-    // console.log(Object.keys(this.user.user.userInfos).length);
+  constructor(private firestore: AngularFirestore) { 
     console.log(user);
   }
 }
