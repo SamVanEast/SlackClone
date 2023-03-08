@@ -1,1 +1,16 @@
-<p>dialog-update-profile-name works!</p>
+<mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
+
+<h1 class="title-dialog" mat-dialog-title>Add user</h1>
+<div mat-dialog-content>
+  <div>
+    <mat-form-field class="mr-16 mt-16" appearance="outline">
+      <mat-label>First name</mat-label>
+      <input [disabled]="loading" [(ngModel)]="firstName" matInput placeholder="First name">
+    </mat-form-field>
+    
+    <mat-form-field class="mt-16" appearance="outline">
+      <mat-label>Last name</mat-label>
+      <input [disabled]="loading" [(ngModel)]="lastName" matInput placeholder="Last name">
+    </mat-form-field>
+  </div>
+</div>

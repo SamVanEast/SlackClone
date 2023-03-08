@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
+import { DialogUpdateProfileNameComponent } from '../dialog-update-profile-name/dialog-update-profile-name.component';
 
 @Component({
   selector: 'app-navbar-right',
@@ -15,7 +17,7 @@ export class NavbarRightComponent implements OnInit{
   public phone;
   currentUserId;
 
-  constructor(private route: ActivatedRoute, private firestore: AngularFirestore){}
+  constructor(private route: ActivatedRoute, private firestore: AngularFirestore, public dialog: MatDialog){}
 
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
@@ -29,5 +31,9 @@ export class NavbarRightComponent implements OnInit{
       this.phone = user.userInfos.phone;
     });
   });
+  }
+
+  openDialog(){
+    this.dialog.open(DialogUpdateProfileNameComponent);
   }
 }

@@ -8,7 +8,7 @@
     <img mat-card-image src="../../assets/img/blank-profile.png" alt="Photo of a Shiba Inu">
     <mat-card-content class="edit-user-btn">
         <p>{{ firstName }} {{ lastName }}</p>
-        <button mat-button color="primary">Bearbeiten</button>
+        <button mat-button (click)="openDialog()" color="primary">Bearbeiten</button>
     </mat-card-content>
     <mat-card-content class="edit-contactdata-btn">
         <p>Contact data</p>
