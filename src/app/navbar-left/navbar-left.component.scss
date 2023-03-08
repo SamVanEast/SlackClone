@@ -4,11 +4,19 @@
 }
 
 .channels {
-    
+
     h2 {
         font-weight: bold;
         font-size: 16px;
     }
+}
+
+.directMessages {
+    h2 {
+        font-weight: bold;
+        font-size: 16px;
+    }
+
 }
 
 .single-channel {
@@ -20,12 +28,13 @@
 
 .hashes {
     font-size: 20px;
-    color: rgba(255,255,255,0.4)
+    color: rgba(255, 255, 255, 0.4)
 }
 
 .single-dm {
     display: flex;
     align-items: center;
+    padding-bottom: 12px;
 }
 
 mat-icon {

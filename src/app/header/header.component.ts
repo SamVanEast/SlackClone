@@ -7,6 +7,8 @@ import { Component } from '@angular/core';
 })
 export class HeaderComponent {
 
+  public openedSidebar = false;
+
   sub(): void {
   }
 
