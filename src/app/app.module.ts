@@ -8,6 +8,8 @@ import { HeaderComponent } from './header/header.component';
 import { NavbarLeftComponent } from './navbar-left/navbar-left.component';
 import { MassagesHistoryComponent } from './massages-history/massages-history.component';
 import { NavbarRightComponent } from './navbar-right/navbar-right.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatToolbarModule } from '@angular/material/toolbar';
 
 @NgModule({
   declarations: [
@@ -20,7 +22,9 @@ import { NavbarRightComponent } from './navbar-right/navbar-right.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    MatToolbarModule
   ],
   providers: [],
   bootstrap: [AppComponent]
