@@ -8,8 +8,9 @@ app-header{
     max-width: 100%;
     height: calc(100vh - 44px);
 
-    app-navbar-left {
+    mat-drawer {
         width: 13%;
+        position: unset;
     }
 
     app-massages-history {
@@ -19,4 +20,9 @@ app-header{
     app-navbar-right {
         width: 20%;
     }
+}
+
+.sidenav-left {
+    background-color: #3E103F;
+    color: #FFFFFF;
 }

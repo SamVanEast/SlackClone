@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./navbar-left.component.scss']
 })
 export class NavbarLeftComponent {
-
+  drawer = true;
 }

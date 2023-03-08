@@ -8,7 +8,6 @@ import { Component } from '@angular/core';
 export class HeaderComponent {
 
   sub(): void {
-    console.log("test")
   }
 
 }

@@ -1,6 +1,20 @@
 <app-header></app-header>
 <div class="content">
-    <app-navbar-left></app-navbar-left>
+    
+    <mat-drawer [opened]="true" #drawer class="sidenav-left" mode="side">
+        <app-navbar-left></app-navbar-left>
+    </mat-drawer>
     <app-massages-history></app-massages-history>
     <app-navbar-right></app-navbar-right>
 </div>
+<mat-drawer-container class="example-container" autosize>
+
+  
+    <div class="example-sidenav-content">
+      <button type="button" mat-button (click)="drawer.toggle()">
+        Toggle sidenav
+      </button>
+    </div>
+  
+  </mat-drawer-container>
+  
