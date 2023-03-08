@@ -4,6 +4,7 @@ import { SlackOverviewComponent } from './slack-overview/slack-overview.componen
 
 const routes: Routes = [
   {path: '', component:  SlackOverviewComponent},
+  {path: ':id', component:  SlackOverviewComponent},
   {path: 'slack/login', component:  SlackOverviewComponent},
   {path: 'slack/overview', component:  SlackOverviewComponent},
 ];
