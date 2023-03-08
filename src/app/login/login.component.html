@@ -21,7 +21,7 @@
         <div class="example-container">
             <mat-form-field appearance="fill">
               <mat-label>Enter your password</mat-label>
-              <input matInput [type]="hide ? 'password' : 'text'">
+              <input  matInput [type]="hide ? 'password' : 'text'">
               <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
                 <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
               </button>
@@ -46,10 +46,17 @@
 
     <h1>Create a new User</h1>
 
+    <form class="example-form">
+
+        <mat-form-field appearance="fill" >
+            <mat-label>Username</mat-label>
+            <input type="text" matInput required #userName>
+          </mat-form-field>
+    
+
     <mat-form-field class="example-full-width">
           <mat-label>Email</mat-label>
-          <input type="email" matInput [formControl]="emailFormControl" [errorStateMatcher]="matcher"
-                 placeholder="Ex. pat@example.com">
+          <input type="email" matInput [formControl]="emailFormControl" [errorStateMatcher]="matcher" placeholder="Ex. pat@example.com" #userMail>
           <mat-hint></mat-hint>
           <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
             Please enter a valid email address
@@ -60,11 +67,11 @@
         </mat-form-field>
 
 
-    <form class="example-form">
+    
     <div class="example-container">
         <mat-form-field appearance="fill">
-          <mat-label>Enter your password</mat-label>
-          <input matInput [type]="hide ? 'password' : 'text'">
+          <mat-label>Enter your password</mat-label >
+          <input  matInput [type]="hide ? 'password' : 'text'" #password >
           <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
             <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
           </button>
@@ -73,13 +80,17 @@
 
     <div class="example-container">
         <mat-form-field appearance="fill">
-          <mat-label>Enter your password</mat-label>
-          <input matInput [type]="hide ? 'password' : 'text'">
+          <mat-label>Repeat password</mat-label>
+          <input matInput [type]="hide ? 'password' : 'text'" >
           <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
             <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
           </button>
         </mat-form-field>
     </div>
+
+    <button class="login" (click)="createNewUser()">Create new User</button>
+
+
 </form>
 
     <button mat-fab matTooltip="Go back" color="primary" aria-label="Example fab with a heart icon" class="go-back" (click)="showLogin()">

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
 import {Router} from '@angular/router';
@@ -24,6 +24,22 @@ export class LoginComponent {
   matcher = new MyErrorStateMatcher();
   hide = true;
   newUser = false;
+  
+
+  allUser: any = [{
+    name:  "John",
+    email: "leo@web.de",
+    password: "123"
+  }]
+
+
+  @ViewChild('password') password:ElementRef;
+  @ViewChild('userName') userName:ElementRef;
+  @ViewChild('userMail') userMail:ElementRef;
+
+
+
+
 
   guestLogin() {
     this.router.navigateByUrl('/')
@@ -36,4 +52,14 @@ export class LoginComponent {
   showLogin() {
     this.newUser = false;
   }
+
+  createNewUser() {
+    
+    this.allUser.push({
+    'name': this.userName.nativeElement.value, 
+    'email': this.userMail.nativeElement.value,
+    'password': this.password.nativeElement.value });
+  }
+
+
 }
