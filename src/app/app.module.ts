@@ -37,6 +37,7 @@ import { FormsModule }   from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MessagesHistoryComponent } from './messages-history/messages-history.component';
 import { LoginComponent } from './login/login.component';
+import { DialogUpdateProfileNameComponent } from './dialog-update-profile-name/dialog-update-profile-name.component';
 
 @NgModule({
   declarations: [
@@ -47,6 +48,7 @@ import { LoginComponent } from './login/login.component';
     NavbarRightComponent,
     MessagesHistoryComponent,
     LoginComponent,
+    DialogUpdateProfileNameComponent,
   ],
   imports: [
     BrowserModule,
