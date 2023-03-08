@@ -9,6 +9,8 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 })
 export class SlackOverviewComponent {;
   constructor(private firestore: AngularFirestore) { 
-    console.log(user);
+    // console.log(this.firestore.collection('users'))
+    // this.firestore.collection('users').add(user).then((user) => {
+    // })
   }
 }
