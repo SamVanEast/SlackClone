@@ -4,17 +4,27 @@
 
     <div class="header-mid">
         <mat-icon>schedule</mat-icon>
-        <form action="" class="search-bar">
+        <form class="search-bar">
             <input type="text" name="" placeholder="Search Slack Clone">
 
-            <button type="submit">
-                <img src="../../assets/img/icons/magnifying-glass-white.svg" >
+            <button>
+                <img src="../../assets/img/icons/magnifying-glass-white.svg">
             </button>
         </form>
+    </div>
 
-
-
-
+    <div class="header-right">
+        <mat-icon>help</mat-icon>
+            <img matBadge="3" class="profile-pic" src="../../assets/img/blank-profile.png">
+            
+        
     </div>
 
 </mat-toolbar>
+
+<!-- <div class="demo-section">
+    Button toggles badge visibility
+    <button mat-raised-button matBadge="7" [matBadgeHidden]="hidden" (click)="toggleBadgeVisibility()">
+        Hide
+    </button>
+  </div> -->

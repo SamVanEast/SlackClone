@@ -25,13 +25,14 @@ mat-form-field {
 }
 
 .search-bar {
-    width: 100%;
+
     max-width: 700px;
-    background: rgba(255,255,255,0.2);
+    background: rgba(255, 255, 255, 0.1);
     display: flex;
     align-self: center;
-    border-radius: 60px;
+    border-radius: 5px;
     padding: 5px 5px;
+    border: 1px solid gray;
 
     input {
         background: transparent;
@@ -39,10 +40,10 @@ mat-form-field {
         border: 0;
         outline: none;
         padding: 0px 10px;
-        font-size: 20px;
+        font-size: 14px;
         color: white;
 
-        
+
     }
 
     button {
@@ -50,12 +51,24 @@ mat-form-field {
         border-radius: 50%;
         cursor: pointer;
         background: transparent;
+        padding-top: 3px;
     }
 
     button img {
-        width: 25px;
+        width: 15px;
 
     }
 
 }
 
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.profile-pic {
+    width: 22px;
+    border-radius: 5px;
+
+}
