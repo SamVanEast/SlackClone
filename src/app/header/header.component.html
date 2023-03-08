@@ -1,7 +1,12 @@
 <mat-toolbar class="toolbar-header">
     <div class="header-left">
         <a routerLink="/">Slack Clone</a>
-        <mat-icon class="collapse-menu" (click)="openNavbarLeft()">close_fullscreen</mat-icon>
+        <button mat-icon-button class="collapse-menu"
+            (click)="openNavbarLeft()">
+            <mat-icon>compare_arrows</mat-icon>
+        </button>
+        
+
     </div>
     <div class="header-mid">
         <mat-icon>schedule</mat-icon>
