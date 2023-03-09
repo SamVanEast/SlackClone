@@ -16,6 +16,7 @@ export class NavbarLeftComponent {
   currentUserId;
   messagesFromFirebase$: Observable<any>;
   public messages;
+  cannels
 
   constructor(private route: ActivatedRoute, private firestore: AngularFirestore) {
     this.messages = user.messages
