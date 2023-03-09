@@ -5,7 +5,7 @@
 
             <div class="single-channel" *ngFor="let channel of messages.channels">
                 <div class="hashes">#</div>
-                <div class="channel-name"><span>general</span></div>
+                <div class="channel-name"><span>{{ channel }}</span></div>
             </div>
             <!-- <div class="single-channel">
                 <div class="hashes">#</div>
@@ -29,7 +29,7 @@
 
             <div class="single-channel" *ngFor="let group of messages.groups">
                 <div class="hashes">#</div>
-                <div class="channel-name"><span>work</span></div>
+                <div class="channel-name"><span>{{ group }}</span></div>
             </div>
             <!-- <div class="single-channel">
                 <div class="hashes">#</div>
@@ -43,7 +43,6 @@
                 <mat-icon>add_box</mat-icon>
                 <div class="channel-name"><span>Add group</span></div>
             </div>
-
         </div>
     </details>
 
@@ -54,7 +53,7 @@
         <div class="directMessages-content">
             <div class="single-dm" *ngFor="let directMessage of messages.chats">
                 <mat-icon>radio_button_unchecked</mat-icon>
-                <div class="channel-name"><span>Samuel Haas</span></div>
+                <div class="channel-name"><span>{{ directMessage }}</span></div>
             </div>
 
 

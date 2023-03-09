@@ -22,7 +22,6 @@ export class NavbarRightComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
-      console.log(this.route.params);
 
       this.currentUserId = params['id'];
 

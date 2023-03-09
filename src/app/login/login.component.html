@@ -94,7 +94,7 @@
     <div class="example-container">
       <mat-form-field appearance="fill">
         <mat-label>Repeat password</mat-label>
-        <input matInput [type]="hide ? 'password' : 'text'" required/>
+        <input matInput [type]="hide ? 'password' : 'text'" #passwordRepeat required/>
         <button
           mat-icon-button
           matSuffix
@@ -110,7 +110,6 @@
     <button class="login" >Create new User</button>
   </form>
 
-  <button (click)="createNewUser()" ></button>
   <button
     mat-fab
     matTooltip="Go back"
@@ -129,7 +128,7 @@
 <div *ngIf="reset" class="container-reset">
   <h1>Reset your Password</h1>
 
-  <form action="">
+  <form action=""  (ngSubmit)="resetPassword()" #myForm ngNativeValidate>
     <mat-form-field class="example-full-width">
       <mat-label>Email</mat-label>
       <input
@@ -146,7 +145,7 @@
     <div class="example-container">
       <mat-form-field appearance="fill">
         <mat-label>new Password</mat-label>
-        <input matInput [type]="hide ? 'password' : 'text'" />
+        <input matInput [type]="hide ? 'password' : 'text'" #resetPw/>
         <button
           mat-icon-button
           matSuffix
@@ -162,7 +161,7 @@
     <div class="example-container">
       <mat-form-field appearance="fill">
         <mat-label>Repeat new password</mat-label>
-        <input matInput [type]="hide ? 'password' : 'text'" />
+        <input matInput [type]="hide ? 'password' : 'text'" #resetPwRepeat />
         <button
           mat-icon-button
           matSuffix
@@ -185,7 +184,7 @@
     >
       <mat-icon>arrow_back</mat-icon>
     </button>
-    <button class="login" >Reset Password</button>
+    <button  class="login" >Reset Password</button>
     
   </form>
   

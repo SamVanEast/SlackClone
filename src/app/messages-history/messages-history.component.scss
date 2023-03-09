@@ -34,7 +34,7 @@
     width: 100%;
     height: 38px;
 
-    &:focus-visible{
+    &:focus-visible {
         outline-color: rgba(29, 28, 29, .3);
     }
 }
@@ -42,4 +42,5 @@
 [contentEditable=true]:empty:not(:focus):before {
 
     content: attr(data-text)
-  }
+}
+

@@ -39,6 +39,7 @@ import { MessagesHistoryComponent } from './messages-history/messages-history.co
 import { LoginComponent } from './login/login.component';
 import { DialogUpdateProfileNameComponent } from './dialog-update-profile-name/dialog-update-profile-name.component';
 import { DialogUpdateContactComponent } from './dialog-update-contact/dialog-update-contact.component';
+import { NgxEditorModule } from 'ngx-editor';
 
 @NgModule({
   declarations: [
@@ -82,7 +83,8 @@ import { DialogUpdateContactComponent } from './dialog-update-contact/dialog-upd
     AngularFirestoreModule,
     AngularFireModule.initializeApp(environment.firebase),
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgxEditorModule
   ],
   providers: [],
   bootstrap: [AppComponent]
