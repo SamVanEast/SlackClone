@@ -16,29 +16,7 @@ export class DialogUpdateProfileNameComponent{
 
   constructor(private route: ActivatedRoute, private firestore: AngularFirestore) { }
 
-  // @HostListener('window:load')
-
-  // onLoad(){
-  //   this.route.paramMap.subscribe((params) => {
-  //     console.log(params.get('id'));
-  //     this.currentUserId = params['id'];
-  //   });
-
-
-  //   this.firestore.collection('users').doc(this.currentUserId).valueChanges().subscribe((user: any) => {
-  //     console.log(user);
-  //     this.firstName = user.userInfos.firstName;
-  //     this.lastName = user.userInfos.lastName;
-  //   });
-  // }
-
   ngAfterViewInit(): void {
-    // this.route.paramMap.subscribe((params) => {
-    //   console.log(params.get('id'));
-    //   this.currentUserId = params['id'];
-    // });
-
-
     this.firestore.collection('users').doc(this.currentUserId).valueChanges().subscribe((user: any) => {
       console.log(user);
       this.firstName = user.userInfos.firstName;
