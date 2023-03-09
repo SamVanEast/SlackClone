@@ -41,6 +41,8 @@ import { DialogUpdateProfileNameComponent } from './dialog-update-profile-name/d
 import { DialogUpdateContactComponent } from './dialog-update-contact/dialog-update-contact.component';
 import { NgxEditorModule } from 'ngx-editor';
 import { DialogAddTeamMemberComponent } from './dialog-add-team-member/dialog-add-team-member.component';
+import { DialogAddChannelComponent } from './dialog-add-channel/dialog-add-channel.component';
+import { DialogAddGroupComponent } from './dialog-add-group/dialog-add-group.component';
 
 @NgModule({
   declarations: [
@@ -54,6 +56,8 @@ import { DialogAddTeamMemberComponent } from './dialog-add-team-member/dialog-ad
     DialogUpdateProfileNameComponent,
     DialogUpdateContactComponent,
     DialogAddTeamMemberComponent,
+    DialogAddChannelComponent,
+    DialogAddGroupComponent,
   ],
   imports: [
     BrowserModule,
