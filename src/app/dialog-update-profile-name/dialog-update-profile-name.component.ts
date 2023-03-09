@@ -27,7 +27,6 @@ export class DialogUpdateProfileNameComponent {
 
   ngAfterViewInit(): void {
     this.firestore.collection('users').doc(this.currentUserId).valueChanges().subscribe((user: any) => {
-      console.log(user);
       this.firstNameFormControl.setValue(user.userInfos.firstName);
       this.lastNameFormControl.setValue(user.userInfos.lastName);
     });

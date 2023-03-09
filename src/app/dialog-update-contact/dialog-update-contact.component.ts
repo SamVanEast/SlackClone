@@ -27,7 +27,6 @@ export class DialogUpdateContactComponent {
 
   ngAfterViewInit(): void {
     this.firestore.collection('users').doc(this.currentUserId).valueChanges().subscribe((user: any) => {
-      console.log(user);
       this.emailFormControl.setValue(user.userInfos.email);
       this.phoneFormControl.setValue(user.userInfos.phone);
     });

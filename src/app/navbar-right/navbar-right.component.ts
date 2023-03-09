@@ -22,12 +22,10 @@ export class NavbarRightComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
-      console.log(this.route.params);
 
       this.currentUserId = params['id'];
 
       this.firestore.collection('users').doc(this.currentUserId).valueChanges().subscribe((user: any) => {
-        console.log(user);
         this.firstName = user.userInfos.firstName;
         this.lastName = user.userInfos.lastName;
         this.email = user.userInfos.email;
