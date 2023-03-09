@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
+import { DialogUpdateContactComponent } from '../dialog-update-contact/dialog-update-contact.component';
 import { DialogUpdateProfileNameComponent } from '../dialog-update-profile-name/dialog-update-profile-name.component';
 
 @Component({
@@ -38,5 +39,10 @@ export class NavbarRightComponent implements OnInit {
   openDialog() {
     const dialog = this.dialog.open(DialogUpdateProfileNameComponent);
     dialog.componentInstance.currentUserId = this.currentUserId;
+  }
+
+  openDialogContact() {
+    const dialogContact = this.dialog.open(DialogUpdateContactComponent);
+    // dialogContact.componentInstance.currentUserId = this.currentUserId;
   }
 }

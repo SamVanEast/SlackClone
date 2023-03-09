@@ -38,6 +38,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MessagesHistoryComponent } from './messages-history/messages-history.component';
 import { LoginComponent } from './login/login.component';
 import { DialogUpdateProfileNameComponent } from './dialog-update-profile-name/dialog-update-profile-name.component';
+import { DialogUpdateContactComponent } from './dialog-update-contact/dialog-update-contact.component';
 
 @NgModule({
   declarations: [
@@ -49,6 +50,7 @@ import { DialogUpdateProfileNameComponent } from './dialog-update-profile-name/d
     MessagesHistoryComponent,
     LoginComponent,
     DialogUpdateProfileNameComponent,
+    DialogUpdateContactComponent,
   ],
   imports: [
     BrowserModule,
