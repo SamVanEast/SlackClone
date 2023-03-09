@@ -37,12 +37,17 @@ export class LoginComponent {
 
   // Var for create user
   @ViewChild('password') password:ElementRef;
+  @ViewChild('passwordRepeat') passwordRepeat:ElementRef;
   @ViewChild('userName') userName:ElementRef;
   @ViewChild('userMail') userMail:ElementRef;
 
-  // var for Userlogin
+  // Var for Reset Password 
   @ViewChild('loginEmail') loginEmail:ElementRef;
   @ViewChild('loginPassword') loginPassword:ElementRef;
+
+  // var for Userlogin
+  @ViewChild('resetPw') resetPw:ElementRef;
+  @ViewChild('resetPwRepeat') resetPwRepeat:ElementRef;
 
   // var for push text 
  
@@ -65,9 +70,7 @@ export class LoginComponent {
           this.router.navigateByUrl('/')
         } else {
           alert('wrong email or wrong password')
-        }
-        
-      
+        }      
     }  
   }
 
@@ -85,22 +88,28 @@ export class LoginComponent {
   }
 
   createNewUser() { 
-    this.pushNewUser = true;
+
+    if(this.password.nativeElement.value == this.passwordRepeat.nativeElement.value) {
+      this.pushNewUser = true;
     this.newUser = false;
 
     setTimeout(()=>{
       this.pushNewUser = false;
-
     }, 3000);
     
     this.allUser.push({
     'name': this.userName.nativeElement.value, 
     'email': this.userMail.nativeElement.value,
     'password': this.password.nativeElement.value });
-
-      
+      console.log(this.allUser);
+    } else {
+      alert('password')
+    }     
   }
 
+  resetPassword() {
+    console.log()
+  }
 
 
 }
