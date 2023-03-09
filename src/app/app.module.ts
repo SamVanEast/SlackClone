@@ -40,6 +40,7 @@ import { LoginComponent } from './login/login.component';
 import { DialogUpdateProfileNameComponent } from './dialog-update-profile-name/dialog-update-profile-name.component';
 import { DialogUpdateContactComponent } from './dialog-update-contact/dialog-update-contact.component';
 import { NgxEditorModule } from 'ngx-editor';
+import { DialogAddTeamMemberComponent } from './dialog-add-team-member/dialog-add-team-member.component';
 
 @NgModule({
   declarations: [
@@ -52,6 +53,7 @@ import { NgxEditorModule } from 'ngx-editor';
     LoginComponent,
     DialogUpdateProfileNameComponent,
     DialogUpdateContactComponent,
+    DialogAddTeamMemberComponent,
   ],
   imports: [
     BrowserModule,
