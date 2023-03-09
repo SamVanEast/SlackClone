@@ -15,7 +15,7 @@
       />
     </mat-form-field>
 
-    <div class="example-container">
+    <div class="example-container column">
       <mat-form-field appearance="fill">
         <mat-label>Enter your password</mat-label>
         <input matInput [type]="hide ? 'password' : 'text'" #loginPassword required />
@@ -29,6 +29,7 @@
           <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
         </button>
       </mat-form-field>
+      <span [ngClass]="{'red': toggle, 'white': !toggle}"  class="wrong-password-text">Wrong Email or Password!!</span>
     </div>
 
 
@@ -91,7 +92,7 @@
       </mat-form-field>
     </div>
 
-    <div class="example-container">
+    <div class="example-container column">
       <mat-form-field appearance="fill">
         <mat-label>Repeat password</mat-label>
         <input matInput [type]="hide ? 'password' : 'text'" #passwordRepeat required/>
@@ -105,6 +106,7 @@
           <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
         </button>
       </mat-form-field>
+      <span [ngClass]="{'red': toggle, 'white': !toggle}"  class="wrong-password-text">its not the same password!!</span>
     </div>
 
     <button class="login" >Create new User</button>
@@ -173,6 +175,7 @@
         </button>
       </mat-form-field>
     </div>
+
 
       <button
       mat-fab

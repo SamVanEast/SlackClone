@@ -26,6 +26,7 @@ export class LoginComponent {
   newUser = false;
   reset = false;
   pushNewUser = false;
+  toggle = false;
   
 
   allUser: any = [{
@@ -69,7 +70,10 @@ export class LoginComponent {
         if(email === inputEmail && password === inputPassword) {
           this.router.navigateByUrl('/')
         } else {
-          alert('wrong email or wrong password')
+          this.toggle = true;
+      setTimeout(()=>{
+        this.toggle = false;
+      }, 3000);
         }      
     }  
   }
@@ -103,7 +107,10 @@ export class LoginComponent {
     'password': this.password.nativeElement.value });
       console.log(this.allUser);
     } else {
-      alert('password')
+      this.toggle = true;
+      setTimeout(()=>{
+        this.toggle = false;
+      }, 3000);
     }     
   }
 

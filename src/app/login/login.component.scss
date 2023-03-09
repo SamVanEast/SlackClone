@@ -4,6 +4,9 @@
   align-items: center;
   flex-direction: column;
   height: 100vh;
+  animation: linear;
+  animation-name: zoomIn;
+  animation-duration: 0.5s;
 }
 
 .forgot-password-link {
@@ -80,6 +83,13 @@ form {
 
 // css for create new User 
 
+.wrong-password-text {
+  text-align: center;
+  color: red;
+  position: relative;
+  bottom: 20px;
+}
+
 
 .container-new-user , .container-reset {
     position: absolute;
@@ -93,6 +103,9 @@ form {
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    animation: linear;
+  animation-name: fromLeftToRight;
+  animation-duration: 0.3s;
 }
 
 .go-back {
@@ -137,3 +150,36 @@ form {
   }
 }
 
+// extras
+
+.column {
+  display: flex;
+  flex-direction: column;
+
+}
+
+.red {
+  color: red;
+}
+
+.white {
+  color: white;
+}
+
+@keyframes fromLeftToRight {
+  0% {
+    width: 0;
+  }
+  100% {
+    width: 100vw;
+  }
+}
+
+@keyframes zoomIn {
+  0% {
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
