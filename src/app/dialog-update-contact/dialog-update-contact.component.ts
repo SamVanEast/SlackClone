@@ -25,6 +25,21 @@ export class DialogUpdateContactComponent {
     });
   }
 
+  saveContact() {
+    this.loading = true;
+    const userDocRef = this.firestore.collection('users').doc(this.currentUserId);
+    userDocRef.update({
+      'userInfos.email': this.email,
+      'userInfos.phone': this.phone,
+    }).then(() => {
+      this.loading = false;
+      this.dialogRef.close();
+    }).catch((error) => {
+      this.loading = false;
+      console.log('Error updating user document:', error);
+    });
+  }
+
   closeDialogContact() {
     this.dialogRef.close();
   }
