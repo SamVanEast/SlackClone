@@ -36,6 +36,7 @@ export class DialogUpdateContactComponent {
   saveContact() {
     if (this.emailFormControl.valid && this.phoneFormControl.valid) {
       this.loading = true;
+      
       this.firestore.collection('users').doc(this.currentUserId).update({
         'userInfos.email': this.emailFormControl.value,
         'userInfos.phone': this.phoneFormControl.value,
