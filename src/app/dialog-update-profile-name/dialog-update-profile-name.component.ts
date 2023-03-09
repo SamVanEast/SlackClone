@@ -1,5 +1,6 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { MatDialogRef } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -14,7 +15,7 @@ export class DialogUpdateProfileNameComponent{
   public lastName;
   currentUserId;
 
-  constructor(private route: ActivatedRoute, private firestore: AngularFirestore) { }
+  constructor(private route: ActivatedRoute, private firestore: AngularFirestore, private dialogRef: MatDialogRef<DialogUpdateProfileNameComponent>) { }
 
   ngAfterViewInit(): void {
     this.firestore.collection('users').doc(this.currentUserId).valueChanges().subscribe((user: any) => {
@@ -22,6 +23,9 @@ export class DialogUpdateProfileNameComponent{
       this.firstName = user.userInfos.firstName;
       this.lastName = user.userInfos.lastName;
     });
+  }
 
+  closeDialogName() {
+    this.dialogRef.close();
   }
 }
