@@ -82,7 +82,7 @@ import { DialogUpdateContactComponent } from './dialog-update-contact/dialog-upd
     AngularFirestoreModule,
     AngularFireModule.initializeApp(environment.firebase),
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
