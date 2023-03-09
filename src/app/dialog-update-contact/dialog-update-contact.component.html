@@ -5,12 +5,16 @@
   <div>
     <mat-form-field class="mr-16 mt-16" appearance="outline">
       <mat-label>E-mail</mat-label>
-      <input [disabled]="loading" [(ngModel)]="email" matInput placeholder="E-mail">
+      <input [disabled]="loading" [formControl]="emailFormControl" matInput placeholder="E-mail">
+      <mat-error *ngIf="emailFormControl.hasError('required')">E-mail is required</mat-error>
+      <mat-error *ngIf="emailFormControl.hasError('email')">Invalid email address</mat-error>
     </mat-form-field>
-
+    
     <mat-form-field class="mt-16" appearance="outline">
       <mat-label>Phone</mat-label>
-      <input [disabled]="loading" [(ngModel)]="phone" matInput placeholder="Phone">
+      <input [disabled]="loading" [formControl]="phoneFormControl" matInput placeholder="Phone">
+      <mat-error *ngIf="phoneFormControl.hasError('required')">Phone number is required</mat-error>
+      <mat-error *ngIf="phoneFormControl.hasError('pattern')">Invalid phone number</mat-error>
     </mat-form-field>
   </div>
 
