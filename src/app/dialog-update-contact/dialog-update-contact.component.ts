@@ -12,8 +12,6 @@ import { ActivatedRoute } from '@angular/router';
 export class DialogUpdateContactComponent {
 
   loading = false;
-  public email;
-  public phone;
   currentUserId;
 
   emailFormControl = new FormControl('', [
