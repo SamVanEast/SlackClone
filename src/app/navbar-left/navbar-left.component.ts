@@ -26,39 +26,10 @@ export class NavbarLeftComponent {
       this.currentUserId = params['id'];
     });
 
-<<<<<<< HEAD
-
-
-    // const db = getFirestore();
-    // const colRef = collection(db, 'todos'); 
-    // this.messagesFromFirebase$ = collectionData(colRef);
-
-    // this.messagesFromFirebase$.subscribe((message) => {
-    //   console.log(message);
-    // })
-
-
-    // const docRef = doc(db, "channels", "REz7mkotTOrDEP60d4YQ");
-    // const myDocRef = this.firestore.doc(`channels/REz7mkotTOrDEP60d4YQ`);
-    // this.messagesFromFirebase$ = from(myDocRef.get());
-    // this.messagesFromFirebase$.subscribe((doc) => {
-    //   const myData = doc.data();
-    //   console.log(doc); 
-    // }, (error) => {
-    //   console.log('Fehler beim Abrufen des Firestore-Dokuments:', error);
-    // });
-    // console.log(myDocRef);
-    console.log(this.messages);
-
-
-    this.loadMessagesFromFirestore();
-
-=======
     this.firestore.collection('users').doc(this.currentUserId).valueChanges().subscribe((user: any) => {
       this.messages = user.messages;
       console.log(this.messages);
     });
->>>>>>> d52bec953cfd27568444ca78527217e0b3453a94
 
     console.log(this.messages);
 
