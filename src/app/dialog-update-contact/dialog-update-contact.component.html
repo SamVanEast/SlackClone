@@ -7,10 +7,15 @@
       <mat-label>E-mail</mat-label>
       <input [disabled]="loading" [(ngModel)]="email" matInput placeholder="E-mail">
     </mat-form-field>
-    
+
     <mat-form-field class="mt-16" appearance="outline">
       <mat-label>Phone</mat-label>
       <input [disabled]="loading" [(ngModel)]="phone" matInput placeholder="Phone">
     </mat-form-field>
+  </div>
+
+  <div class="buttons">
+    <button mat-stroked-button>Basic</button>
+    <button mat-raised-button color="primary">Primary</button>
   </div>
 </div>

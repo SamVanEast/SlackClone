@@ -7,10 +7,15 @@
       <mat-label>First name</mat-label>
       <input [disabled]="loading" [(ngModel)]="firstName" matInput placeholder="First name">
     </mat-form-field>
-    
+
     <mat-form-field class="mt-16" appearance="outline">
       <mat-label>Last name</mat-label>
       <input [disabled]="loading" [(ngModel)]="lastName" matInput placeholder="Last name">
     </mat-form-field>
+  </div>
+
+  <div class="buttons">
+    <button mat-stroked-button>Basic</button>
+    <button mat-raised-button color="primary">Primary</button>
   </div>
 </div>
