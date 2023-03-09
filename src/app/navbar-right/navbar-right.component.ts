@@ -43,6 +43,6 @@ export class NavbarRightComponent implements OnInit {
 
   openDialogContact() {
     const dialogContact = this.dialog.open(DialogUpdateContactComponent);
-    // dialogContact.componentInstance.currentUserId = this.currentUserId;
+    dialogContact.componentInstance.currentUserId = this.currentUserId;
   }
 }

@@ -1,1 +1,16 @@
-<p>dialog-update-contact works!</p>
+<mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
+
+<h1 class="title-dialog" mat-dialog-title>Change name</h1>
+<div mat-dialog-content>
+  <div>
+    <mat-form-field class="mr-16 mt-16" appearance="outline">
+      <mat-label>E-mail</mat-label>
+      <input [disabled]="loading" [(ngModel)]="email" matInput placeholder="E-mail">
+    </mat-form-field>
+    
+    <mat-form-field class="mt-16" appearance="outline">
+      <mat-label>Phone</mat-label>
+      <input [disabled]="loading" [(ngModel)]="phone" matInput placeholder="Phone">
+    </mat-form-field>
+  </div>
+</div>
