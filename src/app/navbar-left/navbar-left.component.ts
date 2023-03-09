@@ -4,6 +4,7 @@ import { collectionData } from '@angular/fire/firestore';
 import { ActivatedRoute } from '@angular/router';
 import { collection, doc, Firestore, getFirestore } from '@firebase/firestore';
 import { from, Observable } from 'rxjs';
+import { channels } from 'src/models/channels';
 import { user } from 'src/models/user';
 
 @Component({
@@ -16,53 +17,44 @@ export class NavbarLeftComponent {
   currentUserId;
   messagesFromFirebase$: Observable<any>;
   public messages;
-  cannels
+  channels;
 
   constructor(private route: ActivatedRoute, private firestore: AngularFirestore) {
-    this.messages = user.messages
+    this.messages = user.messages;
+    // this.channels = channels;
+    // console.log(this.channels);
+    
   }
 
   ngOnInit() {
     this.route.params.subscribe((params) => {
       this.currentUserId = params['id'];
     });
-
-
-
-    // const db = getFirestore();
-    // const colRef = collection(db, 'todos'); 
-    // this.messagesFromFirebase$ = collectionData(colRef);
-
-    // this.messagesFromFirebase$.subscribe((message) => {
-    //   console.log(message);
-    // })
-
-
-    // const docRef = doc(db, "channels", "REz7mkotTOrDEP60d4YQ");
-    // const myDocRef = this.firestore.doc(`channels/REz7mkotTOrDEP60d4YQ`);
-    // this.messagesFromFirebase$ = from(myDocRef.get());
-    // this.messagesFromFirebase$.subscribe((doc) => {
-    //   const myData = doc.data();
-    //   console.log(doc); 
-    // }, (error) => {
-    //   console.log('Fehler beim Abrufen des Firestore-Dokuments:', error);
-    // });
-    // console.log(myDocRef);
-    console.log(this.messages);
-
-
     this.loadMessagesFromFirestore();
-
-
-    console.log(this.messages);
-
   }
 
 
-  async loadMessagesFromFirestore() {
-    await this.firestore.collection('users').doc(this.currentUserId).valueChanges().subscribe((user: any) => {
+  loadMessagesFromFirestore() {
+    this.firestore.collection('users').doc(this.currentUserId).valueChanges().subscribe((user: any) => {
       this.messages = user.messages;
-      // console.log(this.messages);
+      console.log(this.messages.channels);
+      
+      this.loadChannels();
     });
+  }
+
+  loadChannels() {
+    this.channels = [];
+    console.log(this.messages.channels.length);
+
+    this.messages.channels.forEach(channelId => {
+      this.firestore.collection('channels').doc(channelId).valueChanges().subscribe((channel: any) => {
+        // console.log(channel);
+        // debugger
+        this.channels.push(channel);
+      });
+    });
+    console.log(this.channels);
+    
   }
 }
