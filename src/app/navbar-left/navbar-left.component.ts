@@ -18,8 +18,6 @@ export class NavbarLeftComponent {
   public messages;
 
   constructor(private route: ActivatedRoute, private firestore: AngularFirestore) {
-    // const coll = collection(firestore, 'todos');
-    // this.messagesFromFirebase$ = collectionData(coll);
     this.messages = user.messages
   }
 
@@ -28,38 +26,10 @@ export class NavbarLeftComponent {
       this.currentUserId = params['id'];
     });
 
-
-
-    const db = getFirestore();
-    const colRef = collection(db, 'todos'); 
-    this.messagesFromFirebase$ = collectionData(colRef);
-
-    this.messagesFromFirebase$.subscribe((message) => {
-      console.log(message);
-    })
-
-
-    // this.messagesFromFirebase$ = doc(db, "cities", "2l3bcSGs2vZBIc3RODwp");
-
-
-
     this.firestore.collection('users').doc(this.currentUserId).valueChanges().subscribe((user: any) => {
       this.messages = user.messages;
-      // console.log(this.messages);
+      console.log(this.messages);
     });
-
-
-
-
-
-
-
-    // this.messages.channels.forEach(element => {
-    //   console.log(element);
-    //   this.firestore.collection('directMessages').doc(this.currentUserId).valueChanges().subscribe((user: any) => {
-    //   });
-    // });
-
 
 
   }
