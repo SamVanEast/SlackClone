@@ -26,7 +26,6 @@ export class NavbarLeftComponent {
       this.currentUserId = params['id'];
     });
 
-<<<<<<< HEAD
 
 
     // const db = getFirestore();
@@ -53,12 +52,6 @@ export class NavbarLeftComponent {
 
     this.loadMessagesFromFirestore();
 
-=======
-    this.firestore.collection('users').doc(this.currentUserId).valueChanges().subscribe((user: any) => {
-      this.messages = user.messages;
-      console.log(this.messages);
-    });
->>>>>>> d52bec953cfd27568444ca78527217e0b3453a94
 
     console.log(this.messages);
 
