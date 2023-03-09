@@ -24,6 +24,8 @@ export class LoginComponent {
   matcher = new MyErrorStateMatcher();
   hide = true;
   newUser = false;
+  reset = false;
+  pushNewUser = false;
   
 
   allUser: any = [{
@@ -33,16 +35,44 @@ export class LoginComponent {
   }]
 
 
+  // Var for create user
   @ViewChild('password') password:ElementRef;
   @ViewChild('userName') userName:ElementRef;
   @ViewChild('userMail') userMail:ElementRef;
 
+  // var for Userlogin
+  @ViewChild('loginEmail') loginEmail:ElementRef;
+  @ViewChild('loginPassword') loginPassword:ElementRef;
 
+  // var for push text 
+ 
 
 
 
   guestLogin() {
     this.router.navigateByUrl('/')
+  }
+
+  UserLogin() {
+    let inputPassword = this.loginPassword.nativeElement.value
+    let inputEmail = this.loginEmail.nativeElement.value 
+
+      for (let i = 0; i < this.allUser.length; i++) {
+        const email = this.allUser[i]['email'];
+        const password = this.allUser[i]['password'];
+
+        if(email === inputEmail && password === inputPassword) {
+          this.router.navigateByUrl('/')
+        } else {
+          alert('wrong email or wrong password')
+        }
+        
+      
+    }  
+  }
+
+  resetOverview() {
+    this.reset = true;
   }
 
   NewUserOverview() {
@@ -51,6 +81,7 @@ export class LoginComponent {
 
   showLogin() {
     this.newUser = false;
+    this.reset = false;
   }
 
   createNewUser() {
@@ -59,7 +90,10 @@ export class LoginComponent {
     'name': this.userName.nativeElement.value, 
     'email': this.userMail.nativeElement.value,
     'password': this.password.nativeElement.value });
+      alert('created user')
+      this.pushNewUser = true;
   }
+
 
 
 }
