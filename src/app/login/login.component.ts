@@ -84,14 +84,21 @@ export class LoginComponent {
     this.reset = false;
   }
 
-  createNewUser() {
+  createNewUser() { 
+    this.pushNewUser = true;
+    this.newUser = false;
+
+    setTimeout(()=>{
+      this.pushNewUser = false;
+
+    }, 3000);
     
     this.allUser.push({
     'name': this.userName.nativeElement.value, 
     'email': this.userMail.nativeElement.value,
     'password': this.password.nativeElement.value });
-      alert('created user')
-      this.pushNewUser = true;
+
+      
   }
 
 

@@ -115,28 +115,25 @@ form {
   right: 0;
   width: 100vw;
   height: 100vh;
-  background-color: rgba($color: white, $alpha: 0.9);
+  background-color: white;
   display:flex;
   justify-content: center;
   align-items: center;
-  
+  animation: linear;
+  animation-name: fromBottomToMiddle;
+  animation-duration: 3s;
 
   span {
+    position: absolute;
     padding: 20px 40px;
     background-color: #611f69;
     color: white;
     font-size: 18px;
     border-radius: 6px;
-    // animation-name: fromBottomToMiddle();
-    transition: 1s;
+    animation: alternate;
+    animation-name: fromBottomToMiddle;
+    animation-duration: 1.5s;
+
   }
 }
 
-@keyframes fromBottomToMiddle {
-  0% {
-    bottom: 0px;
-  }
-  100% {
-    top: 50vh;
-  }
-}
