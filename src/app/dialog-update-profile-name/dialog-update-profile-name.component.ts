@@ -27,16 +27,12 @@ export class DialogUpdateProfileNameComponent {
 
   saveName() {
     this.loading = true;
-    const userDocRef = this.firestore.collection('users').doc(this.currentUserId);
-    userDocRef.update({
+    this.firestore.collection('users').doc(this.currentUserId).update({
       'userInfos.firstName': this.firstName,
       'userInfos.lastName': this.lastName,
     }).then(() => {
       this.loading = false;
       this.dialogRef.close();
-    }).catch((error) => {
-      this.loading = false;
-      console.log('Error updating user document:', error);
     });
   }
 
