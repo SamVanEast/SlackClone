@@ -1,24 +1,28 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { collectionData } from '@angular/fire/firestore';
+import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { collection, doc, Firestore, getFirestore } from '@firebase/firestore';
 import { from, Observable } from 'rxjs';
 import { user } from 'src/models/user';
+import { DialogAddChannelComponent } from '../dialog-add-channel/dialog-add-channel.component';
+import { DialogAddGroupComponent } from '../dialog-add-group/dialog-add-group.component';
+import { DialogAddTeamMemberComponent } from '../dialog-add-team-member/dialog-add-team-member.component';
 
 @Component({
   selector: 'app-navbar-left',
   templateUrl: './navbar-left.component.html',
   styleUrls: ['./navbar-left.component.scss']
 })
-export class NavbarLeftComponent {
+export class NavbarLeftComponent implements OnInit{
   drawer = true;
   currentUserId;
   messagesFromFirebase$: Observable<any>;
   public messages;
   cannels
 
-  constructor(private route: ActivatedRoute, private firestore: AngularFirestore) {
+  constructor(private route: ActivatedRoute, private firestore: AngularFirestore, public dialog: MatDialog) {
     this.messages = user.messages
   }
 
@@ -64,5 +68,20 @@ export class NavbarLeftComponent {
       this.messages = user.messages;
       // console.log(this.messages);
     });
+  }
+
+  openDialogChannel(){
+    const dialogChannel = this.dialog.open(DialogAddChannelComponent);
+    dialogChannel.componentInstance.currentUserId = this.currentUserId;
+  }
+
+  openDialogGroups(){
+    const dialogGroup = this.dialog.open(DialogAddGroupComponent);
+    dialogGroup.componentInstance.currentUserId = this.currentUserId;
+  }
+
+  openDialogMember(){
+    const dialogMember = this.dialog.open(DialogAddTeamMemberComponent);
+    dialogMember.componentInstance.currentUserId = this.currentUserId;
   }
 }
