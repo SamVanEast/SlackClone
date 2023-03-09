@@ -1,100 +1,199 @@
 <div class="container-login">
+  <h1>Welcome to Slack</h1>
 
-    <h1>Welcome to Slack</h1>
+  <p>We suggest using the <b>email address that you use at work.</b></p>
 
-    <p>We suggest using the <b>email address that you use at work.</b></p>
+  <form class="example-form" (ngSubmit)="UserLogin()" #myForm ngNativeValidate>
+    <mat-form-field class="example-full-width">
+      <mat-label>Email</mat-label>
+      <input
+        type="email"
+        matInput
+        placeholder="Ex. pat@example.com"
+        #loginEmail
+        required
+      />
+    </mat-form-field>
 
-    <form class="example-form">
-        <mat-form-field class="example-full-width">
-          <mat-label>Email</mat-label>
-          <input type="email" matInput [formControl]="emailFormControl" [errorStateMatcher]="matcher"
-                 placeholder="Ex. pat@example.com">
-          <mat-hint></mat-hint>
-          <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
-            Please enter a valid email address
-          </mat-error>
-          <mat-error *ngIf="emailFormControl.hasError('required')">
-            Email is <strong>required</strong>
-          </mat-error>
-        </mat-form-field>
+    <div class="example-container">
+      <mat-form-field appearance="fill">
+        <mat-label>Enter your password</mat-label>
+        <input matInput [type]="hide ? 'password' : 'text'" #loginPassword required />
+        <button
+          mat-icon-button
+          matSuffix
+          (click)="hide = !hide"
+          [attr.aria-label]="'Hide password'"
+          [attr.aria-pressed]="hide"
+        >
+          <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+        </button>
+      </mat-form-field>
+    </div>
 
-        <div class="example-container">
-            <mat-form-field appearance="fill">
-              <mat-label>Enter your password</mat-label>
-              <input  matInput [type]="hide ? 'password' : 'text'">
-              <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
-                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-              </button>
-            </mat-form-field>
-        </div>    
 
-        <div class="buttons">
-            <button class="login">Login</button>
-            <button (click)="guestLogin()" class="guest">Guest Login</button>
-        </div>
-        
+    <div class="forgot-password-link">
+      <p>Forgot your <span (click)="resetOverview()">Password</span> ?</p>
+    </div>
 
-      </form>
+    <div class="buttons">
+      <button type="submit"  class="login">Login</button>
+      <button (click)="guestLogin()" class="guest">Guest Login</button>
+    </div>
+  </form>
 
-      <div class="new-user-link">
-        <p>You don't have an account ? <span (click)="NewUserOverview()" >Here</span> you can create a new account </p>
-      </div>
+  <div class="new-user-link">
+    <p>
+      You don't have an account ?
+      <span (click)="NewUserOverview()">Here</span> you can create a new account
+    </p>
+  </div>
+</div>
+
+<!-- Container for create a new User -->
+
+<div *ngIf="newUser" class="container-new-user">
+  <h1>Create a new User</h1>
+
+  <form class="example-form" (ngSubmit)="createNewUser()" #myForm ngNativeValidate>
+    <mat-form-field appearance="fill">
+      <mat-label>Username</mat-label>
+      <input type="text" matInput required #userName />
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+      <mat-label>Email</mat-label>
+      <input
+        type="email"
+        matInput
+
+        placeholder="Ex. pat@example.com"
+        #userMail
+        required
+      />
+      <mat-hint></mat-hint>
+    
+    </mat-form-field>
+
+    <div class="example-container">
+      <mat-form-field appearance="fill">
+        <mat-label>Enter your password</mat-label>
+        <input matInput [type]="hide ? 'password' : 'text'" #password required />
+        <button
+          mat-icon-button
+          matSuffix
+          (click)="hide = !hide"
+          [attr.aria-label]="'Hide password'"
+          [attr.aria-pressed]="hide"
+        >
+          <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+        </button>
+      </mat-form-field>
+    </div>
+
+    <div class="example-container">
+      <mat-form-field appearance="fill">
+        <mat-label>Repeat password</mat-label>
+        <input matInput [type]="hide ? 'password' : 'text'" required/>
+        <button
+          mat-icon-button
+          matSuffix
+          (click)="hide = !hide"
+          [attr.aria-label]="'Hide password'"
+          [attr.aria-pressed]="hide"
+        >
+          <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+        </button>
+      </mat-form-field>
+    </div>
+
+    <button class="login" >Create new User</button>
+  </form>
+
+  <button (click)="createNewUser()" ></button>
+  <button
+    mat-fab
+    matTooltip="Go back"
+    color="primary"
+    aria-label="Example fab with a heart icon"
+    class="go-back"
+    (click)="showLogin()"
+  >
+    <mat-icon>arrow_back</mat-icon>
+  </button>
+
+  
+</div>
+
+<!-- Container for Reset Password -->
+<div *ngIf="reset" class="container-reset">
+  <h1>Reset your Password</h1>
+
+  <form action="">
+    <mat-form-field class="example-full-width">
+      <mat-label>Email</mat-label>
+      <input
+        type="email"
+        matInput
+  
+        placeholder="Ex. pat@example.com"
+        #userMail
+      />
+      <mat-hint></mat-hint>
+   
+    </mat-form-field>
+  
+    <div class="example-container">
+      <mat-form-field appearance="fill">
+        <mat-label>new Password</mat-label>
+        <input matInput [type]="hide ? 'password' : 'text'" />
+        <button
+          mat-icon-button
+          matSuffix
+          (click)="hide = !hide"
+          [attr.aria-label]="'Hide password'"
+          [attr.aria-pressed]="hide"
+        >
+          <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+        </button>
+      </mat-form-field>
+    </div>
+  
+    <div class="example-container">
+      <mat-form-field appearance="fill">
+        <mat-label>Repeat new password</mat-label>
+        <input matInput [type]="hide ? 'password' : 'text'" />
+        <button
+          mat-icon-button
+          matSuffix
+          (click)="hide = !hide"
+          [attr.aria-label]="'Hide password'"
+          [attr.aria-pressed]="hide"
+        >
+          <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+        </button>
+      </mat-form-field>
+    </div>
+
+      <button
+      mat-fab
+      matTooltip="Go back"
+      color="primary"
+      aria-label="Example fab with a heart icon"
+      class="go-back"
+      (click)="showLogin()"
+    >
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <button class="login" >Reset Password</button>
+    
+  </form>
+  
+
 
 </div>
 
-<div *ngIf="newUser" class="container-new-user">
-
-    <h1>Create a new User</h1>
-
-    <form class="example-form">
-
-        <mat-form-field appearance="fill" >
-            <mat-label>Username</mat-label>
-            <input type="text" matInput required #userName>
-          </mat-form-field>
-    
-
-    <mat-form-field class="example-full-width">
-          <mat-label>Email</mat-label>
-          <input type="email" matInput [formControl]="emailFormControl" [errorStateMatcher]="matcher" placeholder="Ex. pat@example.com" #userMail>
-          <mat-hint></mat-hint>
-          <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
-            Please enter a valid email address
-          </mat-error>
-          <mat-error *ngIf="emailFormControl.hasError('required')">
-            Email is <strong>required</strong>
-          </mat-error>
-        </mat-form-field>
-
-
-    
-    <div class="example-container">
-        <mat-form-field appearance="fill">
-          <mat-label>Enter your password</mat-label >
-          <input  matInput [type]="hide ? 'password' : 'text'" #password >
-          <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
-            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-          </button>
-        </mat-form-field>
-    </div>
-
-    <div class="example-container">
-        <mat-form-field appearance="fill">
-          <mat-label>Repeat password</mat-label>
-          <input matInput [type]="hide ? 'password' : 'text'" >
-          <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
-            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-          </button>
-        </mat-form-field>
-    </div>
-
-    <button class="login" (click)="createNewUser()">Create new User</button>
-
-
-</form>
-
-    <button mat-fab matTooltip="Go back" color="primary" aria-label="Example fab with a heart icon" class="go-back" (click)="showLogin()">
-        <mat-icon>arrow_back</mat-icon>
-    </button>
-
+<!-- Push Meldung -->
+<div class="push-new-user" *ngIf="pushNewUser">
+  <span> You created A new User </span>
 </div>

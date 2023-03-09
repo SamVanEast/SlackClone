@@ -6,6 +6,18 @@
   height: 100vh;
 }
 
+.forgot-password-link {
+  font-size: 18px;
+  display: flex;
+  flex-direction: row;
+
+  span {
+    font-weight: 700;
+        color: #86358f;
+        cursor: pointer;
+  }
+}
+
 h1 {
     font-size: 48px;
 }
@@ -69,7 +81,7 @@ form {
 // css for create new User 
 
 
-.container-new-user {
+.container-new-user , .container-reset {
     position: absolute;
     top: 0;
     left: 0;
@@ -92,3 +104,36 @@ form {
 .mat-mdc-fab.mat-primary {
     background-color: #611f69;
 }
+
+// for push text 
+
+.push-new-user {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: white;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  animation: linear;
+  animation-name: fromBottomToMiddle;
+  animation-duration: 3s;
+
+  span {
+    position: absolute;
+    padding: 20px 40px;
+    background-color: #611f69;
+    color: white;
+    font-size: 18px;
+    border-radius: 6px;
+    animation: alternate;
+    animation-name: fromBottomToMiddle;
+    animation-duration: 1.5s;
+
+  }
+}
+

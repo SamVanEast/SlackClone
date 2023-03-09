@@ -1,21 +1,25 @@
 <mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
 
-<h1 class="title-dialog" mat-dialog-title>Change name</h1>
+<h1 class="title-dialog" mat-dialog-title>Edit name</h1>
 <div mat-dialog-content>
   <div>
     <mat-form-field class="mr-16 mt-16" appearance="outline">
       <mat-label>First name</mat-label>
-      <input [disabled]="loading" [(ngModel)]="firstName" matInput placeholder="First name">
+      <input [disabled]="loading" [formControl]="firstNameFormControl" matInput placeholder="First name">
+      <mat-error *ngIf="firstNameFormControl.hasError('required')">First name is required</mat-error>
+      <mat-error *ngIf="firstNameFormControl.hasError('pattern')">Invalid first name</mat-error>
     </mat-form-field>
 
     <mat-form-field class="mt-16" appearance="outline">
       <mat-label>Last name</mat-label>
-      <input [disabled]="loading" [(ngModel)]="lastName" matInput placeholder="Last name">
+      <input [disabled]="loading" [formControl]="lastNameFormControl" matInput placeholder="Last name">
+      <mat-error *ngIf="lastNameFormControl.hasError('required')">Last name is required</mat-error>
+      <mat-error *ngIf="lastNameFormControl.hasError('pattern')">Invalid last name</mat-error>
     </mat-form-field>
   </div>
 
   <div class="buttons">
     <button mat-stroked-button (click)="closeDialogName()">Cancel</button>
-    <button mat-raised-button color="primary">Save</button>
+    <button mat-raised-button color="primary" (click)="saveName()">Save</button>
   </div>
 </div>
