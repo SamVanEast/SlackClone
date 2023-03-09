@@ -5,11 +5,12 @@ export let user = {
         "email": "asdfa@sd.com",
         "password": 123456,
         "phone": 123456789,
-        "isLoggedIn": false
+        "isLoggedIn": false,
+        "profileImage": ''
     },
     "messages": {
-        "channels": ['BKBJGJTFZGVJHF', 'BLJGUZFJTFJTFZTF'],
-        "groups": ['GKHGFJFGHVJCT', 'KJHVHVJHGVJHCG'],
-        "chats": ['GKJHVKGVJT', 'VKVKTKTNLKBOZ']
+        "channels": [],
+        "groups": [],
+        "chats": []
     }
 }

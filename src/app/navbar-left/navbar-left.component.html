@@ -3,18 +3,18 @@
         <summary>Channels</summary>
         <div class="channels-content">
 
-            <div class="single-channel">
+            <div class="single-channel" *ngFor="let channel of messages.channels">
                 <div class="hashes">#</div>
                 <div class="channel-name"><span>general</span></div>
             </div>
-            <div class="single-channel">
+            <!-- <div class="single-channel">
                 <div class="hashes">#</div>
                 <div class="channel-name"><span>random</span></div>
             </div>
             <div class="single-channel">
                 <div class="hashes">#</div>
                 <div class="channel-name"><span>memes</span></div>
-            </div>
+            </div> -->
             <div class="add-element">
                 <mat-icon>add_box</mat-icon>
                 <div class="channel-name"><span>Add channel</span></div>
@@ -27,18 +27,18 @@
         <summary>Groups</summary>
         <div class="channels-content">
 
-            <div class="single-channel">
+            <div class="single-channel" *ngFor="let group of messages.groups">
                 <div class="hashes">#</div>
                 <div class="channel-name"><span>work</span></div>
             </div>
-            <div class="single-channel">
+            <!-- <div class="single-channel">
                 <div class="hashes">#</div>
                 <div class="channel-name"><span>family</span></div>
             </div>
             <div class="single-channel">
                 <div class="hashes">#</div>
                 <div class="channel-name"><span>friends</span></div>
-            </div>
+            </div> -->
             <div class="add-element">
                 <mat-icon>add_box</mat-icon>
                 <div class="channel-name"><span>Add group</span></div>
@@ -52,12 +52,12 @@
     <details class="channels" [open]="true">
         <summary>Direct Messages</summary>
         <div class="directMessages-content">
-            <div class="single-dm">
+            <div class="single-dm" *ngFor="let directMessage of messages.chats">
                 <mat-icon>radio_button_unchecked</mat-icon>
                 <div class="channel-name"><span>Samuel Haas</span></div>
             </div>
 
-            
+
             <!-- <div class="single-dm">
                 <mat-icon>radio_button_unchecked</mat-icon>
                 <div class="channel-name"><span>Sebastian Michael</span></div>
@@ -65,11 +65,11 @@
             <div class="single-dm">
                 <mat-icon>radio_button_unchecked</mat-icon>
                 <div class="channel-name"><span>Leonardo van Dahl</span></div>
-            </div>
+            </div> -->
             <div class="add-element">
                 <mat-icon>add_box</mat-icon>
                 <div class="channel-name"><span>Add team member</span></div>
-            </div> -->
+            </div>
         </div>
 
     </details>
