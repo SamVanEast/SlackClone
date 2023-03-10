@@ -59,6 +59,7 @@ import { DialogAddGroupComponent } from './dialog-add-group/dialog-add-group.com
     DialogAddChannelComponent,
     DialogAddGroupComponent,
   ],
+
   imports: [
     BrowserModule,
     AppRoutingModule,
