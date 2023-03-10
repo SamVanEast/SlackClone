@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { Firestore } from '@angular/fire/firestore';
 import { MatDialogRef } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { group } from 'src/models/group';
 import { LoginComponent } from '../login/login.component';
+import * as firebase from 'firebase/app';
 
 @Component({
   selector: 'app-dialog-add-group',
@@ -15,10 +17,10 @@ export class DialogAddGroupComponent {
   currentUserId;
   loading = false;
   group;
-  groupsIds = [];
+  groupsIds;
   // groupName;
 
-  constructor(private route: ActivatedRoute, private firestore: AngularFirestore, private dialogRef: MatDialogRef<DialogAddGroupComponent>) {
+  constructor(private route: ActivatedRoute, private firestore: AngularFirestore, private dialogRef: MatDialogRef<DialogAddGroupComponent>, private db: Firestore) {
     this.group = group;
     this.route.params.subscribe((params) => {
       this.currentUserId = params['id'];
@@ -26,22 +28,30 @@ export class DialogAddGroupComponent {
   }
 
   saveGroup() {
+
+
+
     if (this.group.headline !== '') {
       this.firestore.collection('groups').add(this.group).then((group) => {
         console.log(group.id);
-        console.log(this.firestore.collection('users').doc(this.currentUserId).valueChanges());
+        // console.log(this.firestore.collection('users').doc(this.currentUserId).valueChanges());
 
-        this.firestore.collection('users').doc(this.currentUserId).get().then( user => {
-          this.groupsIds = user.messages.groups;
-          this.groupsIds.push(group.id);
-          // console.log(this.groupsIds);
-          this.firestore.collection('users').doc(this.currentUserId).update({
-            'messages.groups': this.groupsIds
-          }).then((user) => {
-            console.log('Hat funktioniert', this.groupsIds);
-          })
+        // database.collection('users').doc(this.currentUserId).get().then(user => {
+        //   console.log(user);
 
-        });
+        // })
+
+        // this.db.collection('users').doc(this.currentUserId).get().then()(user => {
+        //   this.groupsIds = user;
+        //   this.groupsIds.push(group.id);
+        //   // console.log(this.groupsIds);
+        //   // this.firestore.collection('users').doc(this.currentUserId).update({
+        //   //   'messages.groups': this.groupsIds
+        //   // }).then((user) => {
+        //   //   console.log('Hat funktioniert', this.groupsIds);
+        //   // })
+
+        // });
 
 
 

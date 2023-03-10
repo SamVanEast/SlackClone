@@ -20,7 +20,7 @@ export class SlackOverviewComponent {
 
 
   constructor(private router: Router, private firestore: AngularFirestore, private route: ActivatedRoute,) {
-    this.router.navigateByUrl('3xiVuJyrNo551fSV2qMe');
+    this.router.navigateByUrl('Og1osv5p8RiFXQ8v0lvz');
 
     this.route.params.subscribe((params) => {
       this.currentUserId = params['id'];
@@ -29,7 +29,7 @@ export class SlackOverviewComponent {
     this.getAllIds();
 
 
-    // this.firestore.collection('users').doc('').then(() => {
+    // this.firestore.collection('users').doc('').get().pipe(function() {
 
     // })
     // Object.keys(Films)

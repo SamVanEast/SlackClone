@@ -38,7 +38,6 @@ export class NavbarLeftComponent implements OnInit {
   loadMessagesFromFirestore() {
     this.firestore.collection('users').doc(this.currentUserId).valueChanges().subscribe((user: any) => {
       this.messages = user.messages;
-      console.log(this.messages.channels);
 
       this.loadChannels();
       this.loadGroups();
