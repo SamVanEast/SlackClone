@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { MatDialogRef } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
+import * as firebase from 'firebase/compat';
 import { group } from 'src/models/group';
 import { LoginComponent } from '../login/login.component';
 
@@ -15,7 +16,7 @@ export class DialogAddGroupComponent {
   currentUserId;
   loading = false;
   group;
-  groupsIds = [];
+  // groupsIds = [];
   // groupName;
 
   constructor(private route: ActivatedRoute, private firestore: AngularFirestore, private dialogRef: MatDialogRef<DialogAddGroupComponent>) {
@@ -27,28 +28,30 @@ export class DialogAddGroupComponent {
 
   saveGroup() {
     if (this.group.headline !== '') {
-      this.firestore.collection('groups').add(this.group).then((group) => {
-        // this.group.push(this.groupsIds);
-        console.log(this.group);
+      this.loading = true;
+      // Add the new group to Firebase
+      this.firestore.collection('groups').add(this.group).then((docRef) => {
+        const newGroupId = docRef.id;
+        console.log(newGroupId);
         
-        // console.log(group);
-        // console.log(this.firestore.collection('users').doc(this.currentUserId).valueChanges());
-
-        // this.firestore.collection('groups').doc(this.group).valueChanges().subscribe((grouptest) => {
-          // this.groupsIds = groups.communicationSections.groups;
-        //   this.groupsIds.push(group.id);
-        //   // console.log(this.groupsIds);
-        //   this.firestore.collection('users').doc(this.currentUserId).update({
-        //     'messages.groups': this.groupsIds
-        //   }).then((user) => {
-        //     console.log('Hat funktioniert', this.groupsIds);
-        //   })
-
+        // Update the user's groups list in Firebase
+        this.firestore.collection('users').doc(this.currentUserId).update({
+          'messages.groups': newGroupId
+        }).then(() => {
+          console.log('Group saved successfully.');
+          this.loading = false;
+          this.dialogRef.close();
+        }).catch((error) => {
+          console.error('Error updating user data:', error);
+          this.loading = false;
         });
-        // this.dialogRef.close();
-      // });
+      }).catch((error) => {
+        console.error('Error adding new group:', error);
+        this.loading = false;
+      });
     }
   }
+  
 
   closeDialogGroup() {
     this.dialogRef.close();
