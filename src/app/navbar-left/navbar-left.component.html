@@ -7,9 +7,9 @@
         <summary>Channels</summary>
         <div class="channels-content">
 
-            <div class="single-channel" *ngFor="let channel of messages.channels">
+            <div class="single-channel" *ngFor="let channel of channels">
                 <div class="hashes">#</div>
-                <div class="channel-name"><span>{{ channel }}</span></div>
+                <div class="channel-name"><span>{{ channel.headline }}</span></div>
             </div>
             <!-- <div class="single-channel">
                 <div class="hashes">#</div>
@@ -31,9 +31,9 @@
         <summary>Groups</summary>
         <div class="channels-content">
 
-            <div class="single-channel" *ngFor="let group of messages.groups">
+            <div class="single-channel" *ngFor="let group of groups">
                 <div class="hashes">#</div>
-                <div class="channel-name"><span>{{ group }}</span></div>
+                <div class="channel-name"><span>{{ group.headline }}</span></div>
             </div>
             <!-- <div class="single-channel">
                 <div class="hashes">#</div>
