@@ -28,30 +28,25 @@ export class DialogAddGroupComponent {
   saveGroup() {
     if (this.group.headline !== '') {
       this.firestore.collection('groups').add(this.group).then((group) => {
-        console.log(group.id);
-        console.log(this.firestore.collection('users').doc(this.currentUserId).valueChanges());
+        // this.group.push(this.groupsIds);
+        console.log(this.group);
+        
+        // console.log(group);
+        // console.log(this.firestore.collection('users').doc(this.currentUserId).valueChanges());
 
-        this.firestore.collection('users').doc(this.currentUserId).get().then( user => {
-          this.groupsIds = user.messages.groups;
-          this.groupsIds.push(group.id);
-          // console.log(this.groupsIds);
-          this.firestore.collection('users').doc(this.currentUserId).update({
-            'messages.groups': this.groupsIds
-          }).then((user) => {
-            console.log('Hat funktioniert', this.groupsIds);
-          })
+        // this.firestore.collection('groups').doc(this.group).valueChanges().subscribe((grouptest) => {
+          // this.groupsIds = groups.communicationSections.groups;
+        //   this.groupsIds.push(group.id);
+        //   // console.log(this.groupsIds);
+        //   this.firestore.collection('users').doc(this.currentUserId).update({
+        //     'messages.groups': this.groupsIds
+        //   }).then((user) => {
+        //     console.log('Hat funktioniert', this.groupsIds);
+        //   })
 
         });
-
-
-
-
-
-
-
-
-        this.dialogRef.close();
-      });
+        // this.dialogRef.close();
+      // });
     }
   }
 
