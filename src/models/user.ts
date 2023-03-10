@@ -11,6 +11,6 @@ export let user = {
     "messages": {
         "channels": [],
         "groups": [],
-        "chats": []
+        "directMessages": []
     }
 }

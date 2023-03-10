@@ -4,10 +4,6 @@ import { collectionData } from '@angular/fire/firestore';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { collection, doc, Firestore, getFirestore } from '@firebase/firestore';
-import { from, Observable } from 'rxjs';
-import { channels } from 'src/models/channels';
-import { groups } from 'src/models/groups';
-import { user } from 'src/models/user';
 import { DialogAddChannelComponent } from '../dialog-add-channel/dialog-add-channel.component';
 import { DialogAddGroupComponent } from '../dialog-add-group/dialog-add-group.component';
 import { DialogAddTeamMemberComponent } from '../dialog-add-team-member/dialog-add-team-member.component';
@@ -21,16 +17,14 @@ export class NavbarLeftComponent implements OnInit {
   drawer = true;
   currentUserId;
   public messages;
-  // alreadyUsedIds = [];
   channels = [];
   groups = [];
   directMessages = [];
 
+  communicationSections = [];
+
 
   constructor(private route: ActivatedRoute, private firestore: AngularFirestore, public dialog: MatDialog) {
-    this.messages = user.messages;
-    this.channels.push(channels);
-    this.groups.push(groups);
   }
 
   ngOnInit() {
@@ -47,7 +41,8 @@ export class NavbarLeftComponent implements OnInit {
       console.log(this.messages.channels);
 
       this.loadChannels();
-      // this.loadGroups();
+      this.loadGroups();
+      this.loadChats();
     });
   }
 
@@ -55,7 +50,7 @@ export class NavbarLeftComponent implements OnInit {
     this.channels = [];
     let alreadyUsedIds = [];
     this.messages.channels.forEach(channelId => {
-      this.firestore.collection('channels').doc(channelId).valueChanges().subscribe((channel: any) => {
+      this.firestore.collection('channels').doc(channelId).valueChanges({ idField: 'docId' }).subscribe((channel: any) => {
         let result = alreadyUsedIds.filter(id => id.includes(channelId))
         if (result.length == 0 || alreadyUsedIds.length == 0) {
           alreadyUsedIds.push(channelId)
@@ -69,7 +64,7 @@ export class NavbarLeftComponent implements OnInit {
     this.groups = [];
     let alreadyUsedIds = [];
     this.messages.groups.forEach(groupId => {
-      this.firestore.collection('groups').doc(groupId).valueChanges().subscribe((group: any) => {
+      this.firestore.collection('groups').doc(groupId).valueChanges({ idField: 'docId' }).subscribe((group: any) => {
         let result = alreadyUsedIds.filter(id => id.includes(groupId))
         if (result.length == 0 || alreadyUsedIds.length == 0) {
           alreadyUsedIds.push(groupId)
@@ -79,7 +74,20 @@ export class NavbarLeftComponent implements OnInit {
     });
   }
 
-  loadDirectMessages() {
+  loadChats() {
+    this.directMessages = [];
+    let alreadyUsedIds = [];
+    this.messages.directMessages.forEach(directMessageId => {
+      this.firestore.collection('directMessages').doc(directMessageId).valueChanges({ idField: 'docId' }).subscribe((directMessage: any) => {
+        let result = alreadyUsedIds.filter(id => id.includes(directMessageId))
+        if (result.length == 0 || alreadyUsedIds.length == 0) {
+          alreadyUsedIds.push(directMessageId)
+          this.directMessages.push(directMessage);
+        }
+      });
+    });
+
+    console.log(this.directMessages);
 
   }
 
@@ -98,4 +106,9 @@ export class NavbarLeftComponent implements OnInit {
     dialogMember.componentInstance.currentUserId = this.currentUserId;
   }
 
+
+  openMessageHistory(id) {
+    console.log('Das ist die Id zum jeweiligen document', id);
+
+  }
 }

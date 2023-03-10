@@ -7,18 +7,10 @@
         <summary>Channels</summary>
         <div class="channels-content">
 
-            <div class="single-channel" *ngFor="let channel of channels">
+            <div class="single-channel" *ngFor="let channel of channels" (click)="openMessageHistory(channel.docId)">
                 <div class="hashes">#</div>
                 <div class="channel-name"><span>{{ channel.headline }}</span></div>
             </div>
-            <!-- <div class="single-channel">
-                <div class="hashes">#</div>
-                <div class="channel-name"><span>random</span></div>
-            </div>
-            <div class="single-channel">
-                <div class="hashes">#</div>
-                <div class="channel-name"><span>memes</span></div>
-            </div> -->
             <div class="add-element" (click)="openDialogChannel()">
                 <mat-icon>add_box</mat-icon>
                 <div class="channel-name"><span>Add channel</span></div>
@@ -31,18 +23,10 @@
         <summary>Groups</summary>
         <div class="channels-content">
 
-            <div class="single-channel" *ngFor="let group of groups">
+            <div class="single-channel" *ngFor="let group of groups" (click)="openMessageHistory(group.docId)">
                 <div class="hashes">#</div>
                 <div class="channel-name"><span>{{ group.headline }}</span></div>
             </div>
-            <!-- <div class="single-channel">
-                <div class="hashes">#</div>
-                <div class="channel-name"><span>family</span></div>
-            </div>
-            <div class="single-channel">
-                <div class="hashes">#</div>
-                <div class="channel-name"><span>friends</span></div>
-            </div> -->
             <div class="add-element" (click)="openDialogGroups()">
                 <mat-icon>add_box</mat-icon>
                 <div class="channel-name"><span>Add group</span></div>
@@ -55,20 +39,10 @@
     <details class="channels" [open]="true">
         <summary>Direct Messages</summary>
         <div class="directMessages-content">
-            <div class="single-dm" *ngFor="let directMessage of messages.chats">
+            <div class="single-dm" *ngFor="let directMessage of directMessages" (click)="openMessageHistory(directMessage.docId)">
                 <mat-icon>radio_button_unchecked</mat-icon>
-                <div class="channel-name"><span>{{ directMessage }}</span></div>
+                <div class="channel-name"><span>{{ directMessage.headline }}</span></div>
             </div>
-
-
-            <!-- <div class="single-dm">
-                <mat-icon>radio_button_unchecked</mat-icon>
-                <div class="channel-name"><span>Sebastian Michael</span></div>
-            </div>
-            <div class="single-dm">
-                <mat-icon>radio_button_unchecked</mat-icon>
-                <div class="channel-name"><span>Leonardo van Dahl</span></div>
-            </div> -->
             <div class="add-element" (click)="openDialogMember()">
                 <mat-icon>add_box</mat-icon>
                 <div class="channel-name"><span>Add team member</span></div>

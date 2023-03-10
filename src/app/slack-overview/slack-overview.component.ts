@@ -3,7 +3,7 @@ import { user } from 'src/models/user';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { channels } from 'src/models/channels';
 import { groups } from 'src/models/groups';
-import { directMessages } from 'src/models/direct-message';
+import { directMessage } from 'src/models/directMessage';
 import { ActivatedRoute, Router } from '@angular/router';
 import { getFirestore } from "firebase/firestore";
 import { collection, doc, getDoc, getDocs } from '@angular/fire/firestore';
@@ -20,7 +20,7 @@ export class SlackOverviewComponent {
 
 
   constructor(private router: Router, private firestore: AngularFirestore, private route: ActivatedRoute,) {
-    this.router.navigateByUrl('REz7mkotTOrDEP60d4YQ');
+    this.router.navigateByUrl('3xiVuJyrNo551fSV2qMe');
 
     this.route.params.subscribe((params) => {
       this.currentUserId = params['id'];
@@ -45,7 +45,7 @@ export class SlackOverviewComponent {
 
     // this.generateChannelDoc();
     // this.generateGoupsDoc();
-    // this.generateDirectMesssageDoc();
+    // this.generateDirectMessageDoc();
     // this.generateUserDoc();
   }
 
@@ -86,8 +86,8 @@ export class SlackOverviewComponent {
     this.firestore.collection('groups').add(groups).then((user) => {
     })
   }
-  generateDirectMesssageDoc() {
-    this.firestore.collection('directMessages').add(directMessages).then((user) => {
+  generateDirectMessageDoc() {
+    this.firestore.collection('directMessages').add(directMessage).then((user) => {
     })
   }
 }

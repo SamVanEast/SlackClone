@@ -1,4 +1,4 @@
-export let directMessages = {
+export let directMessage = {
     'headline': 'Samuel',
     'participants': [],
     "messages": {
