@@ -1,5 +1,5 @@
-export let groups = {
-    'headline': 'Angular group',
+export let group = {
+    'headline': '',
     'participants': [],
     "messages": {
         "message1": {

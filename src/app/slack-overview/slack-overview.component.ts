@@ -2,7 +2,7 @@ import { Component, HostListener, ViewChild } from '@angular/core';
 import { user } from 'src/models/user';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { channels } from 'src/models/channels';
-import { groups } from 'src/models/groups';
+import { group } from 'src/models/group';
 import { directMessage } from 'src/models/directMessage';
 import { ActivatedRoute, Router } from '@angular/router';
 import { getFirestore } from "firebase/firestore";
@@ -83,7 +83,7 @@ export class SlackOverviewComponent {
     })
   }
   generateGoupsDoc() {
-    this.firestore.collection('groups').add(groups).then((user) => {
+    this.firestore.collection('groups').add(group).then((user) => {
     })
   }
   generateDirectMessageDoc() {

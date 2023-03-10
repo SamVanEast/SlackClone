@@ -5,7 +5,7 @@
   <div>
     <mat-form-field class="mr-16 mt-16" appearance="outline">
       <mat-label>Enter group name</mat-label>
-      <input [attr.disabled]="loading" matInput placeholder="Group name" [(ngModel)]="groupName">
+      <input type="text" [attr.disabled]="loading" matInput placeholder="Group name" [(ngModel)]="group.headline" required>
     </mat-form-field>
 
   <div class="buttons">
