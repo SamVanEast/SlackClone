@@ -63,8 +63,10 @@ export class LoginComponent {
   ngOnInit() {
     this.firestore.collection('users').valueChanges().subscribe((user: any) => {
       this.allUser.push(user);
+
     });
     console.log(this.allUser);
+    console.log(this.user)
   }
 
   generateUserDoc() {
@@ -98,21 +100,21 @@ export class LoginComponent {
 
    UserLogin() {
    let inputPassword = this.loginPassword.nativeElement.value
-  //   let inputEmail = this.loginEmail.nativeElement.value 
+    let inputEmail = this.loginEmail.nativeElement.value 
 
-  //     for (let i = 0; i < this.allUser.length; i++) {
-  //       const email = this.allUser[i]['email'];
-  //       const password = this.allUser[i]['password'];
+      for (let i = 0; i < this.allUser.length; i++) {
+        const email = this.allUser[i]['email'];
+        const password = this.allUser[i]['password'];
 
-  //       if(email === inputEmail && password === inputPassword) {
-  //         this.router.navigateByUrl('/')
-  //       } else {
-  //         this.toggle = true;
-  //     setTimeout(()=>{
-  //       this.toggle = false;
-  //     }, 3000);
-  //       }      
-  //   }  
+        if(email === inputEmail && password === inputPassword) {
+          this.router.navigateByUrl('/')
+        } else {
+          this.toggle = true;
+      setTimeout(()=>{
+        this.toggle = false;
+      }, 3000);
+        }      
+    }  
    }
 
   resetOverview() {
@@ -128,33 +130,6 @@ export class LoginComponent {
     this.reset = false;
   }
 
-  // createNewUser() { 
-
-  //   if(this.password.nativeElement.value == this.passwordRepeat.nativeElement.value) {
-  //     this.pushNewUser = true;
-  //   this.newUser = false;
-
-  //   setTimeout(()=>{
-  //     this.pushNewUser = false;
-  //   }, 3000);
-
-
-    
-  //   this.allUser.push({
-  //   'firstName': this.userFirstName.nativeElement.value, 
-  //   'lastName': this.userLastName.nativeElement.value,
-  //   'phonenumber': this.userFirstName.nativeElement.value,
-  //   'email': this.userMail.nativeElement.value,
-  //   'isLoggedIn': false,
-  //   'password': this.password.nativeElement.value });
-  //     console.log(this.allUser);
-  //   } else {
-  //     this.toggle = true;
-  //     setTimeout(()=>{
-  //       this.toggle = false;
-  //     }, 3000);
-  //   }     
-  // }
 
   resetPassword() {
     console.log()
