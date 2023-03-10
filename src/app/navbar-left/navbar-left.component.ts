@@ -1,13 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { collectionData } from '@angular/fire/firestore';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
-import { collection, doc, Firestore, getFirestore } from '@firebase/firestore';
 import { DialogAddChannelComponent } from '../dialog-add-channel/dialog-add-channel.component';
 import { DialogAddGroupComponent } from '../dialog-add-group/dialog-add-group.component';
 import { DialogAddTeamMemberComponent } from '../dialog-add-team-member/dialog-add-team-member.component';
-
 @Component({
   selector: 'app-navbar-left',
   templateUrl: './navbar-left.component.html',
@@ -111,8 +108,10 @@ export class NavbarLeftComponent implements OnInit {
     console.log('Das ist die Id zum jeweiligen document', id);
   }
 
-  deleteGroup() {
-    console.log('test');
+  deleteGroup(id) {
+    console.log('delete Group', id);
     
+    // this.firestore.collection('users').doc(this.currentUserId).update({
+    // });
   }
 }
