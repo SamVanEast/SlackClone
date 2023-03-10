@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { collectionData } from '@angular/fire/firestore';
 import { MatDialog } from '@angular/material/dialog';
@@ -14,6 +14,7 @@ import { DialogAddTeamMemberComponent } from '../dialog-add-team-member/dialog-a
   styleUrls: ['./navbar-left.component.scss']
 })
 export class NavbarLeftComponent implements OnInit {
+  @Input() groupId: string;
   drawer = true;
   currentUserId;
   public messages;
@@ -106,9 +107,12 @@ export class NavbarLeftComponent implements OnInit {
     dialogMember.componentInstance.currentUserId = this.currentUserId;
   }
 
-
   openMessageHistory(id) {
     console.log('Das ist die Id zum jeweiligen document', id);
+  }
 
+  deleteGroup() {
+    console.log('test');
+    
   }
 }

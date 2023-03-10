@@ -25,7 +25,7 @@
             <div class="single-channel" *ngFor="let group of groups" (click)="openMessageHistory(group.docId)">
                 <div class="hashes">#</div>
                 <div class="channel-name"><span>{{ group.headline }}</span></div>
-                <button mat-icon-button aria-label="Example icon button with a vertical three dot icon">
+                <button mat-icon-button (click)="deleteGroup()">
                     <mat-icon>delete</mat-icon>
                 </button>
             </div>
