@@ -2,9 +2,9 @@ import { Component } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { MatDialogRef } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
-import * as firebase from 'firebase/compat';
 import { group } from 'src/models/group';
-import { LoginComponent } from '../login/login.component';
+import firebase from 'firebase/compat/app';
+import 'firebase/compat/firestore';
 
 @Component({
   selector: 'app-dialog-add-group',
@@ -12,12 +12,10 @@ import { LoginComponent } from '../login/login.component';
   styleUrls: ['./dialog-add-group.component.scss']
 })
 export class DialogAddGroupComponent {
-  // communicationSections
   currentUserId;
   loading = false;
   group;
-  // groupsIds = [];
-  // groupName;
+  groupsIds = [];
 
   constructor(private route: ActivatedRoute, private firestore: AngularFirestore, private dialogRef: MatDialogRef<DialogAddGroupComponent>) {
     this.group = group;
@@ -33,10 +31,12 @@ export class DialogAddGroupComponent {
       this.firestore.collection('groups').add(this.group).then((docRef) => {
         const newGroupId = docRef.id;
         console.log(newGroupId);
+
+        this.groupsIds.push(newGroupId);
         
         // Update the user's groups list in Firebase
         this.firestore.collection('users').doc(this.currentUserId).update({
-          'messages.groups': newGroupId
+          'messages.groups': this.groupsIds
         }).then(() => {
           console.log('Group saved successfully.');
           this.loading = false;
