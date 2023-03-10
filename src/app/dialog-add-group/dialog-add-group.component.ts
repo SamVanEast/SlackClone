@@ -9,10 +9,22 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./dialog-add-group.component.scss']
 })
 export class DialogAddGroupComponent {
-  currentUserId: any;
+  currentUserId;
   loading = false;
+  groupName;
 
   constructor(private route: ActivatedRoute, private firestore: AngularFirestore, private dialogRef: MatDialogRef<DialogAddGroupComponent>) { }
+
+  saveGroup() {
+    this.firestore.collection('groups').add({
+      group: '',
+      headline: this.groupName
+    })
+    .then(() => {
+      console.log('Works');
+      this.dialogRef.close();
+    });
+  }
 
   closeDialogGroup() {
     this.dialogRef.close();

@@ -5,11 +5,11 @@
   <div>
     <mat-form-field class="mr-16 mt-16" appearance="outline">
       <mat-label>Enter group name</mat-label>
-      <input [attr.disabled]="loading" matInput placeholder="Group name">
+      <input [attr.disabled]="loading" matInput placeholder="Group name" [(ngModel)]="groupName">
     </mat-form-field>
 
   <div class="buttons">
     <button mat-stroked-button (click)="closeDialogGroup()" >Cancel</button>
-    <button mat-raised-button color="primary">Save</button>
+    <button mat-raised-button color="primary" (click)="saveGroup()">Save</button>
   </div>
 </div>
