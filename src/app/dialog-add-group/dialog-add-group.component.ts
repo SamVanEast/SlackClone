@@ -3,7 +3,6 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { MatDialogRef } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { group } from 'src/models/group';
-import firebase from 'firebase/compat/app';
 import 'firebase/compat/firestore';
 
 @Component({
