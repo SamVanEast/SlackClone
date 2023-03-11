@@ -53,6 +53,11 @@ export class NavbarRightComponent implements OnInit {
     dialogImage.afterClosed().subscribe(result => {
       if(result){
         this.profileImgSrc = `../../${result}`;
+
+        this.firestore.collection('users').doc(this.currentUserId).update({
+          'userInfos.profileImage': this.profileImgSrc,
+        })
+        console.log(this.profileImgSrc);
       }
     });
   }
