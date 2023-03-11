@@ -1,7 +1,7 @@
 <div class="dialog-images-container">
     <div class="images-container">
         <div class="cont-checkbox" *ngFor="let image of images; index as i">
-            <input type="checkbox" [id]="'myCheckbox-' + i" />
+            <input type="radio" [id]="'myCheckbox-' + i" [name]="'myCheckbox'" />
             <label [for]="'myCheckbox-' + i">
                 <img [src]="image.img" />
                 <span class="cover-checkbox">
