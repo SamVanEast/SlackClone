@@ -1,0 +1,18 @@
+import { Component } from '@angular/core';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { MatDialogRef } from '@angular/material/dialog';
+import { ActivatedRoute } from '@angular/router';
+import { DialogUpdateContactComponent } from '../dialog-update-contact/dialog-update-contact.component';
+
+@Component({
+  selector: 'app-dialog-change-img',
+  templateUrl: './dialog-change-img.component.html',
+  styleUrls: ['./dialog-change-img.component.scss']
+})
+export class DialogChangeImgComponent {
+  loading = false;
+  currentUserId;
+
+  constructor(private route: ActivatedRoute, private firestore: AngularFirestore, private dialogRef: MatDialogRef<DialogUpdateContactComponent>) { }
+
+}

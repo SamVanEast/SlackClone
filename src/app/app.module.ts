@@ -43,6 +43,7 @@ import { NgxEditorModule } from 'ngx-editor';
 import { DialogAddTeamMemberComponent } from './dialog-add-team-member/dialog-add-team-member.component';
 import { DialogAddChannelComponent } from './dialog-add-channel/dialog-add-channel.component';
 import { DialogAddGroupComponent } from './dialog-add-group/dialog-add-group.component';
+import { DialogChangeImgComponent } from './dialog-change-img/dialog-change-img.component';
 
 @NgModule({
   declarations: [
@@ -58,6 +59,7 @@ import { DialogAddGroupComponent } from './dialog-add-group/dialog-add-group.com
     DialogAddTeamMemberComponent,
     DialogAddChannelComponent,
     DialogAddGroupComponent,
+    DialogChangeImgComponent,
   ],
   imports: [
     BrowserModule,
