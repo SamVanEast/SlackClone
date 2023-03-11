@@ -1,0 +1,37 @@
+mat-dialog-content {
+    max-height: 50vh;
+}
+
+.buttons {
+    margin-top: 22px;
+}
+
+.contact-info {
+    list-style-type: none;
+}
+
+h3{
+    font-weight: bold;
+    padding-top: 22px;
+
+    &:first-child {
+        padding-top: 0;
+    }
+
+}
+
+span {
+    padding-top: 12px;
+}
+
+h2 {
+    padding-top: 22px;
+}
+
+.data-protection {
+    padding-bottom: 0;
+}
+
+.person-responsible {
+    padding-top: 0;
+}

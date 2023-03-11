@@ -1,4 +1,6 @@
 import { Component, ElementRef } from '@angular/core';
+import { ImprintDataprotectionComponent } from '../imprint-dataprotection/imprint-dataprotection.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-header',
@@ -8,7 +10,7 @@ import { Component, ElementRef } from '@angular/core';
 export class HeaderComponent {
   public openNavbar = true;
 
-  constructor(public elementRef: ElementRef) {
+  constructor(public elementRef: ElementRef, public dialog: MatDialog) {
 
   }
 
@@ -20,8 +22,10 @@ export class HeaderComponent {
     this.openNavbar = !this.openNavbar
   }
 
-  enteredSearchValue: string = '';
-  
-  
+
+  openImprint() {
+    this.dialog.open(ImprintDataprotectionComponent);
+  }
+
 }
 
