@@ -175,7 +175,7 @@
       </mat-form-field>
     </div>
   
-    <div class="example-container">
+    <div class="example-container column">
       <mat-form-field appearance="fill">
         <mat-label>Repeat new password</mat-label>
         <input matInput [type]="hide ? 'password' : 'text'" #resetPwRepeat />
@@ -189,6 +189,7 @@
           <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
         </button>
       </mat-form-field>
+      <span [ngClass]="{'red': toggle, 'white': !toggle}"  class="wrong-password-text">its not the same password!!</span>
     </div>
 
 
