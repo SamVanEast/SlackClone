@@ -44,4 +44,9 @@ export class NavbarRightComponent implements OnInit {
     const dialogContact = this.dialog.open(DialogUpdateContactComponent);
     dialogContact.componentInstance.currentUserId = this.currentUserId;
   }
+
+  openDialogChangeImg(){
+    console.log('works');
+    
+  }
 }
