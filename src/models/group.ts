@@ -2,16 +2,16 @@ export let group = {
     'headline': '',
     'collection': 'groups',
     'participants': [],
-    "messages": {
-        "message0": {
-            "creator": "",
-            "text": "",
+    "messages": [
+        {
+            "creator": "Samuel Haas",
+            "text": "Ja",
             "date": 2151351351
         },
-        "message1": {
-            "creator": "",
-            "text": "",
+        {
+            "creator": "Sebastian Michael",
+            "text": "Soll ich ein bisschen Kiffgras zum Spritzen mitbringen? Oder Koks?",
             "date": 2151351351
         }
-    }
+    ]
 } 

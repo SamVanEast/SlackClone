@@ -1,20 +1,20 @@
 <div class="messages_history">
     <div class="header-and-messages">
         <div class="messages_history_header">
-            <span> # Content </span>
+            <span> # {{ doc?.headline }} </span>
         </div>
-        <div class="messages_history_content">
-            <div class="single-post">
+        <div class="messages_history_content" >
+            <div class="single-post" *ngFor="let message of doc?.messages">
                 <img class="profile-pic" src="../../assets/img/blank-profile.png">
                 <div class="author-and-text">
-                    <div><span class="author">Samuel Haas</span>
-                        <span class="time">Sat, 16.03</span>
+                    <div><span class="author">{{ message.creator }}</span>
+                        <span class="time">{{ message.date }}</span>
                     </div>
-                    <span>Heute abend zusaufen?</span>
+                    <span>{{ message.text }}</span>
                 </div>
             </div>
 
-            <div class="single-post">
+            <!-- <div class="single-post">
                 <img class="profile-pic" src="../../assets/img/blank-profile.png">
                 <div class="author-and-text">
                     <div><span class="author">Thomas Wagner</span>
@@ -60,7 +60,7 @@
                     <div><span class="author">Samuel Haas</span>
                         <span class="time">Sat, 12.11</span>
                     </div>
-                    <span>Ja</span>
+                    <span>c</span>
                 </div>
             </div>
 
@@ -131,7 +131,7 @@
                         leicht
                         unterhopft. Ganz zitterig. </span>
                 </div>
-            </div>
+            </div> -->
         </div>
     </div>
 

@@ -54,6 +54,7 @@ export class DialogAddTeamMemberComponent {
         this.loading = false;
       });
     }
+    this.directMessages.headline = '';
   }
 
   closeDialogMember() {

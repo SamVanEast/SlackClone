@@ -54,6 +54,7 @@ export class DialogAddGroupComponent {
         this.loading = false;
       });
     }
+    this.group.headline = '';
   }
 
 

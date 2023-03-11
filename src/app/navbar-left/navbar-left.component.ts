@@ -18,8 +18,7 @@ export class NavbarLeftComponent implements OnInit {
   channels = [];
   groups = [];
   directMessages = [];
-  @Output() public whichContentShouldLoad = new EventEmitter<any>();
-  content;
+  @Output() whichContentShouldLoad = new EventEmitter<any>();
   // communicationSections = [];
 
 
@@ -31,6 +30,7 @@ export class NavbarLeftComponent implements OnInit {
       this.currentUserId = params['id'];
     });
     this.loadMessagesFromFirestore();
+    this.openMessageHistory('PtNj9aQeezv13BcAkbq4', 'channels');
   }
 
 
@@ -106,10 +106,7 @@ export class NavbarLeftComponent implements OnInit {
   }
 
   openMessageHistory(id, collection) {
-    this.content = [];
-    this.content.push(collection);
-    this.content.push(id);
-    this.whichContentShouldLoad.emit(this.content);
+    this.whichContentShouldLoad.emit([collection, id]);
   }
 
   deleteGroup(id) {
