@@ -13,6 +13,36 @@ export class DialogChangeImgComponent {
   loading = false;
   currentUserId;
 
+  images = [
+    {
+      img: 'assets/img/blank-profile.png',
+    },
+    {
+      img: 'assets/img/pingu.png',
+    },
+    {
+      img: 'assets/img/female1.png',
+    },
+    {
+      img: 'assets/img/female2.png',
+    },
+    {
+      img: 'assets/img/male1.png',
+    },
+    {
+      img: 'assets/img/male2.png',
+    },
+  ];
+
   constructor(private route: ActivatedRoute, private firestore: AngularFirestore, private dialogRef: MatDialogRef<DialogUpdateContactComponent>) { }
+
+  saveImage() {
+    console.log('saved');
+
+  }
+
+  closeDialogImage() {
+    this.dialogRef.close();
+  }
 
 }

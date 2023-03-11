@@ -1,12 +1,20 @@
 <div class="dialog-images-container">
     <div class="images-container">
-        <img src="../../assets/img/blank-profile.png" alt="">
-        <img src="../../assets/img/pingu.png" alt="">
-        <img src="../../assets/img/female1.png" alt="">
+        <div class="cont-checkbox" *ngFor="let image of images; index as i">
+            <input type="checkbox" [id]="'myCheckbox-' + i" />
+            <label [for]="'myCheckbox-' + i">
+                <img [src]="image.img" />
+                <span class="cover-checkbox">
+                    <svg viewBox="0 0 12 10">
+                        <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
+                    </svg>
+                </span>
+            </label>
+        </div>
     </div>
-    <div class="images-container">
-        <img src="../../assets/img/female2.png" alt="">
-        <img src="../../assets/img/male1.png" alt="">
-        <img src="../../assets/img/male2.png" alt="">
+
+    <div class="buttons">
+        <button mat-stroked-button (click)="closeDialogImage()">Cancel</button>
+        <button mat-raised-button color="primary" (click)="saveImage()">Save</button>
     </div>
 </div>
