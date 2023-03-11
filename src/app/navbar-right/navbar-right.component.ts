@@ -12,6 +12,7 @@ import { DialogUpdateProfileNameComponent } from '../dialog-update-profile-name/
   styleUrls: ['./navbar-right.component.scss']
 })
 export class NavbarRightComponent implements OnInit {
+  showNavbarRight = true;
   userId: string;
   public firstName;
   public lastName;
@@ -63,5 +64,9 @@ export class NavbarRightComponent implements OnInit {
         })
       }
     });
+  }
+
+  closeNavbarRight() {
+    this.showNavbarRight = false;
   }
 }

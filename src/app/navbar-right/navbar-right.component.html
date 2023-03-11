@@ -1,7 +1,7 @@
-<mat-card class="navbar-right-container">
+<mat-card class="navbar-right-container" *ngIf="showNavbarRight">
     <mat-card-header class="title-close-container">
         <mat-card-title>Profile</mat-card-title>
-        <button mat-icon-button matTooltip="Basic">
+        <button mat-icon-button matTooltip="Basic" (click)="closeNavbarRight()">
             <mat-icon>close</mat-icon>
         </button>
     </mat-card-header>
