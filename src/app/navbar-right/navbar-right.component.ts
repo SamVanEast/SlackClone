@@ -18,7 +18,7 @@ export class NavbarRightComponent implements OnInit {
   public email;
   public phone;
   currentUserId;
-  public profileImgSrc = '../../assets/img/blank-profile.png';
+  public profileImgSrc = '';
 
   constructor(private route: ActivatedRoute, private firestore: AngularFirestore, public dialog: MatDialog) { }
 
@@ -32,6 +32,10 @@ export class NavbarRightComponent implements OnInit {
         this.lastName = user.userInfos.lastName;
         this.email = user.userInfos.email;
         this.phone = user.userInfos.phone;
+      });
+
+      this.firestore.collection('users').doc(this.currentUserId).get().subscribe((doc) => {
+        this.profileImgSrc = doc.get('userInfos.profileImage');
       });
     });
   }
@@ -57,7 +61,6 @@ export class NavbarRightComponent implements OnInit {
         this.firestore.collection('users').doc(this.currentUserId).update({
           'userInfos.profileImage': this.profileImgSrc,
         })
-        console.log(this.profileImgSrc);
       }
     });
   }
