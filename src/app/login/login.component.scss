@@ -7,16 +7,18 @@
   animation: linear;
   animation-name: zoomIn;
   animation-duration: 0.5s;
+  gap: 14px;
 }
 
 .forgot-password-link {
   font-size: 18px;
   display: flex;
   flex-direction: row;
+  justify-content: center;
 
   span {
     font-weight: 700;
-        color: #86358f;
+        color: #611f69;
         cursor: pointer;
   }
 }
@@ -50,6 +52,7 @@ form {
   padding: 15px 5px;
   cursor: pointer;
 
+
   &:hover {
     opacity: 0.95;
   }
@@ -66,7 +69,7 @@ form {
   cursor: pointer;
 
   &:hover {
-    border: 2px solid #86358f;
+    border: 2px solid #611f69;
     opacity: 0.75;
   }
 }
@@ -76,7 +79,7 @@ form {
 
     span {
         font-weight: 700;
-        color: #86358f;
+        color: #611f69;
         cursor: pointer;
     }
 }
@@ -88,6 +91,7 @@ form {
   color: red;
   position: relative;
   bottom: 20px;
+  cursor: default;
 }
 
 
@@ -169,9 +173,11 @@ form {
 @keyframes fromLeftToRight {
   0% {
     width: 0;
+    height: 0;
   }
   100% {
     width: 100vw;
+    height: 100vh;
   }
 }
 

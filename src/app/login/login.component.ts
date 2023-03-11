@@ -36,10 +36,6 @@ export class LoginComponent {
   pushNewUser = false;
   toggle = false;
   userId: string;
-  firstname; 
-  lastname;
-  phone;
-  email;
   user;
 
   
@@ -58,6 +54,7 @@ export class LoginComponent {
 
   // var for reset Password
   @ViewChild('resetPw') resetPw:ElementRef;
+  @ViewChild('resetPwRepeat') resetPwRepeat:ElementRef;
   @ViewChild('resetEmail') resetEmail:ElementRef;
 
   // var for push text 
@@ -66,10 +63,9 @@ export class LoginComponent {
 
 
   ngOnInit() {
-    this.firestore.collection('users').valueChanges().subscribe((user: any) => {
+    this.firestore.collection('users').valueChanges({ idField: 'docId' }).subscribe((user: any) => {
       this.allUser = user;
       console.log(user)
-      console.log(this.allUser)
     });
 
   }
@@ -82,7 +78,6 @@ export class LoginComponent {
       	this.firestore.collection('users').add(this.user).then((user) => {
         
       })
-      console.log(user)
       this.pushNewUser = true;
       this.newUser = false;
       setTimeout(()=>{
@@ -128,16 +123,29 @@ export class LoginComponent {
 
     for (let i = 0; i < this.allUser.length; i++) {
       const email = this.allUser[i]['userInfos']['email'];
+      const id = this.allUser[i]['docId'];
+      
       if(inputEmail === email){
-        console.log('it works')
+        this.changePassword(id);
       } else if (i === this.allUser.length - 1){
-        console.log('email doesnt exist')
+        alert('Email Doesnt exist')
       }  
     }
    }
 
-   changePassword() {
-    this.firestore.collection('users').doc(this.userId).update(this.user);
+   changePassword(id: string) {
+    let password = this.resetPw.nativeElement.value;
+    let repPassword = this.resetPwRepeat.nativeElement.value;
+
+    if(password === repPassword){
+      this.firestore.collection('users').doc(id).update({
+        'userInfos.password': this.resetPw.nativeElement.value,});
+    } else {
+      this.toggle = true;
+      setTimeout(()=> {
+        this.toggle = false;
+      }, 3000);
+    }
    }
 
   resetOverview() {
