@@ -19,6 +19,8 @@ export class HeaderComponent {
   openNavbarLeft() {
     this.openNavbar = !this.openNavbar
   }
+
+  enteredSearchValue: string = '';
   
   
 }
