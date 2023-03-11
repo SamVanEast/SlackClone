@@ -35,6 +35,7 @@ export class LoginComponent {
   reset = false;
   pushNewUser = false;
   toggle = false;
+  userId: string;
   firstname; 
   lastname;
   phone;
@@ -68,9 +69,9 @@ export class LoginComponent {
     this.firestore.collection('users').valueChanges().subscribe((user: any) => {
       this.allUser = user;
       console.log(user)
-      console.log('nue', this.allUser)
+      console.log(this.allUser)
     });
-    console.log('nue', this.allUser)
+
   }
 
 
@@ -133,6 +134,10 @@ export class LoginComponent {
         console.log('email doesnt exist')
       }  
     }
+   }
+
+   changePassword() {
+    this.firestore.collection('users').doc(this.userId).update(this.user);
    }
 
   resetOverview() {
