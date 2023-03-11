@@ -1,4 +1,4 @@
-import { Component, HostListener, ViewChild } from '@angular/core';
+import { Component, HostListener, Input, ViewChild } from '@angular/core';
 import { user } from 'src/models/user';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { channels } from 'src/models/channels';
@@ -15,7 +15,6 @@ import { collection, doc, getDoc, getDocs } from '@angular/fire/firestore';
 })
 export class SlackOverviewComponent {
   @ViewChild('header') header;
-  showNavbar = true;
   currentUserId;
   whichContentShouldLoad;
 
@@ -51,6 +50,10 @@ export class SlackOverviewComponent {
     // this.generateUserDoc();
   }
 
+  // ngOnChanges() {
+  //   console.log(this.openOrCloseNavbarLeft);
+  // }
+
   async getAllIds() {
     const db = getFirestore();
     const docRef = collection(db, 'users');
@@ -63,16 +66,19 @@ export class SlackOverviewComponent {
     })
   }
 
-  @HostListener('window:click')
-
-  onClick() {
-    this.showNavbar = this.header.openNavbar;
-  }
-
-  setContent(whichContentShouldLoad){
+  setContent(whichContentShouldLoad) {
     this.whichContentShouldLoad = whichContentShouldLoad;
   }
 
+  openOrClose(boolean) {
+    if (boolean) {
+      console.log('is open');
+
+    } else {
+      console.log('is closed');
+
+    }
+  }
 
 
 

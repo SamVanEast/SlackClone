@@ -1,4 +1,4 @@
-import { Component, ElementRef } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Output } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { ActivatedRoute } from '@angular/router';
 import { ImprintDataprotectionComponent } from '../imprint-dataprotection/imprint-dataprotection.component';
@@ -10,9 +10,11 @@ import { MatDialog } from '@angular/material/dialog';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent {
-  public openNavbar = true;
   currentUserId;
   public profileImgSrc = '';
+  openOrClose = false; 
+  @Output() openNavbarLeft = new EventEmitter<any>();
+
 
   constructor(private route: ActivatedRoute, public elementRef: ElementRef, private firestore: AngularFirestore, public dialog: MatDialog) { }
 
@@ -26,14 +28,17 @@ export class HeaderComponent {
         console.log(this.profileImgSrc);
       });
     });
+
+    this.openOrCloseNavbarLeft();
   }
 
   sub(): void {
   }
 
 
-  openNavbarLeft() {
-    this.openNavbar = !this.openNavbar
+  openOrCloseNavbarLeft() {
+    this.openOrClose = !this.openOrClose
+    this.openNavbarLeft.emit(this.openOrClose);
   }
 
 

@@ -85,9 +85,6 @@ export class NavbarLeftComponent implements OnInit {
         }
       });
     });
-
-    console.log(this.directMessages);
-
   }
 
   openDialogChannel() {

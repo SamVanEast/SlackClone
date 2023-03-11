@@ -26,8 +26,6 @@ export class MessagesHistoryComponent {
 
   ngOnChanges() {
     if (this.whichContentShouldLoad !== undefined && this.whichContentShouldLoad.length > 0) {
-      console.log(this.whichContentShouldLoad);
-      
       this.firestore.collection(this.whichContentShouldLoad[0]).doc(this.whichContentShouldLoad[1]).valueChanges().subscribe((doc: any) => {
         this.doc = doc;
       });
