@@ -1,4 +1,6 @@
 import { Component, ElementRef } from '@angular/core';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -7,21 +9,32 @@ import { Component, ElementRef } from '@angular/core';
 })
 export class HeaderComponent {
   public openNavbar = true;
+  currentUserId;
+  public profileImgSrc = '';
 
-  constructor(public elementRef: ElementRef) {
+  constructor(private route: ActivatedRoute, public elementRef: ElementRef, private firestore: AngularFirestore) { }
 
+  ngOnInit(): void {
+    this.route.params.subscribe((params) => {
+
+      this.currentUserId = params['id'];
+
+      this.firestore.collection('users').doc(this.currentUserId).get().subscribe((doc) => {
+        this.profileImgSrc = doc.get('userInfos.profileImage');
+        console.log(this.profileImgSrc);
+      });
+    });
   }
 
   sub(): void {
   }
 
-  
+
   openNavbarLeft() {
     this.openNavbar = !this.openNavbar
   }
 
   enteredSearchValue: string = '';
-  
-  
+
 }
 
