@@ -12,8 +12,9 @@ import { DialogUpdateContactComponent } from '../dialog-update-contact/dialog-up
 export class DialogChangeImgComponent {
   loading = false;
   currentUserId;
+  public selectedImageId;
 
-  images = [
+  public images = [
     {
       img: 'assets/img/blank-profile.png',
     },
@@ -36,16 +37,15 @@ export class DialogChangeImgComponent {
 
   constructor(private route: ActivatedRoute, private firestore: AngularFirestore, private dialogRef: MatDialogRef<DialogUpdateContactComponent>) { }
 
-  saveImage() {
-    console.log('saved');
+  setSelectedImageId(imageId) {
+    this.selectedImageId = imageId;
+  }
 
+  saveImage() {
+    console.log(this.selectedImageId);
   }
 
   closeDialogImage() {
     this.dialogRef.close();
-  }
-
-  test(img){
-    console.log(img);
   }
 }
