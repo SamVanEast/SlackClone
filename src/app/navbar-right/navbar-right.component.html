@@ -1,7 +1,7 @@
-<mat-card class="navbar-right-container">
+<mat-card class="navbar-right-container" *ngIf="showNavbarRight">
     <mat-card-header class="title-close-container">
         <mat-card-title>Profile</mat-card-title>
-        <button mat-icon-button matTooltip="Basic">
+        <button mat-icon-button matTooltip="Basic" (click)="closeNavbarRight()">
             <mat-icon>close</mat-icon>
         </button>
     </mat-card-header>
@@ -9,7 +9,7 @@
         <button mat-icon-button (click)="openDialogChangeImg()">
             <mat-icon>edit</mat-icon>
           </button>
-        <img mat-card-image src="../../assets/img/blank-profile.png" alt="Photo of a Shiba Inu">
+        <img mat-card-image id="profile-img" [src]="profileImgSrc">
     </div>
     <mat-card-content class="edit-user-btn">
         <p>{{ firstName }} {{ lastName }}</p>

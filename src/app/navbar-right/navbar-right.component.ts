@@ -12,12 +12,14 @@ import { DialogUpdateProfileNameComponent } from '../dialog-update-profile-name/
   styleUrls: ['./navbar-right.component.scss']
 })
 export class NavbarRightComponent implements OnInit {
+  showNavbarRight = true;
   userId: string;
   public firstName;
   public lastName;
   public email;
   public phone;
   currentUserId;
+  public profileImgSrc = '';
 
   constructor(private route: ActivatedRoute, private firestore: AngularFirestore, public dialog: MatDialog) { }
 
@@ -27,11 +29,14 @@ export class NavbarRightComponent implements OnInit {
       this.currentUserId = params['id'];
 
       this.firestore.collection('users').doc(this.currentUserId).valueChanges().subscribe((user: any) => {
-        console.log(user);
         this.firstName = user.userInfos.firstName;
         this.lastName = user.userInfos.lastName;
         this.email = user.userInfos.email;
         this.phone = user.userInfos.phone;
+      });
+
+      this.firestore.collection('users').doc(this.currentUserId).get().subscribe((doc) => {
+        this.profileImgSrc = doc.get('userInfos.profileImage');
       });
     });
   }
@@ -49,5 +54,19 @@ export class NavbarRightComponent implements OnInit {
   openDialogChangeImg(){
     const dialogImage= this.dialog.open(DialogChangeImgComponent);
     dialogImage.componentInstance.currentUserId = this.currentUserId;
+
+    dialogImage.afterClosed().subscribe(result => {
+      if(result){
+        this.profileImgSrc = `../../${result}`;
+
+        this.firestore.collection('users').doc(this.currentUserId).update({
+          'userInfos.profileImage': this.profileImgSrc,
+        })
+      }
+    });
+  }
+
+  closeNavbarRight() {
+    this.showNavbarRight = false;
   }
 }

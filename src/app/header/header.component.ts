@@ -1,4 +1,6 @@
 import { Component, ElementRef } from '@angular/core';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { ActivatedRoute } from '@angular/router';
 import { ImprintDataprotectionComponent } from '../imprint-dataprotection/imprint-dataprotection.component';
 import { MatDialog } from '@angular/material/dialog';
 
@@ -9,15 +11,27 @@ import { MatDialog } from '@angular/material/dialog';
 })
 export class HeaderComponent {
   public openNavbar = true;
+  currentUserId;
+  public profileImgSrc = '';
 
-  constructor(public elementRef: ElementRef, public dialog: MatDialog) {
+  constructor(private route: ActivatedRoute, public elementRef: ElementRef, private firestore: AngularFirestore) { }
 
+  ngOnInit(): void {
+    this.route.params.subscribe((params) => {
+
+      this.currentUserId = params['id'];
+
+      this.firestore.collection('users').doc(this.currentUserId).get().subscribe((doc) => {
+        this.profileImgSrc = doc.get('userInfos.profileImage');
+        console.log(this.profileImgSrc);
+      });
+    });
   }
 
   sub(): void {
   }
 
-  
+
   openNavbarLeft() {
     this.openNavbar = !this.openNavbar
   }

@@ -1,9 +1,9 @@
 <div class="dialog-images-container">
     <div class="images-container">
         <div class="cont-checkbox" *ngFor="let image of images; index as i">
-            <input type="radio" [id]="'myCheckbox-' + i" [name]="'myCheckbox'" />
+            <input type="radio" [id]="'myCheckbox-' + i" [name]="'myCheckbox'" (click)="setSelectedImageId(image.img)"/>
             <label [for]="'myCheckbox-' + i">
-                <img [src]="image.img" />
+                <img [src]="image.img"/>
                 <span class="cover-checkbox">
                     <svg viewBox="0 0 12 10">
                         <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
@@ -15,6 +15,6 @@
 
     <div class="buttons">
         <button mat-stroked-button (click)="closeDialogImage()">Cancel</button>
-        <button mat-raised-button color="primary" (click)="saveImage()">Save</button>
+        <button mat-raised-button color="primary" (click)="saveImage()" [attr.data-selected-image-id]="selectedImageId">Save</button>
     </div>
 </div>
