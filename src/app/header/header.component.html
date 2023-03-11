@@ -1,17 +1,16 @@
 <mat-toolbar class="toolbar-header">
     <div class="header-left">
         <a routerLink="/">Slack Clone</a>
-        <button mat-icon-button class="collapse-menu"
-            (click)="openNavbarLeft()">
+        <button mat-icon-button class="collapse-menu" (click)="openNavbarLeft()" matTooltip="Open/collapse menu" matTooltipPosition="right">
             <mat-icon>compare_arrows</mat-icon>
         </button>
-        
+
 
     </div>
     <div class="header-mid">
         <!-- <mat-icon>schedule</mat-icon> -->
         <form class="search-bar" ngNativeValidate (submit)="sub()">
-            <input type="text" name="" placeholder="Search Slack Clone" >
+            <input type="text" name="" placeholder="Search Slack Clone">
 
             <button>
                 <img src="../../assets/img/icons/magnifying-glass-white.svg">
@@ -21,8 +20,14 @@
     </div>
 
     <div class="header-right">
-        <mat-icon (click)="openImprint()">help</mat-icon>
-        <img class="profile-pic" src="../../assets/img/blank-profile.png">
+        <mat-icon style="cursor: pointer;" (click)="openImprint()">help</mat-icon>
+        <img class="profile-pic" src="../../assets/img/blank-profile.png" [matMenuTriggerFor]="menu">
+
+        <mat-menu #menu="matMenu">
+            <button mat-menu-item>Item 1</button>
+            <button mat-menu-item>Item 2</button>
+        </mat-menu>
+
     </div>
 
 </mat-toolbar>
