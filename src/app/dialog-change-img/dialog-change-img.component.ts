@@ -45,4 +45,7 @@ export class DialogChangeImgComponent {
     this.dialogRef.close();
   }
 
+  test(img){
+    console.log(img);
+  }
 }
