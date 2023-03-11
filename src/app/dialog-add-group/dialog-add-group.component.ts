@@ -4,8 +4,7 @@ import { Firestore } from '@angular/fire/firestore';
 import { MatDialogRef } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { group } from 'src/models/group';
-import { LoginComponent } from '../login/login.component';
-import * as firebase from 'firebase/app';
+import 'firebase/compat/firestore';
 
 @Component({
   selector: 'app-dialog-add-group',
@@ -13,12 +12,10 @@ import * as firebase from 'firebase/app';
   styleUrls: ['./dialog-add-group.component.scss']
 })
 export class DialogAddGroupComponent {
-  // communicationSections
   currentUserId;
   loading = false;
   group;
-  groupsIds;
-  // groupName;
+  groupsIds = [];
 
   constructor(private route: ActivatedRoute, private firestore: AngularFirestore, private dialogRef: MatDialogRef<DialogAddGroupComponent>, private db: Firestore) {
     this.group = group;
@@ -32,38 +29,37 @@ export class DialogAddGroupComponent {
 
 
     if (this.group.headline !== '') {
-      this.firestore.collection('groups').add(this.group).then((group) => {
-        console.log(group.id);
-        // console.log(this.firestore.collection('users').doc(this.currentUserId).valueChanges());
+      this.loading = true;
+      // Add the new group to Firebase
+      this.firestore.collection('groups').add(this.group).then((docRef) => {
+        const newGroupId = docRef.id;
+        console.log(newGroupId);
 
-        // database.collection('users').doc(this.currentUserId).get().then(user => {
-        //   console.log(user);
+        // Get the current list of group IDs from the user's document
+        this.firestore.collection('users').doc(this.currentUserId).get().toPromise().then((userDoc) => {
+          const currentGroups = userDoc.get('messages.groups') || [];
 
-        // })
+          // Add the new group ID to the current list and update it in Firebase
+          currentGroups.push(newGroupId);
+          this.firestore.collection('users').doc(this.currentUserId).update({
+            'messages.groups': currentGroups
+          }).then(() => {
+            console.log('Group saved successfully.');
+            this.loading = false;
+            this.dialogRef.close();
+          }).catch((error) => {
+            console.error('Error updating user data:', error);
+            this.loading = false;
+          });
+        });
 
-        // this.db.collection('users').doc(this.currentUserId).get().then()(user => {
-        //   this.groupsIds = user;
-        //   this.groupsIds.push(group.id);
-        //   // console.log(this.groupsIds);
-        //   // this.firestore.collection('users').doc(this.currentUserId).update({
-        //   //   'messages.groups': this.groupsIds
-        //   // }).then((user) => {
-        //   //   console.log('Hat funktioniert', this.groupsIds);
-        //   // })
-
-        // });
-
-
-
-
-
-
-
-
-        this.dialogRef.close();
+      }).catch((error) => {
+        console.error('Error adding new group:', error);
+        this.loading = false;
       });
     }
   }
+
 
   closeDialogGroup() {
     this.dialogRef.close();

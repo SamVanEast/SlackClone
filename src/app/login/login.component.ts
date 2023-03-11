@@ -2,6 +2,9 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 import { FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
 import {Router} from '@angular/router';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { user } from 'src/models/user';
+import { Observable } from 'rxjs';
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -17,9 +20,12 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 })
 export class LoginComponent {
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private firestore: AngularFirestore) {
+    this.user = user;
+  }
 
   emailFormControl = new FormControl('', [Validators.required, Validators.email]);
+  allUser = [];
 
   matcher = new MyErrorStateMatcher();
   hide = true;
@@ -27,20 +33,21 @@ export class LoginComponent {
   reset = false;
   pushNewUser = false;
   toggle = false;
+  firstname; 
+  lastname;
+  phone;
+  email;
+  user;
+
   
-
-  allUser: any = [{
-    name:  "John",
-    email: "leo@web.de",
-    password: "123"
-  }]
-
 
   // Var for create user
   @ViewChild('password') password:ElementRef;
   @ViewChild('passwordRepeat') passwordRepeat:ElementRef;
-  @ViewChild('userName') userName:ElementRef;
+  @ViewChild('userFirstName') userFirstName:ElementRef;
+  @ViewChild('userLastName') userLastName:ElementRef;
   @ViewChild('userMail') userMail:ElementRef;
+  @ViewChild('phoneNumber') phoneNumber:ElementRef;
 
   // Var for Reset Password 
   @ViewChild('loginEmail') loginEmail:ElementRef;
@@ -53,14 +60,46 @@ export class LoginComponent {
   // var for push text 
  
 
+  ngOnInit() {
+    this.firestore.collection('users').valueChanges().subscribe((user: any) => {
+      this.allUser.push(user);
 
+    });
+    console.log(this.allUser);
+    console.log(this.user)
+  }
+
+  generateUserDoc() {
+
+    if(this.password.nativeElement.value == this.passwordRepeat.nativeElement.value) {
+
+      	this.firestore.collection('users').add(this.user).then((user) => {
+        this.allUser.push(user)
+      })
+      console.log(user)
+      this.pushNewUser = true;
+      this.newUser = false;
+      setTimeout(()=>{
+            this.pushNewUser = false;
+          }, 3000);
+      }else {
+        this.toggle = true;
+        setTimeout(()=> {
+          this.toggle = false;
+        }, 3000);
+      }
+}
+
+
+
+  
 
   guestLogin() {
     this.router.navigateByUrl('/')
   }
 
-  UserLogin() {
-    let inputPassword = this.loginPassword.nativeElement.value
+   UserLogin() {
+   let inputPassword = this.loginPassword.nativeElement.value
     let inputEmail = this.loginEmail.nativeElement.value 
 
       for (let i = 0; i < this.allUser.length; i++) {
@@ -76,7 +115,7 @@ export class LoginComponent {
       }, 3000);
         }      
     }  
-  }
+   }
 
   resetOverview() {
     this.reset = true;
@@ -91,28 +130,6 @@ export class LoginComponent {
     this.reset = false;
   }
 
-  createNewUser() { 
-
-    if(this.password.nativeElement.value == this.passwordRepeat.nativeElement.value) {
-      this.pushNewUser = true;
-    this.newUser = false;
-
-    setTimeout(()=>{
-      this.pushNewUser = false;
-    }, 3000);
-    
-    this.allUser.push({
-    'name': this.userName.nativeElement.value, 
-    'email': this.userMail.nativeElement.value,
-    'password': this.password.nativeElement.value });
-      console.log(this.allUser);
-    } else {
-      this.toggle = true;
-      setTimeout(()=>{
-        this.toggle = false;
-      }, 3000);
-    }     
-  }
 
   resetPassword() {
     console.log()

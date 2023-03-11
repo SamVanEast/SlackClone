@@ -56,10 +56,22 @@
 <div *ngIf="newUser" class="container-new-user">
   <h1>Create a new User</h1>
 
-  <form class="example-form" (ngSubmit)="createNewUser()" #myForm ngNativeValidate>
+  <form class="example-form" (ngSubmit)="generateUserDoc()" #myForm ngNativeValidate>
+   
+    
     <mat-form-field appearance="fill">
-      <mat-label>Username</mat-label>
-      <input type="text" matInput required #userName />
+      <mat-label>First Name</mat-label>
+      <input type="text" matInput required #userFirstName [(ngModel)]="user.userInfos.firstName" name="firstname"/>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>last Name</mat-label>
+      <input type="text" matInput required #userLastName [(ngModel)]="user.userInfos.lastName" name="lastname" />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Phonenumber</mat-label>
+      <input type="number" matInput required #phoneNumber [(ngModel)]="user.userInfos.phone" name="phone" />
     </mat-form-field>
 
     <mat-form-field class="example-full-width">
@@ -71,15 +83,18 @@
         placeholder="Ex. pat@example.com"
         #userMail
         required
+        [(ngModel)]="user.userInfos.email" name="email"
       />
       <mat-hint></mat-hint>
     
     </mat-form-field>
 
+    
+
     <div class="example-container">
       <mat-form-field appearance="fill">
         <mat-label>Enter your password</mat-label>
-        <input matInput [type]="hide ? 'password' : 'text'" #password required />
+        <input matInput [type]="hide ? 'password' : 'text'" #password required [(ngModel)]="user.userInfos.password" name="password" />
         <button
           mat-icon-button
           matSuffix
@@ -95,7 +110,7 @@
     <div class="example-container column">
       <mat-form-field appearance="fill">
         <mat-label>Repeat password</mat-label>
-        <input matInput [type]="hide ? 'password' : 'text'" #passwordRepeat required/>
+        <input matInput [type]="hide ? 'password' : 'text'" #passwordRepeat  required/>
         <button
           mat-icon-button
           matSuffix

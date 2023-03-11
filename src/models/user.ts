@@ -8,7 +8,7 @@ export let user = {
         "isLoggedIn": false,
         "profileImage": ''
     },
-    "communicationSections": {
+    "messages": {
         "channels": [],
         "groups": [],
         "directMessages": []

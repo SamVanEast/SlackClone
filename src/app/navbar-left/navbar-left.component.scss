@@ -14,24 +14,25 @@
 
 .channels-content {
     padding-top: 12px;
-
 }
 
 .directMessages-content {
-
     padding-top: 12px;
-
-
 }
 
 .single-channel {
     display: flex;
+    align-items: center;
     gap: 10px;
     font-size: 15px;
     padding-bottom: 12px;
     font-weight: 400;
+    height: 20px;
 
-    
+    button {
+        padding: 0;
+        margin-left: auto;
+    }
 }
 
 .hashes {
