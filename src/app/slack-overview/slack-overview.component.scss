@@ -11,6 +11,7 @@ app-header{
     mat-drawer {
         width: 13%;
         position: unset;
+        overflow: auto;
     }
 
     app-messages-history {

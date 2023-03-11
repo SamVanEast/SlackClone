@@ -17,7 +17,7 @@ export class DialogAddGroupComponent {
   group;
   groupsIds = [];
 
-  constructor(private route: ActivatedRoute, private firestore: AngularFirestore, private dialogRef: MatDialogRef<DialogAddGroupComponent>, private db: Firestore) {
+  constructor(private route: ActivatedRoute, private firestore: AngularFirestore, private dialogRef: MatDialogRef<DialogAddGroupComponent>) {
     this.group = group;
     this.route.params.subscribe((params) => {
       this.currentUserId = params['id'];
@@ -25,15 +25,11 @@ export class DialogAddGroupComponent {
   }
 
   saveGroup() {
-
-
-
     if (this.group.headline !== '') {
       this.loading = true;
       // Add the new group to Firebase
       this.firestore.collection('groups').add(this.group).then((docRef) => {
         const newGroupId = docRef.id;
-        console.log(newGroupId);
 
         // Get the current list of group IDs from the user's document
         this.firestore.collection('users').doc(this.currentUserId).get().toPromise().then((userDoc) => {

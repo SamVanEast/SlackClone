@@ -39,7 +39,7 @@ export class NavbarLeftComponent implements OnInit {
 
       this.loadChannels();
       this.loadGroups();
-      this.loadChats();
+      this.loadDirectMessages();
     });
   }
 
@@ -71,7 +71,7 @@ export class NavbarLeftComponent implements OnInit {
     });
   }
 
-  loadChats() {
+  loadDirectMessages() {
     this.directMessages = [];
     let alreadyUsedIds = [];
     this.messages.directMessages.forEach(directMessageId => {
@@ -80,6 +80,7 @@ export class NavbarLeftComponent implements OnInit {
         if (result.length == 0 || alreadyUsedIds.length == 0) {
           alreadyUsedIds.push(directMessageId)
           this.directMessages.push(directMessage);
+          
         }
       });
     });
