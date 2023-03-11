@@ -42,7 +42,7 @@ export class DialogChangeImgComponent {
   }
 
   saveImage() {
-    console.log(this.selectedImageId);
+    this.dialogRef.close(this.selectedImageId);
   }
 
   closeDialogImage() {

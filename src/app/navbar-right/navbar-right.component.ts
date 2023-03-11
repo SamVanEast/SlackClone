@@ -49,5 +49,11 @@ export class NavbarRightComponent implements OnInit {
   openDialogChangeImg(){
     const dialogImage= this.dialog.open(DialogChangeImgComponent);
     dialogImage.componentInstance.currentUserId = this.currentUserId;
+
+    dialogImage.afterClosed().subscribe(result => {
+      if(result){
+        console.log(result); // Hier können Sie die selectedImageId verwenden
+      }
+    });
   }
 }
