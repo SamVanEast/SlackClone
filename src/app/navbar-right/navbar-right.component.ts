@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
+import { DialogChangeImgComponent } from '../dialog-change-img/dialog-change-img.component';
 import { DialogUpdateContactComponent } from '../dialog-update-contact/dialog-update-contact.component';
 import { DialogUpdateProfileNameComponent } from '../dialog-update-profile-name/dialog-update-profile-name.component';
 
@@ -46,7 +47,7 @@ export class NavbarRightComponent implements OnInit {
   }
 
   openDialogChangeImg(){
-    console.log('works');
-    
+    const dialogImage= this.dialog.open(DialogChangeImgComponent);
+    dialogImage.componentInstance.currentUserId = this.currentUserId;
   }
 }
