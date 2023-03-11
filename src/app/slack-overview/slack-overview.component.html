@@ -2,9 +2,9 @@
 <div class="content">
     
     <mat-drawer [opened]="showNavbar" #drawer class="sidenav-left" mode="side">
-        <app-navbar-left></app-navbar-left>
+        <app-navbar-left (whichContentShouldLoad)="setContent($event)"></app-navbar-left >
     </mat-drawer>
-    <app-messages-history></app-messages-history>
+    <app-messages-history [whichContentShouldLoad]="whichContentShouldLoad"></app-messages-history>
     <app-navbar-right></app-navbar-right>
 </div>
 

@@ -1,5 +1,6 @@
 export let directMessage = {
     'headline': 'Samuel',
+    'collection': 'directMessages',
     'participants': [],
     "messages": {
         "message0": {

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
@@ -18,8 +18,9 @@ export class NavbarLeftComponent implements OnInit {
   channels = [];
   groups = [];
   directMessages = [];
-
-  communicationSections = [];
+  @Output() public whichContentShouldLoad = new EventEmitter<any>();
+  content;
+  // communicationSections = [];
 
 
   constructor(private route: ActivatedRoute, private firestore: AngularFirestore, public dialog: MatDialog) {
@@ -80,7 +81,7 @@ export class NavbarLeftComponent implements OnInit {
         if (result.length == 0 || alreadyUsedIds.length == 0) {
           alreadyUsedIds.push(directMessageId)
           this.directMessages.push(directMessage);
-          
+
         }
       });
     });
@@ -104,13 +105,16 @@ export class NavbarLeftComponent implements OnInit {
     dialogMember.componentInstance.currentUserId = this.currentUserId;
   }
 
-  openMessageHistory(id) {
-    console.log('Das ist die Id zum jeweiligen document', id);
+  openMessageHistory(id, collection) {
+    this.content = [];
+    this.content.push(collection);
+    this.content.push(id);
+    this.whichContentShouldLoad.emit(this.content);
   }
 
   deleteGroup(id) {
     console.log('delete Group', id);
-    
+
     // this.firestore.collection('users').doc(this.currentUserId).update({
     // });
   }

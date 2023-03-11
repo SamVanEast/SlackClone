@@ -7,7 +7,7 @@
         <summary>Channels</summary>
         <div class="channels-content">
 
-            <div class="single-channel" *ngFor="let channel of channels" (click)="openMessageHistory(channel.docId)">
+            <div class="single-channel" *ngFor="let channel of channels" (click)="openMessageHistory(channel.docId, channel.collection)">
                 <div class="hashes">#</div>
                 <div class="channel-name"><span>{{ channel.headline }}</span></div>
             </div>
@@ -22,7 +22,7 @@
     <details class="channels" [open]="true">
         <summary>Groups</summary>
         <div class="channels-content">
-            <div class="single-channel" *ngFor="let group of groups" (click)="openMessageHistory(group.docId)">
+            <div class="single-channel" *ngFor="let group of groups" (click)="openMessageHistory(group.docId, group.collection)">
                 <div class="hashes">#</div>
                 <div class="channel-name"><span>{{ group.headline }}</span></div>
                 <button mat-icon-button (click)="deleteGroup(group.docId)">
@@ -42,7 +42,7 @@
         <summary>Direct Messages</summary>
         <div class="directMessages-content">
             <div class="single-dm" *ngFor="let directMessage of directMessages"
-                (click)="openMessageHistory(directMessage.docId)">
+                (click)="openMessageHistory(directMessage.docId, directMessage.collection)">
                 <mat-icon>radio_button_unchecked</mat-icon>
                 <div class="channel-name"><span>{{ directMessage.headline }}</span></div>
             </div>

@@ -17,6 +17,8 @@ export class SlackOverviewComponent {
   @ViewChild('header') header;
   showNavbar = true;
   currentUserId;
+  whichContentShouldLoad;
+
 
 
   constructor(private router: Router, private firestore: AngularFirestore, private route: ActivatedRoute,) {
@@ -65,6 +67,10 @@ export class SlackOverviewComponent {
 
   onClick() {
     this.showNavbar = this.header.openNavbar;
+  }
+
+  setContent(whichContentShouldLoad){
+    this.whichContentShouldLoad = whichContentShouldLoad;
   }
 
 
