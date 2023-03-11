@@ -6,6 +6,8 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { user } from 'src/models/user';
 import { Observable } from 'rxjs';
 
+
+
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
     const isSubmitted = form && form.submitted;
@@ -49,32 +51,35 @@ export class LoginComponent {
   @ViewChild('userMail') userMail:ElementRef;
   @ViewChild('phoneNumber') phoneNumber:ElementRef;
 
-  // Var for Reset Password 
+  // Var for Login 
   @ViewChild('loginEmail') loginEmail:ElementRef;
   @ViewChild('loginPassword') loginPassword:ElementRef;
 
-  // var for Userlogin
+  // var for reset Password
   @ViewChild('resetPw') resetPw:ElementRef;
-  @ViewChild('resetPwRepeat') resetPwRepeat:ElementRef;
+  @ViewChild('resetEmail') resetEmail:ElementRef;
 
   // var for push text 
  
 
+
+
   ngOnInit() {
     this.firestore.collection('users').valueChanges().subscribe((user: any) => {
-      this.allUser.push(user);
-
+      this.allUser = user;
+      console.log(user)
+      console.log('nue', this.allUser)
     });
-    console.log(this.allUser);
-    console.log(this.user)
+    console.log('nue', this.allUser)
   }
+
 
   generateUserDoc() {
 
     if(this.password.nativeElement.value == this.passwordRepeat.nativeElement.value) {
 
       	this.firestore.collection('users').add(this.user).then((user) => {
-        this.allUser.push(user)
+        
       })
       console.log(user)
       this.pushNewUser = true;
@@ -103,8 +108,8 @@ export class LoginComponent {
     let inputEmail = this.loginEmail.nativeElement.value 
 
       for (let i = 0; i < this.allUser.length; i++) {
-        const email = this.allUser[i]['email'];
-        const password = this.allUser[i]['password'];
+        const email = this.allUser[i]['userInfos']['email'];
+        const password = this.allUser[i]['userInfos']['password'];
 
         if(email === inputEmail && password === inputPassword) {
           this.router.navigateByUrl('/')
@@ -115,6 +120,19 @@ export class LoginComponent {
       }, 3000);
         }      
     }  
+   }
+
+   resetPassword() {
+    let inputEmail = this.resetEmail.nativeElement.value
+
+    for (let i = 0; i < this.allUser.length; i++) {
+      const email = this.allUser[i]['userInfos']['email'];
+      if(inputEmail === email){
+        console.log('it works')
+      } else if (i === this.allUser.length - 1){
+        console.log('email doesnt exist')
+      }  
+    }
    }
 
   resetOverview() {
@@ -130,10 +148,6 @@ export class LoginComponent {
     this.reset = false;
   }
 
-
-  resetPassword() {
-    console.log()
-  }
 
 
 }
