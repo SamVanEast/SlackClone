@@ -14,7 +14,7 @@ export class HeaderComponent {
   currentUserId;
   public profileImgSrc = '';
 
-  constructor(private route: ActivatedRoute, public elementRef: ElementRef, private firestore: AngularFirestore) { }
+  constructor(private route: ActivatedRoute, public elementRef: ElementRef, private firestore: AngularFirestore, public dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
