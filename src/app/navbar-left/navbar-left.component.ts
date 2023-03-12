@@ -106,10 +106,4 @@ export class NavbarLeftComponent implements OnInit {
     this.whichContentShouldLoad.emit([collection, id]);
   }
 
-  deleteGroup(id) {
-    console.log('delete Group', id);
-
-    // this.firestore.collection('users').doc(this.currentUserId).update({
-    // });
   }
-}
