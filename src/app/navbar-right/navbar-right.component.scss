@@ -1,4 +1,5 @@
 .navbar-right-container {
+    max-width: 275px;
     height: 100%;
     overflow: auto;
 }
@@ -22,7 +23,7 @@
     justify-content: center;
     
     img{
-        width: 230px;
+        width: 100%;
         border-radius: 10px;
     }
 
