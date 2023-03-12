@@ -40,6 +40,14 @@
     color: rgba(255, 255, 255, 0.4)
 }
 
+.channel-name {
+    cursor: pointer;
+    &:hover {
+        color: rgba(255, 255, 255, 0.8);
+        
+    }
+}
+
 .single-dm {
     display: flex;
     align-items: center;
