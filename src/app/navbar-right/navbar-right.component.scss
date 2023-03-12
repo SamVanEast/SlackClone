@@ -16,6 +16,10 @@
 
 .profileImage{
     position: relative;
+    padding-left: 16px;
+    padding-right: 16px;
+    display: flex;
+    justify-content: center;
     
     img{
         width: 230px;
@@ -24,7 +28,7 @@
 
     button{
         position: absolute;
-        right: 0;
+        right: 25px;
         z-index: 999;
     }
 }

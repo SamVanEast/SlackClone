@@ -15,7 +15,7 @@ export class NavbarRightComponent implements OnInit {
   open() {
     throw new Error('Method not implemented.');
   }
-  showNavbarRight = false;
+  showNavbarRight = true;
   userId: string;
   public firstName;
   public lastName;
