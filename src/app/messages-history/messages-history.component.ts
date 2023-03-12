@@ -41,4 +41,10 @@ export class MessagesHistoryComponent {
   }
 
 
+  sendMessage() {
+    // send message to collection
+    
+    this.editor.setContent('');
+  }
+
 }

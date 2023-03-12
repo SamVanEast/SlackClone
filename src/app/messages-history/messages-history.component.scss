@@ -3,7 +3,7 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    
+
 }
 
 .messages_history_header {
@@ -79,7 +79,7 @@
 .time {
     font-size: 12px;
     padding-left: 6px;
-    color: rgba(0,0,0,0.3)
+    color: rgba(0, 0, 0, 0.3)
 }
 
 .author-and-text {
@@ -90,7 +90,8 @@
 
 .positioning {
     padding: 0px 20px 40px 20px;
-    border-top: 1px solid rgba(0,0,0,0.1);
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    position: relative;
 }
 
 .content-and-editor {
@@ -100,4 +101,16 @@
 
 .header-and-messages {
     overflow: auto;
+}
+
+
+.send-button {
+    position: absolute;
+    bottom: 22px;
+    z-index: 2;
+    right: 43px;
+    background-color: green;
+    border-radius: 100%;
+    padding: 6px;
+    cursor: pointer;
 }
