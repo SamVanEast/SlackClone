@@ -88,13 +88,13 @@ mat-form-field {
 
 
 
-
+// Navbar Right
 .navbar-right-container {
     position: absolute;
     right: 0;
     z-index: 1;
     max-width: 275px;
-    height: 100%;
+    height: calc(100vh - 64px);
     overflow: auto;
 
     mat-icon {
