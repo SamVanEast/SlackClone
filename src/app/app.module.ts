@@ -6,7 +6,6 @@ import { AppComponent } from './app.component';
 import { SlackOverviewComponent } from './slack-overview/slack-overview.component';
 import { HeaderComponent } from './header/header.component';
 import { NavbarLeftComponent } from './navbar-left/navbar-left.component';
-import { NavbarRightComponent } from './navbar-right/navbar-right.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
@@ -52,7 +51,6 @@ import { ImprintDataprotectionComponent } from './imprint-dataprotection/imprint
     SlackOverviewComponent,
     HeaderComponent,
     NavbarLeftComponent,
-    NavbarRightComponent,
     MessagesHistoryComponent,
     LoginComponent,
     DialogUpdateProfileNameComponent,
