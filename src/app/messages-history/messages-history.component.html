@@ -8,13 +8,13 @@
                 <img class="profile-pic" src="../../assets/img/blank-profile.png">
                 <div class="author-and-text">
                     <div><span class="author">{{ message.creator }}</span>
-                        <span class="time">{{ message.date }}</span>
+                        <span class="time">{{ message.date | date: 'dd.MM.yyyy hh:mm' }}</span>
                     </div>
                     <span>{{ message.text }}</span>
                 </div>
             </div>
 
-            <!-- <div class="single-post">
+            <!--  <div class="single-post">
                 <img class="profile-pic" src="../../assets/img/blank-profile.png">
                 <div class="author-and-text">
                     <div><span class="author">Thomas Wagner</span>
