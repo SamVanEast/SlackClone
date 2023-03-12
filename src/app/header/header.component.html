@@ -21,7 +21,7 @@
 
     <div class="header-right">
         <mat-icon style="cursor: pointer;" (click)="openImprint()">help</mat-icon>
-        <img class="profile-pic" src="../../assets/img/blank-profile.png" [matMenuTriggerFor]="menu">
+        <img class="profile-pic" id="profile-img" [src]="profileImgSrc" [matMenuTriggerFor]="menu">
 
         <mat-menu #menu="matMenu" >
             <button mat-menu-item (click)="openRightNavbar()">Profile</button>
