@@ -119,3 +119,8 @@
     padding: 6px;
     cursor: pointer;
 }
+
+.closeNavbar {
+    animation: vanishOut 125ms ease-in-out;
+
+}

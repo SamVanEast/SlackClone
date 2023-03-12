@@ -72,10 +72,10 @@ export class SlackOverviewComponent {
 
   openOrClose(boolean) {
     if (boolean) {
-      console.log('is open');
+      document.getElementById('sidenav-left').classList.remove('closeNavbar');
 
     } else {
-      console.log('is closed');
+      document.getElementById('sidenav-left').classList.add('closeNavbar');
 
     }
   }

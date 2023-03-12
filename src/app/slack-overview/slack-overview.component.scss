@@ -29,3 +29,9 @@ app-header{
     color: #FFFFFF;
     min-width: 250px;
 }
+
+.closeNavbar {
+    animation: vanishOut 125ms ease-in-out;
+    transform: translateX(-200%);
+    position: absolute;
+}

@@ -1,6 +1,6 @@
 <app-header #header (openNavbarLeft)="openOrClose($event)"></app-header>
 <div class="content">
-    <app-navbar-left (whichContentShouldLoad)="setContent($event)" class="sidenav-left"></app-navbar-left>
+    <app-navbar-left (whichContentShouldLoad)="setContent($event)" class="sidenav-left" id="sidenav-left"></app-navbar-left>
     <app-messages-history [whichContentShouldLoad]="whichContentShouldLoad"></app-messages-history>
     <app-navbar-right></app-navbar-right>
 </div>
