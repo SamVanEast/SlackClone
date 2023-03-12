@@ -12,7 +12,7 @@ import { DialogUpdateProfileNameComponent } from '../dialog-update-profile-name/
   styleUrls: ['./navbar-right.component.scss']
 })
 export class NavbarRightComponent implements OnInit {
-  showNavbarRight = true;
+  showNavbarRight = false;
   userId: string;
   public firstName;
   public lastName;
