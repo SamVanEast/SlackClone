@@ -1,4 +1,4 @@
-import { Component, ElementRef, EventEmitter, Output } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Output, ViewChild } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { ActivatedRoute } from '@angular/router';
 import { ImprintDataprotectionComponent } from '../imprint-dataprotection/imprint-dataprotection.component';
@@ -14,6 +14,7 @@ export class HeaderComponent {
   public profileImgSrc = '';
   openOrClose = false; 
   @Output() openNavbarLeft = new EventEmitter<any>();
+  @ViewChild('NavbarRight') NavbarRight;
 
 
   constructor(private route: ActivatedRoute, public elementRef: ElementRef, private firestore: AngularFirestore, public dialog: MatDialog) { }
@@ -44,6 +45,12 @@ export class HeaderComponent {
 
   openImprint() {
     this.dialog.open(ImprintDataprotectionComponent);
+  }
+
+
+  openRightNavbar(){
+    console.log('works');
+    
   }
 
 }
