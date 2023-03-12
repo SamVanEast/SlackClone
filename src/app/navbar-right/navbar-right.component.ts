@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
@@ -15,8 +15,7 @@ export class NavbarRightComponent implements OnInit {
   open() {
     throw new Error('Method not implemented.');
   }
-
-  @Input() showNavbarRight: boolean = false;
+  showNavbarRight = true;
   userId: string;
   public firstName;
   public lastName;

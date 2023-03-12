@@ -15,7 +15,6 @@ export class HeaderComponent {
   public profileImgSrc = '';
   openOrClose = false; 
   @Output() openNavbarLeft = new EventEmitter<any>();
-  showNavbarRight: boolean;
 
   constructor(private route: ActivatedRoute, public elementRef: ElementRef, private firestore: AngularFirestore, public dialog: MatDialog) { }
 
@@ -49,8 +48,7 @@ export class HeaderComponent {
 
 
   openRightNavbar(){
-    this.showNavbarRight = true;
-    console.log(this.showNavbarRight);
+    console.log('works');
   }
 
 }
