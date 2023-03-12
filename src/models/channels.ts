@@ -13,6 +13,5 @@ export let channels = {
             "text": "Bin dabei",
             "date": 2151351351
         }
-    ]
-    
+    ] 
 } 
