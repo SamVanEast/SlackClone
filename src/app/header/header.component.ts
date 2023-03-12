@@ -2,6 +2,7 @@ import { Component, ElementRef, EventEmitter, Output, ViewChild } from '@angular
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { ActivatedRoute } from '@angular/router';
 import { ImprintDataprotectionComponent } from '../imprint-dataprotection/imprint-dataprotection.component';
+import { NavbarRightComponent } from '../navbar-right/navbar-right.component';
 import { MatDialog } from '@angular/material/dialog';
 
 @Component({
@@ -9,14 +10,14 @@ import { MatDialog } from '@angular/material/dialog';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
+
 export class HeaderComponent {
   currentUserId;
   public profileImgSrc = '';
   openOrClose = false; 
   @Output() openNavbarLeft = new EventEmitter<any>();
 
-
-  constructor(private route: ActivatedRoute, public elementRef: ElementRef, private firestore: AngularFirestore, public dialog: MatDialog) { }
+  constructor(private route: ActivatedRoute, public elementRef: ElementRef, private firestore: AngularFirestore, public dialog: MatDialog, private navbarRight: NavbarRightComponent) { }
 
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
@@ -49,7 +50,7 @@ export class HeaderComponent {
 
   openRightNavbar(){
     console.log('works');
-    this.dialog.open(NavbarRightComponent);
+    this.navbarRight.open();
   }
 
 }
