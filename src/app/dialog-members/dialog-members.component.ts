@@ -10,10 +10,11 @@ import { ActivatedRoute } from '@angular/router';
 export class DialogMembersComponent {
   currentUserId;
 
-  constructor(private route: ActivatedRoute, private firestore: AngularFirestore){}
+  constructor(private route: ActivatedRoute, private firestore: AngularFirestore){
+  }
 
   ngOnInit(){
-    this.firestore.collection('users').doc(this.currentUserId).valueChanges({idField: 'costumIdName'}).forEach((members: any) => {
+    this.firestore.collection('users').doc(this.currentUserId).valueChanges().subscribe((members: any) => {
       console.log(members);
     });
   }

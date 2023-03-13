@@ -74,6 +74,7 @@ export class MessagesHistoryComponent {
   }
 
   openDialogMembers(){
-    this.dialog.open(DialogMembersComponent);
+    const dialog = this.dialog.open(DialogMembersComponent);
+    dialog.componentInstance.currentUserId = this.currentUserId;
   }
 }
