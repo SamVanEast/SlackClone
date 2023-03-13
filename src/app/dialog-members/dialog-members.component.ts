@@ -9,13 +9,15 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class DialogMembersComponent {
   currentUserId;
+  allUsers = [];
 
   constructor(private route: ActivatedRoute, private firestore: AngularFirestore){
   }
 
   ngOnInit(){
     this.firestore.collection('users').valueChanges().subscribe((members: any) => {
-      console.log(members);
+      this.allUsers = members;
+      console.log(this.allUsers);
     });
   }
 }
