@@ -18,6 +18,7 @@ export class MessagesHistoryComponent {
   @Input() whichContentShouldLoad;
   doc;
   @Input() searchText;
+  currentUser;
 
   constructor(private route: ActivatedRoute, private firestore: AngularFirestore) {
     this.whichContentShouldLoad = [];
@@ -36,6 +37,9 @@ export class MessagesHistoryComponent {
 
   ngOnInit(): void {
     this.editor = new Editor();
+    this.firestore.collection('users').doc(this.currentUserId).valueChanges().subscribe((user: any) => {
+      this.currentUser = user;
+    });
   }
 
   ngOnDestroy(): void {
@@ -44,8 +48,24 @@ export class MessagesHistoryComponent {
 
 
   sendMessage() {
-    // send message to collection
+    var oParser = new DOMParser();
+    var oDOM = oParser.parseFromString(this.html, "text/html");
+    var text = oDOM.body.innerText;
     
+    if (text !== '') {
+      this.doc.messages.push({
+        creator: `${this.currentUser.userInfos.firstName} ${this.currentUser.userInfos.lastName}`,
+        text: text,
+        data: new Date().getTime() 
+      })
+      this.firestore.collection(this.whichContentShouldLoad[0]).doc(this.whichContentShouldLoad[1]).update({
+        'messages': this.doc.messages
+      });
+    }
+      // console.log(this.doc.messages)
+    // console.log(this.currentUser)
+
+
     this.editor.setContent('');
   }
 }
