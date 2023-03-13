@@ -45,46 +45,49 @@ export class NavbarLeftComponent implements OnInit {
   }
 
   loadChannels() {
-    this.channels = [];
+    let channels = [];
     let alreadyUsedIds = [];
     this.messages.channels.forEach(channelId => {
       this.firestore.collection('channels').doc(channelId).valueChanges({ idField: 'docId' }).subscribe((channel: any) => {
         let result = alreadyUsedIds.filter(id => id.includes(channelId))
         if (result.length == 0 || alreadyUsedIds.length == 0) {
           alreadyUsedIds.push(channelId)
-          this.channels.push(channel);
+          channels.push(channel);
         }
       });
     });
+    this.channels = channels;
   }
 
   loadGroups() {
-    this.groups = [];
+    let groups = [];
     let alreadyUsedIds = [];
     this.messages.groups.forEach(groupId => {
       this.firestore.collection('groups').doc(groupId).valueChanges({ idField: 'docId' }).subscribe((group: any) => {
         let result = alreadyUsedIds.filter(id => id.includes(groupId))
         if (result.length == 0 || alreadyUsedIds.length == 0) {
           alreadyUsedIds.push(groupId)
-          this.groups.push(group);
+          groups.push(group);
         }
       });
     });
+    this.groups = groups;
   }
 
   loadDirectMessages() {
-    this.directMessages = [];
+    let directMessages = [];
     let alreadyUsedIds = [];
     this.messages.directMessages.forEach(directMessageId => {
       this.firestore.collection('directMessages').doc(directMessageId).valueChanges({ idField: 'docId' }).subscribe((directMessage: any) => {
         let result = alreadyUsedIds.filter(id => id.includes(directMessageId))
         if (result.length == 0 || alreadyUsedIds.length == 0) {
           alreadyUsedIds.push(directMessageId)
-          this.directMessages.push(directMessage);
+          directMessages.push(directMessage);
 
         }
       });
     });
+    this.directMessages = directMessages;
   }
 
   openDialogChannel() {
@@ -104,6 +107,8 @@ export class NavbarLeftComponent implements OnInit {
 
   openMessageHistory(id, collection) {
     this.whichContentShouldLoad.emit([collection, id]);
-  }
+    console.log(id, collection);
 
   }
+
+}

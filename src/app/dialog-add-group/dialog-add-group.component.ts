@@ -27,32 +27,20 @@ export class DialogAddGroupComponent {
   saveGroup() {
     if (this.group.headline !== '') {
       this.loading = true;
-      // Add the new group to Firebase
       this.firestore.collection('groups').add(this.group).then((docRef) => {
         const newGroupId = docRef.id;
-
-        // Get the current list of group IDs from the user's document
         this.firestore.collection('users').doc(this.currentUserId).get().toPromise().then((userDoc) => {
-          const currentGroups = userDoc.get('messages.groups') || [];
-
-          // Add the new group ID to the current list and update it in Firebase
+          const currentUser: any = userDoc.data();
+          const currentGroups = currentUser.messages.groups;
           currentGroups.push(newGroupId);
           this.firestore.collection('users').doc(this.currentUserId).update({
             'messages.groups': currentGroups
           }).then(() => {
-            console.log('Group saved successfully.');
             this.loading = false;
             this.dialogRef.close();
-          }).catch((error) => {
-            console.error('Error updating user data:', error);
-            this.loading = false;
-          });
+          })
         });
-
-      }).catch((error) => {
-        console.error('Error adding new group:', error);
-        this.loading = false;
-      });
+      })
     }
     this.group.headline = '';
   }

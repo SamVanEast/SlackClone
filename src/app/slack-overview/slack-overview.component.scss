@@ -22,6 +22,10 @@ app-header{
     app-navbar-right {
         width: fit-content;
     }
+
+    app-navbar-left {
+        overflow: auto;
+    }
 }
 
 .sidenav-left {
