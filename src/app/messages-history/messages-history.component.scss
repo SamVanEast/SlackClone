@@ -24,7 +24,7 @@
     button{
         margin-left: auto;
         margin-right: 20px;
-        background-color: #3E103F;
+        // background-color: #3E103F;
         color: white;
     }
 }
@@ -32,10 +32,14 @@
 .messages_history_content {
     padding: 0px 20px 50px 20px;
     flex: 1 1 auto;
-    justify-content: flex-end;
+    margin: 10px;
+    --line-height: 1.4;
     display: flex;
-    flex-direction: column;
-
+    justify-content: flex-end;
+    flex-flow: column;
+    max-height: calc(var(--max-lines) * 1em * var(--line-height));
+    line-height: var(--line-height);
+    overflow: hidden;
 }
 
 .text_field {
