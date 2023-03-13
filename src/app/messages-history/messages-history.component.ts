@@ -31,8 +31,6 @@ export class MessagesHistoryComponent {
     if (this.whichContentShouldLoad !== undefined && this.whichContentShouldLoad.length > 0) {
       this.firestore.collection(this.whichContentShouldLoad[0]).doc(this.whichContentShouldLoad[1]).valueChanges().subscribe((doc: any) => {
         this.doc = doc;
-        console.log(doc);
-        
       });
     }
   }
@@ -66,15 +64,16 @@ export class MessagesHistoryComponent {
         'messages': this.doc.messages
       });
     }
-      // console.log(this.doc.messages)
-    // console.log(this.currentUser)
-
-
     this.editor.setContent('');
-  }
+  };
 
   openDialogMembers(){
     const dialog = this.dialog.open(DialogMembersComponent);
     dialog.componentInstance.currentUserId = this.currentUserId;
-  }
+  };
+
+  openCreatorProfile(id){
+    console.log(id);
+    
+  };
 }
