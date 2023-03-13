@@ -9,7 +9,7 @@
             <div class="single-post">
                 <img class="profile-pic" src="{{ message.creatorImg }}">
                 <div class="author-and-text">
-                    <div><span class="author">{{ message.creator }}</span>
+                    <div><span class="author" (click)="openCreatorProfile(message.creatorId)">{{ message.creator }} </span>
                         <span class="time">{{ message.date | date:'dd/MM/yyyy' }}</span>
                     </div>
                     <span>{{ message.text }}</span>
@@ -140,7 +140,7 @@
 
     <div class="ngxEditor__wrapper positioning" *ngIf="editor">
         <mat-icon class="send-button" (click)="sendMessage()" matTooltip="Send message">outgoing_mail</mat-icon>
-        <ngx-editor-menu [editor]="editor"> </ngx-editor-menu>
+        <!-- <ngx-editor-menu [editor]="editor"> </ngx-editor-menu> -->
         <ngx-editor [editor]="editor" [(ngModel)]="html" [disabled]="false" [placeholder]="'Type here...'"></ngx-editor>
     </div>
 </div>
