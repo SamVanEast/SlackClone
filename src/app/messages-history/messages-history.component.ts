@@ -31,6 +31,8 @@ export class MessagesHistoryComponent {
     if (this.whichContentShouldLoad !== undefined && this.whichContentShouldLoad.length > 0) {
       this.firestore.collection(this.whichContentShouldLoad[0]).doc(this.whichContentShouldLoad[1]).valueChanges().subscribe((doc: any) => {
         this.doc = doc;
+      console.log(doc.messages[22]);
+
       });
     }
     console.log(this.searchText)
@@ -40,6 +42,7 @@ export class MessagesHistoryComponent {
     this.editor = new Editor();
     this.firestore.collection('users').doc(this.currentUserId).valueChanges().subscribe((user: any) => {
       this.user = user;
+      
     });
   }
 
@@ -59,7 +62,7 @@ export class MessagesHistoryComponent {
         creatorId: this.currentUserId,
         creator: `${this.user.userInfos.firstName} ${this.user.userInfos.lastName}`,
         text: text,
-        data: new Date().getTime(),
+        date: new Date().getTime(),
       })
       this.firestore.collection(this.whichContentShouldLoad[0]).doc(this.whichContentShouldLoad[1]).update({
         'messages': this.doc.messages
