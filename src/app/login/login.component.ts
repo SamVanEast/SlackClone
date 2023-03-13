@@ -1,7 +1,7 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
-import {Router} from '@angular/router';
+import { Router } from '@angular/router';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { user } from 'src/models/user';
 import { Observable } from 'rxjs';
@@ -42,63 +42,63 @@ export class LoginComponent {
   user;
 
 
-  
+
 
   // Var for create user
-  @ViewChild('password') password:ElementRef;
-  @ViewChild('passwordRepeat') passwordRepeat:ElementRef;
-  @ViewChild('userFirstName') userFirstName:ElementRef;
-  @ViewChild('userLastName') userLastName:ElementRef;
-  @ViewChild('userMail') userMail:ElementRef;
-  @ViewChild('phoneNumber') phoneNumber:ElementRef;
+  @ViewChild('password') password: ElementRef;
+  @ViewChild('passwordRepeat') passwordRepeat: ElementRef;
+  @ViewChild('userFirstName') userFirstName: ElementRef;
+  @ViewChild('userLastName') userLastName: ElementRef;
+  @ViewChild('userMail') userMail: ElementRef;
+  @ViewChild('phoneNumber') phoneNumber: ElementRef;
 
   // Var for Login 
-  @ViewChild('loginEmail') loginEmail:ElementRef;
-  @ViewChild('loginPassword') loginPassword:ElementRef;
+  @ViewChild('loginEmail') loginEmail: ElementRef;
+  @ViewChild('loginPassword') loginPassword: ElementRef;
 
   // var for reset Password
-  @ViewChild('resetPw') resetPw:ElementRef;
-  @ViewChild('resetPwRepeat') resetPwRepeat:ElementRef;
-  @ViewChild('resetEmail') resetEmail:ElementRef;
+  @ViewChild('resetPw') resetPw: ElementRef;
+  @ViewChild('resetPwRepeat') resetPwRepeat: ElementRef;
+  @ViewChild('resetEmail') resetEmail: ElementRef;
 
   // var for push text 
- 
+
 
 
 
   ngOnInit() {
     this.firestore.collection('users').valueChanges({ idField: 'docId' }).subscribe((user: any) => {
       this.allUser = user;
-      
+
     });
   }
 
-  
+
 
   generateUserDoc() {
 
-    if(this.password.nativeElement.value == this.passwordRepeat.nativeElement.value) {
+    if (this.password.nativeElement.value == this.passwordRepeat.nativeElement.value) {
 
-      	this.firestore.collection('users').add(user).then((user) => {    
-          this.userId = user.id 
-          this.updateChannelParticipants();
+      this.firestore.collection('users').add(user).then((user) => {
+        this.userId = user.id
+        this.updateChannelParticipants();
       })
       this.pushNewUser = true;
       this.newUser = false;
-      setTimeout(()=>{
-            this.pushNewUser = false;
-          }, 3000);
-      }else {
-        this.toggle = true;
-        setTimeout(()=> {
-          this.toggle = false;
-        }, 3000);
-      }
-}
+      setTimeout(() => {
+        this.pushNewUser = false;
+      }, 3000);
+    } else {
+      this.toggle = true;
+      setTimeout(() => {
+        this.toggle = false;
+      }, 3000);
+    }
+  }
 
 
-updateChannelParticipants() {
-    user.communicationSections.channels.forEach((channelId) =>{
+  updateChannelParticipants() {
+    user.communicationSections.channels.forEach((channelId) => {
       this.firestore.collection('channels').doc(channelId).get().toPromise().then((channelDoc) => {
         const currentDoc: any = channelDoc.data();
         const currentParticipants = currentDoc.participants;
@@ -109,75 +109,77 @@ updateChannelParticipants() {
           console.log('it works')
         })
       });
-    })    
+    })
   }
-  
+
 
   guestLogin() {
     this.router.navigateByUrl('/')
   }
 
-   UserLogin() {
-   let inputPassword = this.loginPassword.nativeElement.value
-    let inputEmail = this.loginEmail.nativeElement.value 
+  UserLogin() {
+    let inputPassword = this.loginPassword.nativeElement.value
+    let inputEmail = this.loginEmail.nativeElement.value
 
-      for (let i = 0; i < this.allUser.length; i++) {
-        const email = this.allUser[i]['userInfos']['email'];
-        const password = this.allUser[i]['userInfos']['password'];
+    for (let i = 0; i < this.allUser.length; i++) {
+      const email = this.allUser[i]['userInfos']['email'];
+      const password = this.allUser[i]['userInfos']['password'];
+      const id = this.allUser[i]['docId'];
 
-        if(email === inputEmail && password === inputPassword) {
-          this.router.navigateByUrl('/')
-          
-        } else {
-          this.toggle = true;
-      setTimeout(()=>{
-        this.toggle = false;
-      }, 3000);
-        }      
-    }  
-   }
+      if (email === inputEmail && password === inputPassword) {
+        this.router.navigateByUrl(`/slack/${id}`)
 
-   resetPassword() {
+      } else {
+        this.toggle = true;
+        setTimeout(() => {
+          this.toggle = false;
+        }, 3000);
+      }
+    }
+  }
+
+  resetPassword() {
     let inputEmail = this.resetEmail.nativeElement.value
 
     for (let i = 0; i < this.allUser.length; i++) {
       const email = this.allUser[i]['userInfos']['email'];
       const id = this.allUser[i]['docId'];
-      
-      if(inputEmail === email){
+
+      if (inputEmail === email) {
         this.changePassword(id);
         break;
-      } else if (i === this.allUser.length - 1){
+      } else if (i === this.allUser.length - 1) {
         this.toggleReset = true;
-        setTimeout(()=> {
+        setTimeout(() => {
           this.toggleReset = false;
         }, 3000);
-      }  
+      }
     }
-   }
+  }
 
-   changePassword(id: string) {
+  changePassword(id: string) {
     let password = this.resetPw.nativeElement.value;
     let repPassword = this.resetPwRepeat.nativeElement.value;
 
-    if(password === repPassword){
+    if (password === repPassword) {
       this.firestore.collection('users').doc(id).update({
-        'userInfos.password': this.resetPw.nativeElement.value,});
-        this.reset = false;
-        this.pushResetPw = true;
-      setTimeout(()=>{
-            this.pushResetPw = false;
-          }, 3000);
+        'userInfos.password': this.resetPw.nativeElement.value,
+      });
+      this.reset = false;
+      this.pushResetPw = true;
+      setTimeout(() => {
+        this.pushResetPw = false;
+      }, 3000);
 
     } else {
-      
+
       this.toggle = true;
-      setTimeout(()=> {
+      setTimeout(() => {
         this.toggle = false;
       }, 3000);
-      
+
     }
-   }
+  }
 
   resetOverview() {
     this.reset = true;

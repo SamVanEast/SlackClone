@@ -61,8 +61,6 @@ export class DialogAddGroupComponent {
     })
   }
 
-
-
   closeDialogGroup() {
     this.dialogRef.close();
   }

@@ -20,20 +20,10 @@ export class SlackOverviewComponent {
   searchText: string = '';
 
   constructor(private router: Router, private firestore: AngularFirestore, private route: ActivatedRoute,) {
-    this.router.navigateByUrl('Og1osv5p8RiFXQ8v0lvz');
 
     this.route.params.subscribe((params) => {
       this.currentUserId = params['id'];
     });
-
-    this.getAllIds();
-
-
-    // this.firestore.collection('users').doc('').get().pipe(function() {
-
-    // })
-    // Object.keys(Films)
-
 
     this.firestore.collection('users').valueChanges({ idField: 'docId' }).subscribe((changes: any) => {
       // console.log(changes);
@@ -49,22 +39,6 @@ export class SlackOverviewComponent {
     // this.generateUserDoc();
   }
 
-  // ngOnChanges() {
-  //   console.log(this.openOrCloseNavbarLeft);
-  // }
-
-  async getAllIds() {
-    const db = getFirestore();
-    const docRef = collection(db, 'users');
-    const docSnap = await getDocs(docRef);
-
-    // console.log(docSnap)
-    docSnap.forEach((doc) => {
-      // console.log(doc)
-
-    })
-  }
-
   setContent(whichContentShouldLoad) {
     this.whichContentShouldLoad = whichContentShouldLoad;
   }
@@ -78,12 +52,6 @@ export class SlackOverviewComponent {
 
     }
   }
-
-
-
-
-
-
 
   generateChannelDoc() {
     this.firestore.collection('channels').add(channels).then((user) => {
