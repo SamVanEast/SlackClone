@@ -1,5 +1,6 @@
 <div class="dialogMemberContainer">
-    <mat-card *ngFor="let user of allUsers">
-        <mat-card-content>{{ user.firstName }}</mat-card-content>
+    <h2>Members</h2>
+    <mat-card class="memberCards" *ngFor="let user of allUsers">
+        <mat-card-content>{{ user.userInfos.firstName }} {{ user.userInfos.lastName }}</mat-card-content>
     </mat-card>
 </div>

@@ -21,8 +21,7 @@ export class DialogMembersComponent {
         
         this.firestore.collection('users').doc(participant).get().toPromise().then((doc: any) => {
             const user = doc.data();
-            this.allUsers.push(user.userInfos);
-            console.log('allUser', this.allUsers);
+            this.allUsers.push(user);
           });
       });
     });
