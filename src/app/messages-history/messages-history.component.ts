@@ -33,6 +33,7 @@ export class MessagesHistoryComponent {
         this.doc = doc;
       });
     }
+    console.log(this.searchText)
   }
 
   ngOnInit(): void {
