@@ -6,7 +6,7 @@ export let user = {
         "password": "",
         "phone": [] as number[] ,
         "isLoggedIn": false,
-        "profileImg": ''
+        "profileImg": '../../assets/img/blank-profile.png'
     },
     "communicationSections": {
         "channels": ['hTdApKhXg8111SoNr2Yq', 'KlTnEdj7XuVLzYnB13Iw'],

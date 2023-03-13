@@ -14,12 +14,11 @@ export class NavbarLeftComponent implements OnInit {
   @Input() groupId: string;
   drawer = true;
   currentUserId;
-  public messages;
+  public communicationSections;
   channels = [];
   groups = [];
   directMessages = [];
   @Output() whichContentShouldLoad = new EventEmitter<any>();
-  // communicationSections = [];
 
 
   constructor(private route: ActivatedRoute, private firestore: AngularFirestore, public dialog: MatDialog) {
@@ -36,7 +35,7 @@ export class NavbarLeftComponent implements OnInit {
 
   loadMessagesFromFirestore() {
     this.firestore.collection('users').doc(this.currentUserId).valueChanges().subscribe((user: any) => {
-      this.messages = user.messages;
+      this.communicationSections = user.communicationSections;
 
       this.loadChannels();
       this.loadGroups();
@@ -47,7 +46,7 @@ export class NavbarLeftComponent implements OnInit {
   loadChannels() {
     let channels = [];
     let alreadyUsedIds = [];
-    this.messages.channels.forEach(channelId => {
+    this.communicationSections.channels.forEach(channelId => {
       this.firestore.collection('channels').doc(channelId).valueChanges({ idField: 'docId' }).subscribe((channel: any) => {
         let result = alreadyUsedIds.filter(id => id.includes(channelId))
         if (result.length == 0 || alreadyUsedIds.length == 0) {
@@ -62,7 +61,7 @@ export class NavbarLeftComponent implements OnInit {
   loadGroups() {
     let groups = [];
     let alreadyUsedIds = [];
-    this.messages.groups.forEach(groupId => {
+    this.communicationSections.groups.forEach(groupId => {
       this.firestore.collection('groups').doc(groupId).valueChanges({ idField: 'docId' }).subscribe((group: any) => {
         let result = alreadyUsedIds.filter(id => id.includes(groupId))
         if (result.length == 0 || alreadyUsedIds.length == 0) {
@@ -77,7 +76,7 @@ export class NavbarLeftComponent implements OnInit {
   loadDirectMessages() {
     let directMessages = [];
     let alreadyUsedIds = [];
-    this.messages.directMessages.forEach(directMessageId => {
+    this.communicationSections.directMessages.forEach(directMessageId => {
       this.firestore.collection('directMessages').doc(directMessageId).valueChanges({ idField: 'docId' }).subscribe((directMessage: any) => {
         let result = alreadyUsedIds.filter(id => id.includes(directMessageId))
         if (result.length == 0 || alreadyUsedIds.length == 0) {

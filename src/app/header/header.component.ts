@@ -42,7 +42,8 @@ export class HeaderComponent {
       });
 
       this.firestore.collection('users').doc(this.currentUserId).get().subscribe((doc) => {
-        this.profileImgSrc = doc.get('userInfos.profileImage');
+        const user:any = doc.data();
+        this.profileImgSrc = user.userInfos.profileImg;
         console.log(this.profileImgSrc);
       });
     });
