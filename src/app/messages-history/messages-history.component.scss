@@ -29,11 +29,10 @@
 }
 
 .messages_history_content {
-    padding: 0px 20px 10px 20px;
-    display: flex;
+    padding: 0px 20px 20px 20px;
     justify-content: flex-end;
-    flex-flow: column;
-    overflow: scroll;
+    display: flex;
+    flex-direction: column-reverse;
 }
 
 .text_field {
