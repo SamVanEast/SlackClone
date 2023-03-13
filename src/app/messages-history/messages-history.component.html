@@ -5,7 +5,7 @@
         </div>
         <div class="messages_history_content">
             <ng-container *ngFor="let message of doc?.messages">
-            <div class="single-post" *ngIf="searchText === ''">
+            <div class="single-post">
                 <img class="profile-pic" src="../../assets/img/blank-profile.png">
                 <div class="author-and-text">
                     <div><span class="author">{{ message.creator }}</span>
