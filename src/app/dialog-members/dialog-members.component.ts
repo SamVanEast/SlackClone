@@ -14,7 +14,7 @@ export class DialogMembersComponent {
   }
 
   ngOnInit(){
-    this.firestore.collection('users').doc(this.currentUserId).valueChanges().subscribe((members: any) => {
+    this.firestore.collection('users').valueChanges().subscribe((members: any) => {
       console.log(members);
     });
   }
