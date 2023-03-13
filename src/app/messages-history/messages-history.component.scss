@@ -24,22 +24,16 @@
     button{
         margin-left: auto;
         margin-right: 20px;
-        // background-color: #3E103F;
         color: white;
     }
 }
 
 .messages_history_content {
-    padding: 0px 20px 0px 20px;
-    flex: 1 1 auto;
-    margin: 10px;
-    --line-height: 1.4;
-    display: flex;
+    padding: 0px 20px 20px 20px;
     justify-content: flex-end;
-    flex-flow: column;
-    max-height: calc(var(--max-lines) * 1em * var(--line-height));
-    line-height: var(--line-height);
-    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
 }
 
 .text_field {
