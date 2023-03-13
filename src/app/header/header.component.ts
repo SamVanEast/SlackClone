@@ -44,7 +44,6 @@ export class HeaderComponent {
       this.firestore.collection('users').doc(this.currentUserId).get().subscribe((doc) => {
         const user:any = doc.data();
         this.profileImgSrc = user.userInfos.profileImg;
-        console.log(this.profileImgSrc);
       });
     });
 
@@ -84,7 +83,7 @@ export class HeaderComponent {
         this.profileImgSrc = `../../${result}`;
 
         this.firestore.collection('users').doc(this.currentUserId).update({
-          'userInfos.profileImage': this.profileImgSrc,
+          'userInfos.profileImg': this.profileImgSrc,
         })
       }
     });
