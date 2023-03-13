@@ -94,7 +94,7 @@ mat-form-field {
     right: 0;
     z-index: 3;
     max-width: 275px;
-    height: calc(100vh - 64px);
+    height: calc(100vh - 213px);
     overflow: auto;
 
     mat-icon {
@@ -111,7 +111,7 @@ mat-form-field {
     padding-bottom: 0;
     border-bottom: 1px solid rgba($color: rgb(0, 0, 0), $alpha: 0.1);
     margin-bottom: 16px;
-    height: 49px;
+    height: 48px;
 
     button {
         position: absolute;

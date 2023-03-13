@@ -20,6 +20,11 @@
     span {
         padding-left: 24px;
     }
+
+    button{
+        margin-left: auto;
+        margin-right: 20px;
+    }
 }
 
 .messages_history_content {
@@ -66,7 +71,7 @@
 .single-post {
     margin-top: 22px;
     display: flex;
-
+    max-width: 80%;
     &:first-child {
         margin-top: 12px;
     }
