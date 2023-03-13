@@ -1,3 +1,5 @@
-<mat-card *ngFor="let user of allUsers">
-    <mat-card-content>{{ user?.userInfos.firstName }}</mat-card-content>
-</mat-card>
+<div class="dialogMemberContainer">
+    <mat-card *ngFor="let user of allUsers">
+        <mat-card-content>{{ matchingUserIds }}</mat-card-content>
+    </mat-card>
+</div>
