@@ -17,8 +17,11 @@ export class SlackOverviewComponent {
   @ViewChild('header') header;
   currentUserId;
   whichContentShouldLoad;
+  searchText: string = '';
 
-
+  getSumValue() {
+    return this.searchText;
+  }
 
   constructor(private router: Router, private firestore: AngularFirestore, private route: ActivatedRoute,) {
     this.router.navigateByUrl('Og1osv5p8RiFXQ8v0lvz');
@@ -101,5 +104,10 @@ export class SlackOverviewComponent {
   generateDirectMessageDoc() {
     this.firestore.collection('directMessages').add(directMessage).then((user) => {
     })
+  }
+
+  onSearchTextEntered(searchValue: string) {
+    this.searchText = searchValue;
+    // console.log(searchValue);
   }
 }

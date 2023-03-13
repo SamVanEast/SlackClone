@@ -3,8 +3,9 @@
         <div class="messages_history_header">
             <span> # {{ doc?.headline }} </span>
         </div>
-        <div class="messages_history_content" >
-            <div class="single-post" *ngFor="let message of doc?.messages">
+        <div class="messages_history_content">
+            <ng-container *ngFor="let message of doc?.messages">
+            <div class="single-post" *ngIf="searchText === ''">
                 <img class="profile-pic" src="../../assets/img/blank-profile.png">
                 <div class="author-and-text">
                     <div><span class="author">{{ message.creator }}</span>
@@ -13,6 +14,7 @@
                     <span>{{ message.text }}</span>
                 </div>
             </div>
+        </ng-container>
 
             <!--  <div class="single-post">
                 <img class="profile-pic" src="../../assets/img/blank-profile.png">

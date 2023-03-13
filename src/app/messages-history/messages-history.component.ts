@@ -3,6 +3,7 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { ActivatedRoute } from '@angular/router';
 import { Editor } from 'ngx-editor';
 import { channels } from 'src/models/channels';
+import { SlackOverviewComponent } from '../slack-overview/slack-overview.component';
 
 @Component({
   selector: 'app-messages-history',
@@ -16,6 +17,7 @@ export class MessagesHistoryComponent {
   currentDoc;
   @Input() whichContentShouldLoad;
   doc;
+  @Input() searchText;
 
   constructor(private route: ActivatedRoute, private firestore: AngularFirestore) {
     this.whichContentShouldLoad = [];
@@ -46,5 +48,4 @@ export class MessagesHistoryComponent {
     
     this.editor.setContent('');
   }
-
 }

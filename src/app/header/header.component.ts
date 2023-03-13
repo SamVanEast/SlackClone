@@ -24,6 +24,8 @@ export class HeaderComponent {
   public lastName;
   public email;
   public phone;
+  enteredSearchValue: string = '';
+
 
   constructor(private route: ActivatedRoute, public elementRef: ElementRef, private firestore: AngularFirestore, public dialog: MatDialog) { }
 
@@ -94,6 +96,13 @@ export class HeaderComponent {
 
   closeNavbarRight() {
     this.showNavbarRight = false;
+  }
+
+  @Output()
+  searchTextChanged: EventEmitter<string> = new EventEmitter<string>();
+
+  onSearchTextChanged() {
+    this.searchTextChanged.emit(this.enteredSearchValue); 
   }
 
 }

@@ -1,4 +1,4 @@
-<app-header #header (openNavbarLeft)="openOrClose($event)"></app-header>
+<app-header #header (openNavbarLeft)="openOrClose($event)" (searchTextChanged)="onSearchTextEntered($event)"></app-header>
 <div class="content">
     <app-navbar-left (whichContentShouldLoad)="setContent($event)" class="sidenav-left" id="sidenav-left"></app-navbar-left>
     <app-messages-history [whichContentShouldLoad]="whichContentShouldLoad"></app-messages-history>
