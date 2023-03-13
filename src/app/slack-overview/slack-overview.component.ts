@@ -19,10 +19,6 @@ export class SlackOverviewComponent {
   whichContentShouldLoad;
   searchText: string = '';
 
-  getSumValue() {
-    return this.searchText;
-  }
-
   constructor(private router: Router, private firestore: AngularFirestore, private route: ActivatedRoute,) {
     this.router.navigateByUrl('Og1osv5p8RiFXQ8v0lvz');
 
