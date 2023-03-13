@@ -1,9 +1,9 @@
 import { Component, Input, HostListener, OnChanges } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { Editor } from 'ngx-editor';
-import { channels } from 'src/models/channels';
-import { SlackOverviewComponent } from '../slack-overview/slack-overview.component';
+import { DialogMembersComponent } from '../dialog-members/dialog-members.component';
 
 @Component({
   selector: 'app-messages-history',
@@ -20,7 +20,7 @@ export class MessagesHistoryComponent {
   @Input() searchText;
   user;
 
-  constructor(private route: ActivatedRoute, private firestore: AngularFirestore) {
+  constructor(private route: ActivatedRoute, private firestore: AngularFirestore, public dialog: MatDialog) {
     this.whichContentShouldLoad = [];
     this.route.params.subscribe((params) => {
       this.currentUserId = params['id'];
@@ -71,5 +71,9 @@ export class MessagesHistoryComponent {
 
 
     this.editor.setContent('');
+  }
+
+  openDialogMembers(){
+    this.dialog.open(DialogMembersComponent);
   }
 }
