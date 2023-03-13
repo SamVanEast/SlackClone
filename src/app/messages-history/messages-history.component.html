@@ -2,7 +2,7 @@
     <div class="header-and-messages">
         <div class="messages_history_header">
             <span> # {{ doc?.headline }} </span>
-            <button mat-raised-button>Members</button>
+            <button mat-raised-button (click)="openDialogMembers()">Members</button>
         </div>
         <div class="messages_history_content">
             <ng-container *ngFor="let message of doc?.messages">
