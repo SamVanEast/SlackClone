@@ -41,6 +41,7 @@ export class LoginComponent {
   userId: string;
   user;
 
+
   
 
   // Var for create user
@@ -72,12 +73,15 @@ export class LoginComponent {
     });
   }
 
+  
 
   generateUserDoc() {
 
     if(this.password.nativeElement.value == this.passwordRepeat.nativeElement.value) {
 
-      	this.firestore.collection('users').add(this.user).then((user) => {       
+      	this.firestore.collection('users').add(user).then((user) => {    
+          this.userId = user.id 
+          this.updateChannelParticipants();
       })
       this.pushNewUser = true;
       this.newUser = false;
@@ -93,7 +97,20 @@ export class LoginComponent {
 }
 
 
-
+updateChannelParticipants() {
+    user.communicationSections.channels.forEach((channelId) =>{
+      this.firestore.collection('channels').doc(channelId).get().toPromise().then((channelDoc) => {
+        const currentDoc: any = channelDoc.data();
+        const currentParticipants = currentDoc.participants;
+        currentParticipants.push(this.userId);
+        this.firestore.collection('channels').doc(channelId).update({
+          'participants': currentParticipants
+        }).then(() => {
+          console.log('it works')
+        })
+      });
+    })    
+  }
   
 
   guestLogin() {
@@ -110,6 +127,7 @@ export class LoginComponent {
 
         if(email === inputEmail && password === inputPassword) {
           this.router.navigateByUrl('/')
+          
         } else {
           this.toggle = true;
       setTimeout(()=>{

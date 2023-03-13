@@ -9,7 +9,7 @@ export let user = {
         "profileImg": ''
     },
     "communicationSections": {
-        "channels": [],
+        "channels": ['hTdApKhXg8111SoNr2Yq', 'KlTnEdj7XuVLzYnB13Iw'],
         "groups": [],
         "directMessages": []
     }
