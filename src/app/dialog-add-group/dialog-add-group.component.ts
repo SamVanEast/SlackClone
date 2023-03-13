@@ -19,9 +19,6 @@ export class DialogAddGroupComponent {
 
   constructor(private route: ActivatedRoute, private firestore: AngularFirestore, private dialogRef: MatDialogRef<DialogAddGroupComponent>) {
     this.group = group;
-    this.route.params.subscribe((params) => {
-      this.currentUserId = params['id'];
-    });
   }
 
   saveGroup() {
@@ -38,7 +35,7 @@ export class DialogAddGroupComponent {
   pushNewGroupToArray(newGroupId) {
     this.firestore.collection('users').doc(this.currentUserId).get().toPromise().then((userDoc) => {
       const currentUser: any = userDoc.data();
-      const currentGroups = currentUser.messages.groups;
+      const currentGroups = currentUser.communicationSections.groups;
       currentGroups.push(newGroupId);
       this.updateGroup(newGroupId);
       this.updateUser(currentGroups);
@@ -54,7 +51,7 @@ export class DialogAddGroupComponent {
 
   updateUser(currentGroups) {
     this.firestore.collection('users').doc(this.currentUserId).update({
-      'messages.groups': currentGroups
+      'communicationSections.groups': currentGroups
     }).then(() => {
       this.loading = false;
       this.dialogRef.close();
