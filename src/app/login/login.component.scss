@@ -154,6 +154,39 @@ form {
   }
 }
 
+::ng-deep .mat-focused .mat-form-field-label {
+  /*change color of label*/
+  color: green !important;
+ }
+
+ ::ng-deep.mat-form-field-underline {
+  /*change color of underline*/
+  background-color: green !important;
+} 
+
+::ng-deep.mat-form-field-ripple {
+ /*change color of underline when focused*/
+ background-color: green !important;
+}
+
+.mat-focused .mat-form-field {
+  /*change color of label*/
+  color: white !important;
+ }
+
+ ::ng-deep .example-form {
+  .mat-focused .mat-form-field-ripple {
+    /*change color of underline when focused*/
+    background-color: green!important;
+  }
+  .mat-focused .mat-form-field-label {
+    /*change color of label when focused*/
+    color: green !important;
+   }
+}
+
+
+
 // extras
 
 .column {
