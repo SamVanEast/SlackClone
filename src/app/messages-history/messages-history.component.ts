@@ -3,6 +3,7 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { Editor } from 'ngx-editor';
+import { DialogAddMemberToGroupComponent } from '../dialog-add-member-to-group/dialog-add-member-to-group.component';
 import { DialogMembersComponent } from '../dialog-members/dialog-members.component';
 
 @Component({
@@ -80,4 +81,8 @@ export class MessagesHistoryComponent {
     console.log(id);
     
   };
+
+  openAddMemberToGroup() {
+    const dialog = this.dialog.open(DialogAddMemberToGroupComponent);
+  }
 }
