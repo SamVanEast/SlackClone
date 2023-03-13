@@ -8,6 +8,13 @@
   animation-name: zoomIn;
   animation-duration: 0.5s;
   gap: 14px;
+
+  @media screen and (max-width: 600px) {
+    padding-left: 12px;
+    padding-right: 12px;
+    }
+
+
 }
 
 .forgot-password-link {
@@ -25,10 +32,18 @@
 
 h1 {
     font-size: 48px;
+
+    @media screen and (max-width: 600px) {
+      font-size: 34px;
+    }
 }
 
 p {
     font-size: 18px;
+
+    @media screen and (max-width: 600px) {
+      	font-size: 16px;
+    }
 }
 
 form {
@@ -86,6 +101,10 @@ form {
 
 // css for create new User 
 
+.new-user-headline {
+  margin-bottom: 40px;
+}
+
 .wrong-password-text {
   text-align: center;
   color: red;
@@ -107,9 +126,9 @@ form {
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    animation: linear;
+    animation: ease-in-out;
   animation-name: fromLeftToRight;
-  animation-duration: 0.3s;
+  animation-duration: 0.4s;
 }
 
 .go-back {
@@ -147,43 +166,30 @@ form {
     color: white;
     font-size: 18px;
     border-radius: 6px;
-    animation: alternate;
+    animation: alternate ;
     animation-name: fromBottomToMiddle;
     animation-duration: 1.5s;
 
   }
 }
 
-::ng-deep .mat-focused .mat-form-field-label {
-  /*change color of label*/
-  color: green !important;
- }
+// css Reset 
 
- ::ng-deep.mat-form-field-underline {
-  /*change color of underline*/
-  background-color: green !important;
-} 
+.reset-headline {
+  margin-bottom: 40px;
 
-::ng-deep.mat-form-field-ripple {
- /*change color of underline when focused*/
- background-color: green !important;
-}
-
-.mat-focused .mat-form-field {
-  /*change color of label*/
-  color: white !important;
- }
-
- ::ng-deep .example-form {
-  .mat-focused .mat-form-field-ripple {
-    /*change color of underline when focused*/
-    background-color: green!important;
+  @media screen and (max-width: 500px) {
+    font-size: 30px;
   }
-  .mat-focused .mat-form-field-label {
-    /*change color of label when focused*/
-    color: green !important;
-   }
 }
+
+.reset-text {
+  text-align: center;
+  color: red;
+  position: relative;
+  cursor: default;
+}
+
 
 
 

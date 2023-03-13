@@ -5,6 +5,7 @@ import {Router} from '@angular/router';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { user } from 'src/models/user';
 import { Observable } from 'rxjs';
+import { MatAutocompleteTrigger } from '@angular/material/autocomplete';
 
 
 
@@ -34,6 +35,8 @@ export class LoginComponent {
   newUser = false;
   reset = false;
   pushNewUser = false;
+  pushResetPw = false;
+  toggleReset = false;
   toggle = false;
   userId: string;
   user;
@@ -65,9 +68,8 @@ export class LoginComponent {
   ngOnInit() {
     this.firestore.collection('users').valueChanges({ idField: 'docId' }).subscribe((user: any) => {
       this.allUser = user;
-      console.log(user)
+      
     });
-
   }
 
 
@@ -75,8 +77,7 @@ export class LoginComponent {
 
     if(this.password.nativeElement.value == this.passwordRepeat.nativeElement.value) {
 
-      	this.firestore.collection('users').add(this.user).then((user) => {
-        
+      	this.firestore.collection('users').add(this.user).then((user) => {       
       })
       this.pushNewUser = true;
       this.newUser = false;
@@ -127,8 +128,12 @@ export class LoginComponent {
       
       if(inputEmail === email){
         this.changePassword(id);
+        break;
       } else if (i === this.allUser.length - 1){
-        alert('Email Doesnt exist')
+        this.toggleReset = true;
+        setTimeout(()=> {
+          this.toggleReset = false;
+        }, 3000);
       }  
     }
    }
@@ -140,20 +145,30 @@ export class LoginComponent {
     if(password === repPassword){
       this.firestore.collection('users').doc(id).update({
         'userInfos.password': this.resetPw.nativeElement.value,});
+        this.reset = false;
+        this.pushResetPw = true;
+      setTimeout(()=>{
+            this.pushResetPw = false;
+          }, 3000);
+
     } else {
+      
       this.toggle = true;
       setTimeout(()=> {
         this.toggle = false;
       }, 3000);
+      
     }
    }
 
   resetOverview() {
     this.reset = true;
+
   }
 
   NewUserOverview() {
     this.newUser = true;
+
   }
 
   showLogin() {
