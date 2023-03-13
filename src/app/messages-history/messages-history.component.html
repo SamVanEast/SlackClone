@@ -6,7 +6,7 @@
         </div>
         <div class="messages_history_content">
             <ng-container *ngFor="let message of doc?.messages">
-            <div class="single-post" *ngIf="searchText === '' || message.text.toLowerCase().includes(searchText.toLowerCase())">
+            <div class="single-post" *ngIf="searchText === '' || message.text.toLowerCase().includes(searchText.toLowerCase()) || message.creator.toLowerCase().includes(searchText.toLowerCase())">
                 <img class="profile-pic" src="{{ message.creatorImg }}">
                 <div class="author-and-text">
                     <div><span class="author" (click)="openCreatorProfile(message.creatorId)">{{ message.creator }} </span>
