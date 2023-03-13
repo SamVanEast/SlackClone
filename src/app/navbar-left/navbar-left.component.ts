@@ -30,7 +30,7 @@ export class NavbarLeftComponent implements OnInit {
       this.currentUserId = params['id'];
     });
     this.loadMessagesFromFirestore();
-    this.openMessageHistory('PtNj9aQeezv13BcAkbq4', 'channels');
+    this.openMessageHistory('KlTnEdj7XuVLzYnB13Iw', 'channels');
   }
 
 

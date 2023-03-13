@@ -18,7 +18,7 @@ export class MessagesHistoryComponent {
   @Input() whichContentShouldLoad;
   doc;
   @Input() searchText;
-  currentUser;
+  user;
 
   constructor(private route: ActivatedRoute, private firestore: AngularFirestore) {
     this.whichContentShouldLoad = [];
@@ -31,6 +31,8 @@ export class MessagesHistoryComponent {
     if (this.whichContentShouldLoad !== undefined && this.whichContentShouldLoad.length > 0) {
       this.firestore.collection(this.whichContentShouldLoad[0]).doc(this.whichContentShouldLoad[1]).valueChanges().subscribe((doc: any) => {
         this.doc = doc;
+        console.log(doc);
+        
       });
     }
   }
@@ -38,7 +40,7 @@ export class MessagesHistoryComponent {
   ngOnInit(): void {
     this.editor = new Editor();
     this.firestore.collection('users').doc(this.currentUserId).valueChanges().subscribe((user: any) => {
-      this.currentUser = user;
+      this.user = user;
     });
   }
 
@@ -54,9 +56,11 @@ export class MessagesHistoryComponent {
     
     if (text !== '') {
       this.doc.messages.push({
-        creator: `${this.currentUser.userInfos.firstName} ${this.currentUser.userInfos.lastName}`,
+        creatorImg: this.user.userInfos.profileImage,
+        creatorId: this.currentUserId,
+        creator: `${this.user.userInfos.firstName} ${this.user.userInfos.lastName}`,
         text: text,
-        data: new Date().getTime() 
+        data: new Date().getTime(),
       })
       this.firestore.collection(this.whichContentShouldLoad[0]).doc(this.whichContentShouldLoad[1]).update({
         'messages': this.doc.messages

@@ -6,7 +6,7 @@ export let user = {
         "password": 123456,
         "phone": 123456789,
         "isLoggedIn": false,
-        "profileImage": ''
+        "profileImg": ''
     },
     "communicationSections": {
         "channels": [],
