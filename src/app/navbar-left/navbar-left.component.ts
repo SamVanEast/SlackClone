@@ -107,8 +107,6 @@ export class NavbarLeftComponent implements OnInit {
 
   openMessageHistory(id, collection) {
     this.whichContentShouldLoad.emit([collection, id]);
-    console.log(id, collection);
-
   }
 
 }

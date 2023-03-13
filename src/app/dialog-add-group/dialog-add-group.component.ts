@@ -29,21 +29,38 @@ export class DialogAddGroupComponent {
       this.loading = true;
       this.firestore.collection('groups').add(this.group).then((docRef) => {
         const newGroupId = docRef.id;
-        this.firestore.collection('users').doc(this.currentUserId).get().toPromise().then((userDoc) => {
-          const currentUser: any = userDoc.data();
-          const currentGroups = currentUser.messages.groups;
-          currentGroups.push(newGroupId);
-          this.firestore.collection('users').doc(this.currentUserId).update({
-            'messages.groups': currentGroups
-          }).then(() => {
-            this.loading = false;
-            this.dialogRef.close();
-          })
-        });
-      })
+        this.pushNewGroupToArray(newGroupId);
+      });
     }
     this.group.headline = '';
   }
+
+  pushNewGroupToArray(newGroupId) {
+    this.firestore.collection('users').doc(this.currentUserId).get().toPromise().then((userDoc) => {
+      const currentUser: any = userDoc.data();
+      const currentGroups = currentUser.messages.groups;
+      currentGroups.push(newGroupId);
+      this.updateGroup(newGroupId);
+      this.updateUser(currentGroups);
+    });
+  }
+
+  updateGroup(newGroupId) {
+    this.firestore.collection('groups').doc(newGroupId).update({
+      'participants': [this.currentUserId]
+    }).then(() => {
+    })
+  }
+
+  updateUser(currentGroups) {
+    this.firestore.collection('users').doc(this.currentUserId).update({
+      'messages.groups': currentGroups
+    }).then(() => {
+      this.loading = false;
+      this.dialogRef.close();
+    })
+  }
+
 
 
   closeDialogGroup() {
