@@ -1,5 +1,6 @@
 import { Component, Output } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-dialog-members',
@@ -10,7 +11,7 @@ export class DialogMembersComponent {
   allUsers = [];
   whichContentShouldLoad;
 
-  constructor(private firestore: AngularFirestore) {
+  constructor(private firestore: AngularFirestore, private dialogRef: MatDialogRef<DialogMembersComponent>) {
   }
 
   ngOnInit() {
@@ -35,7 +36,13 @@ export class DialogMembersComponent {
     //     });
     //   // });
     console.log(user.userInfos.firstName);
-  console.log(user.userInfos.lastName);
-  console.log(user.userInfos.email);
+    console.log(user.userInfos.lastName);
+    console.log(user.userInfos.email);
+
+    this.closeDialogMembers();
+  }
+
+  closeDialogMembers(){
+    this.dialogRef.close();
   }
 }

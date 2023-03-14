@@ -1,5 +1,11 @@
 <div class="dialogMemberContainer">
-    <h2>Members</h2>
+    <div class="titleMember">
+        <button mat-icon-button matTooltip="Basic" (click)="closeDialogMembers()">
+            <mat-icon>close</mat-icon>
+        </button>
+
+        <h2>Members</h2>
+    </div>
     <mat-card class="memberCards" *ngFor="let user of allUsers" (click)="showMemberProfile(user)">
         <mat-card-content>{{ user.userInfos.firstName }} {{ user.userInfos.lastName }}</mat-card-content>
     </mat-card>
