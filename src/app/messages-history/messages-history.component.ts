@@ -41,7 +41,9 @@ export class MessagesHistoryComponent {
     this.editor = new Editor();
     this.firestore.collection('users').doc(this.currentUserId).valueChanges().subscribe((user: any) => {
       this.user = user;
+      console.log(user);
       
+
     });
   }
 
@@ -54,10 +56,10 @@ export class MessagesHistoryComponent {
     var oParser = new DOMParser();
     var oDOM = oParser.parseFromString(this.html, "text/html");
     var text = oDOM.body.innerText;
-    
+
     if (text !== '') {
       this.doc.messages.push({
-        creatorImg: this.user.userInfos.profileImage,
+        creatorImg: this.user.userInfos.profileImg,
         creatorId: this.currentUserId,
         creator: `${this.user.userInfos.firstName} ${this.user.userInfos.lastName}`,
         text: text,
@@ -70,19 +72,19 @@ export class MessagesHistoryComponent {
     this.editor.setContent('');
   };
 
-  openDialogMembers(){
+  openDialogMembers() {
     const dialog = this.dialog.open(DialogMembersComponent);
     dialog.componentInstance.whichContentShouldLoad = this.whichContentShouldLoad;
   };
 
-  openCreatorProfile(id){
+  openCreatorProfile(id) {
     console.log(id);
-    
+
   };
 
   openAddMemberToGroup() {
     const dialog = this.dialog.open(DialogAddMemberToGroupComponent);
-    dialog.componentInstance.currentUserId = this.currentUserId;    
-    dialog.componentInstance.whichContentShouldLoad = this.whichContentShouldLoad;    
+    dialog.componentInstance.currentUserId = this.currentUserId;
+    dialog.componentInstance.whichContentShouldLoad = this.whichContentShouldLoad;
   }
 }
