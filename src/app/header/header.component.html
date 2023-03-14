@@ -24,7 +24,7 @@
         <img class="profile-pic" id="profile-img" [src]="profileImgSrc" [matMenuTriggerFor]="menu">
 
         <mat-menu #menu="matMenu" >
-            <button mat-menu-item (click)="openNavbarRight()" matTooltip="Profile">Profile</button>
+            <button mat-menu-item (click)="openNavbarRight()">Profile</button>
             <button mat-menu-item routerLink="/slack/login">Logout</button>
         </mat-menu>
     </div>
