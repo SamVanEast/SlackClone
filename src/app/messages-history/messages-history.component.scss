@@ -94,6 +94,11 @@
 .author {
     font-weight: 500;
     font-size: 16px;
+
+    &:hover{
+        cursor: pointer;
+        text-decoration: underline;
+    }
 }
 
 .time {
