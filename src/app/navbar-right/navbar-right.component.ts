@@ -5,7 +5,8 @@ import { ActivatedRoute } from '@angular/router';
 import { DialogChangeImgComponent } from '../dialog-change-img/dialog-change-img.component';
 import { DialogUpdateContactComponent } from '../dialog-update-contact/dialog-update-contact.component';
 import { DialogUpdateProfileNameComponent } from '../dialog-update-profile-name/dialog-update-profile-name.component';
-import { HeaderComponent } from '../header/header.component'
+import { NavbarService } from '../../services/navbar.service';
+
 
 @Component({
   selector: 'app-navbar-right',
@@ -15,8 +16,6 @@ import { HeaderComponent } from '../header/header.component'
 export class NavbarRightComponent {
   currentUserId;
   public profileImgSrc = '';
-  @Input()showNavbarRight = true;
-  @Output()closeNavbarRightEmit = new EventEmitter<boolean>();
   userId: string;
   public firstName;
   public lastName;
@@ -24,7 +23,7 @@ export class NavbarRightComponent {
   public phone;
   enteredSearchValue: string = '';
 
-  constructor(private route: ActivatedRoute, private firestore: AngularFirestore, public dialog: MatDialog){}
+  constructor(public nav: NavbarService, private route: ActivatedRoute, private firestore: AngularFirestore, public dialog: MatDialog){}
 
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
@@ -71,11 +70,10 @@ export class NavbarRightComponent {
   }
 
   openRightNavbar(){
-    this.showNavbarRight = true;
+    this.nav.toggle();
   }
 
   closeNavbarRight() {
-    this.showNavbarRight = false;
-    this.closeNavbarRightEmit.emit(this.showNavbarRight);
+    this.nav.toggle();
   }
 }

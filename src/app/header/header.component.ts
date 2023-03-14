@@ -3,6 +3,7 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { ActivatedRoute } from '@angular/router';
 import { ImprintDataprotectionComponent } from '../imprint-dataprotection/imprint-dataprotection.component';
 import { MatDialog } from '@angular/material/dialog';
+import { NavbarService } from '../../services/navbar.service';
 
 @Component({
   selector: 'app-header',
@@ -21,10 +22,8 @@ export class HeaderComponent {
   public email;
   public phone;
   enteredSearchValue: string = '';
-  public showNavbarRight = true;
-  @Output() openNavbarRightEmit = new EventEmitter<boolean>();
 
-  constructor(private route: ActivatedRoute, public elementRef: ElementRef, private firestore: AngularFirestore, public dialog: MatDialog) { }
+  constructor(public nav: NavbarService, private route: ActivatedRoute, public elementRef: ElementRef, private firestore: AngularFirestore, public dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
@@ -69,7 +68,7 @@ export class HeaderComponent {
   }
 
   openNavbarRight() {
-    this.openNavbarRightEmit.emit(this.showNavbarRight);
+    this.nav.toggle();
   }
 }
 

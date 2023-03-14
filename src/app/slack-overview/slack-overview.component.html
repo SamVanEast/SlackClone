@@ -1,8 +1,8 @@
-<app-header #header (openNavbarRightEmit)="navbarRightEmit($event)" (openNavbarLeft)="openOrClose($event)" (searchTextChanged)="onSearchTextEntered($event)"></app-header>
+<app-header #header (openNavbarLeft)="openOrClose($event)" (searchTextChanged)="onSearchTextEntered($event)"></app-header>
 <div class="content">
     <app-navbar-left (whichContentShouldLoad)="setContent($event)"  class="sidenav-left" id="sidenav-leftt" *ngIf="mobileNavBar"></app-navbar-left>
     <app-messages-history [whichContentShouldLoad]="whichContentShouldLoad" [searchText]="searchText" #messagsHistory *ngIf="mobileContent"></app-messages-history>
-    <app-navbar-right [showNavbarRight]="showNavbarRight" (closeNavbarRightEmit)="closeNavbarRightEmit($event)"></app-navbar-right>
+    <app-navbar-right></app-navbar-right>
 </div>
 <div class="mobile-footer">
     <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="home" (click)="showChannels()" ></mat-icon>

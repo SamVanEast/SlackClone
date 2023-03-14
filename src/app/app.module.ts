@@ -47,6 +47,7 @@ import { ImprintDataprotectionComponent } from './imprint-dataprotection/imprint
 import { DialogMembersComponent } from './dialog-members/dialog-members.component';
 import { DialogAddMemberToGroupComponent } from './dialog-add-member-to-group/dialog-add-member-to-group.component';
 import { NavbarRightComponent } from './navbar-right/navbar-right.component';
+import { NavbarService } from '../services/navbar.service';
 
 @NgModule({
   declarations: [
@@ -98,9 +99,9 @@ import { NavbarRightComponent } from './navbar-right/navbar-right.component';
     AngularFireModule.initializeApp(environment.firebase),
     FormsModule,
     ReactiveFormsModule,
-    NgxEditorModule
+    NgxEditorModule,
   ],
-  providers: [],
+  providers: [NavbarService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

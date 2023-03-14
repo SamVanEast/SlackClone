@@ -5,14 +5,13 @@ import { channels } from 'src/models/channels';
 import { group } from 'src/models/group';
 import { directMessage } from 'src/models/directMessage';
 import { ActivatedRoute, Router } from '@angular/router';
-import { getFirestore } from "firebase/firestore";
-import { collection, doc, getDoc, getDocs } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-slack-overview',
   templateUrl: './slack-overview.component.html',
   styleUrls: ['./slack-overview.component.scss']
 })
+
 export class SlackOverviewComponent {
   @ViewChild('header') header;
   @ViewChild('messagsHistory') messagsHistory;
@@ -22,7 +21,6 @@ export class SlackOverviewComponent {
   mobileNavBar = true;
   mobileContent = true;
   innerWidth: any;
-  public showNavbarRight;
 
   constructor(private router: Router, private firestore: AngularFirestore, private route: ActivatedRoute,) {
 
@@ -95,7 +93,6 @@ export class SlackOverviewComponent {
 
   onSearchTextEntered(searchValue: string) {
     this.searchText = searchValue;
-    // console.log(searchValue);
   }
 
   showChannels() {
@@ -107,13 +104,4 @@ export class SlackOverviewComponent {
     this.mobileNavBar = false;
     this.mobileContent = true;
   }
-
-  navbarRightEmit($event) {
-    this.showNavbarRight = $event;
-  }
-
-  closeNavbarRightEmit($event){
-    this.showNavbarRight = $event;
-  }
-
 }

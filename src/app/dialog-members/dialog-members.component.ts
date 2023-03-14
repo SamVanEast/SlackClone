@@ -1,6 +1,8 @@
 import { Component, Output } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { MatDialogRef } from '@angular/material/dialog';
+import { NavbarService } from '../../services/navbar.service';
+
 
 @Component({
   selector: 'app-dialog-members',
@@ -11,7 +13,7 @@ export class DialogMembersComponent {
   allUsers = [];
   whichContentShouldLoad;
 
-  constructor(private firestore: AngularFirestore, private dialogRef: MatDialogRef<DialogMembersComponent>) {
+  constructor(public nav: NavbarService, private firestore: AngularFirestore, private dialogRef: MatDialogRef<DialogMembersComponent>) {
   }
 
   ngOnInit() {
@@ -43,6 +45,7 @@ export class DialogMembersComponent {
   }
 
   closeDialogMembers(){
+    this.nav.toggle();
     this.dialogRef.close();
   }
 }
