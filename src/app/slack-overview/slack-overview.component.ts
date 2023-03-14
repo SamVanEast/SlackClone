@@ -112,4 +112,9 @@ export class SlackOverviewComponent {
     this.showNavbarRight = $event;
   }
 
+  closeNavbarRightEmit($event){
+    this.showNavbarRight = $event;
+    console.log($event);
+  }
+
 }

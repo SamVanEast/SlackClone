@@ -1,4 +1,4 @@
-import { Component, Input, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
@@ -16,6 +16,7 @@ export class NavbarRightComponent {
   currentUserId;
   public profileImgSrc = '';
   @Input()showNavbarRight = true;
+  @Output()closeNavbarRightEmit = new EventEmitter<boolean>();
   userId: string;
   public firstName;
   public lastName;
@@ -42,11 +43,6 @@ export class NavbarRightComponent {
         this.profileImgSrc = user.userInfos.profileImg;
       });
     });
-  }
-
-  ngOnChanges(){
-    console.log(this.showNavbarRight);
-    
   }
 
   openDialog() {
@@ -80,5 +76,6 @@ export class NavbarRightComponent {
 
   closeNavbarRight() {
     this.showNavbarRight = false;
+    this.closeNavbarRightEmit.emit(this.showNavbarRight);
   }
 }
