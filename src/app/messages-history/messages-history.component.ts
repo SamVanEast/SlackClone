@@ -41,9 +41,6 @@ export class MessagesHistoryComponent {
     this.editor = new Editor();
     this.firestore.collection('users').doc(this.currentUserId).valueChanges().subscribe((user: any) => {
       this.user = user;
-      console.log(user);
-      
-
     });
   }
 
