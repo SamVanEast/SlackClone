@@ -15,6 +15,7 @@ import { collection, doc, getDoc, getDocs } from '@angular/fire/firestore';
 })
 export class SlackOverviewComponent {
   @ViewChild('header') header;
+  @ViewChild('messagsHistory') messagsHistory;
   currentUserId;
   whichContentShouldLoad;
   searchText: string = '';
