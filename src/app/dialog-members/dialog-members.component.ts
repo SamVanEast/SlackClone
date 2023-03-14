@@ -32,7 +32,7 @@ export class DialogMembersComponent {
   }
 
   showMemberProfile(user) {
-    this.nav.toggleRight();
+    this.nav.openRight();
     this.closeDialogMembers();
     console.log(user);
   }
