@@ -6,8 +6,8 @@
     <mat-form-field appearance="fill">
       <mat-label>Select user</mat-label>
       <mat-select>
-        <mat-option [value]="">
-          
+        <mat-option *ngFor="let user of allUsers">
+          <img src="{{ user.userInfos.profileImg }}"> {{user.userInfos.firstName }} {{ user.userInfos.lastName }}
         </mat-option>
       </mat-select>
     </mat-form-field>

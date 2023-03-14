@@ -32,7 +32,6 @@ export class MessagesHistoryComponent {
     if (this.whichContentShouldLoad !== undefined && this.whichContentShouldLoad.length > 0) {
       this.firestore.collection(this.whichContentShouldLoad[0]).doc(this.whichContentShouldLoad[1]).valueChanges().subscribe((doc: any) => {
         this.doc = doc;
-      console.log(doc.messages[22]);
 
       });
     }
@@ -83,5 +82,6 @@ export class MessagesHistoryComponent {
 
   openAddMemberToGroup() {
     const dialog = this.dialog.open(DialogAddMemberToGroupComponent);
+    dialog.componentInstance.currentUserId = this.currentUserId;    
   }
 }
