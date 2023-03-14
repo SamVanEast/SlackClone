@@ -22,6 +22,14 @@ export class DialogAddTeamMemberComponent {
   ngOnInit(): void {
     this.firestore.collection('users').valueChanges({ idField: 'docId' }).subscribe((users: any) => {
       this.allUsers = users;
+      this.allUsers.forEach(function (user, i) {
+        // console.log(this.currentUserId);
+        
+        // let result = user.docId === this.currentUserId;
+        // if (result) {
+        //   console.log(this.allUsers[i]);
+        // }
+      })
     });
   }
 

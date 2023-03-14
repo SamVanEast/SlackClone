@@ -30,7 +30,7 @@ export class NavbarLeftComponent implements OnInit {
       this.currentUserId = params['id'];
     });
     this.loadMessagesFromFirestore();
-    this.openMessageHistory('KlTnEdj7XuVLzYnB13Iw', 'channels');
+    this.openMessageHistory('KlTnEdj7XuVLzYnB13Iw', 'channels', 'General');
   }
 
 
@@ -76,6 +76,7 @@ export class NavbarLeftComponent implements OnInit {
   loadDirectMessages() {
     let directMessages = [];
     let alreadyUsedIds = [];
+    this.headlinesOfDirectMessages = [];
     this.communicationSections.directMessages.forEach(directMessageId => {
       this.firestore.collection('directMessages').doc(directMessageId).valueChanges({ idField: 'docId' }).subscribe((directMessage: any) => {
         let result = alreadyUsedIds.filter(id => id.includes(directMessageId))
@@ -87,21 +88,20 @@ export class NavbarLeftComponent implements OnInit {
       });
     });
     this.directMessages = directMessages;
-    
   }
 
   loadUserNameDown(participants) {
     participants.forEach(id => {
-      if (id !== this.currentUserId){
+      if (id !== this.currentUserId) {
         this.firestore.collection('users').doc(id).get().toPromise().then((doc: any) => {
           const user = doc.data();
-          this.headlinesOfDirectMessages.push(`${user.userInfos.firstName} ${user.userInfos.lastName}`);
-          console.log(user);
-          
+          let result = this.headlinesOfDirectMessages.filter(id => id.includes(`${user.userInfos.firstName} ${user.userInfos.lastName}`))
+          if (result.length == 0) {
+            this.headlinesOfDirectMessages.push(`${user.userInfos.firstName} ${user.userInfos.lastName}`);
+          }
         })
       }
     });
-    console.log(this.headlinesOfDirectMessages);
 
   }
 
@@ -120,8 +120,10 @@ export class NavbarLeftComponent implements OnInit {
     dialogMember.componentInstance.currentUserId = this.currentUserId;
   }
 
-  openMessageHistory(id, collection) {
-    this.whichContentShouldLoad.emit([collection, id]);
+  openMessageHistory(id, collection, headline) {
+    this.whichContentShouldLoad.emit([collection, id, headline]);
   }
+
+
 
 }
