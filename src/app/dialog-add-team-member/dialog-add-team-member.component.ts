@@ -11,29 +11,38 @@ import { directMessage } from 'src/models/directMessage';
 })
 export class DialogAddTeamMemberComponent {
   currentUserId;
+  memberId;
   loading = false;
-  directMessages;
   groupsIds = [];
+  allUsers = [];
 
   constructor(private route: ActivatedRoute, private firestore: AngularFirestore, private dialogRef: MatDialogRef<DialogAddTeamMemberComponent>) {
-    this.directMessages = directMessage;
+  }
+
+  ngOnInit(): void {
+    this.firestore.collection('users').valueChanges({ idField: 'docId' }).subscribe((users: any) => {
+      this.allUsers = users;
+    });
   }
 
 
   save() {
-    if (this.directMessages.headline !== '') {
-      this.loading = true;
-      this.firestore.collection('directMessages').add(this.directMessages).then((docRef) => {
-        const newDirectMessageId = docRef.id;
-        this.pushNewDirectMessageToArray(newDirectMessageId);
-      })
-    }
-    this.directMessages.headline = '';
+    this.loading = true;
+    this.firestore.collection('directMessages').add(directMessage).then((docRef) => {
+      const newDirectMessageId = docRef.id;
+      this.pushNewDirectMessageToArray(newDirectMessageId);
+      this.firestore.collection('users').doc(this.memberId).get().toPromise().then((doc: any) => {
+        const docData = doc.data();
+        docData.communicationSections.directMessages.push(newDirectMessageId);
+        this.updateUserCommunicationSections(docData);
+        this.updateHeadlineDirectMessages(docData, newDirectMessageId);
+      });
+    })
+
   }
 
   pushNewDirectMessageToArray(newDirectMessageId) {
     this.firestore.collection('users').doc(this.currentUserId).get().toPromise().then((userDoc) => {
-      
       const currentUser: any = userDoc.data();
       const currentDirectMessagesIds = currentUser.communicationSections.directMessages;
       currentDirectMessagesIds.push(newDirectMessageId);
@@ -48,6 +57,18 @@ export class DialogAddTeamMemberComponent {
       this.loading = false;
       this.dialogRef.close();
     })
+  }
+
+  updateUserCommunicationSections(docData) {
+    this.firestore.collection('users').doc(this.memberId).update({
+      "communicationSections.directMessages": docData.communicationSections.directMessages
+    });
+  }
+
+  updateHeadlineDirectMessages(docData, newDirectMessageId){
+    this.firestore.collection('directMessages').doc(newDirectMessageId).update({
+      "headline": `${docData.userInfos.firstName} ${docData.userInfos.lastName}`
+    });
   }
 
   closeDialogMember() {
