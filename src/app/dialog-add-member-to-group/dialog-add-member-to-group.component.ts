@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { ActivatedRoute } from '@angular/router';
+import { UserService } from 'src/services/user.service';
 
 @Component({
   selector: 'app-dialog-add-member-to-group',
@@ -13,7 +14,7 @@ export class DialogAddMemberToGroupComponent {
   memberId;
   whichContentShouldLoad;
   groupDoc;
-  constructor(private dialogRef: MatDialogRef<DialogAddMemberToGroupComponent>, private route: ActivatedRoute, private firestore: AngularFirestore) {
+  constructor(public use: UserService, private dialogRef: MatDialogRef<DialogAddMemberToGroupComponent>, private route: ActivatedRoute, private firestore: AngularFirestore) {
 
   }
 
@@ -21,8 +22,15 @@ export class DialogAddMemberToGroupComponent {
 
 
   ngOnInit(): void {
+    let self = this;
       this.firestore.collection('users').valueChanges({ idField: 'docId' }).subscribe((users: any) => {
         this.allUsers = users;
+        this.allUsers.forEach(function (user, i) {
+          let result = user.docId === self.use.currentUserId;
+          if (result) {
+            self.allUsers.splice(i, 1)
+          }
+        })
       });
   }
 

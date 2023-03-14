@@ -13,22 +13,44 @@ import { UserService } from 'src/services/user.service';
 export class DialogAddTeamMemberComponent {
   memberId;
   loading = false;
-  groupsIds = [];
   allUsers = [];
+  withWhoDirectMessages;
 
   constructor(public use: UserService, private firestore: AngularFirestore, private dialogRef: MatDialogRef<DialogAddTeamMemberComponent>) {
   }
 
   ngOnInit(): void {
     this.firestore.collection('users').valueChanges({ idField: 'docId' }).subscribe((users: any) => {
-      this.allUsers = users;
-      this.allUsers.forEach(function (user, i) {
-        // console.log(this.currentUserId);
-        
-        // let result = user.docId === this.currentUserId;
-        // if (result) {
-        //   console.log(this.allUsers[i]);
-        // }
+      this.loadAllUsers(users);
+    });
+  }
+
+  loadAllUsers(users){
+    let self = this;
+    this.allUsers = users;
+    this.checkAllUsers();
+    this.allUsers.forEach(function (user, i) {
+      let result = user.docId === self.use.currentUserId;
+      if (result) {
+        self.allUsers.splice(i, 1)
+      }
+      if (i === self.allUsers.length - 1) {
+        console.log(self.allUsers);
+        self.checkAllUsers();
+      }
+    })
+  }
+
+  checkAllUsers() {
+    let self = this;
+    this.allUsers.forEach(function (user, i) {
+
+      self.withWhoDirectMessages.forEach((menberOfDirectMessages) => {
+        let result = user.docId === menberOfDirectMessages;
+        if (result) {
+          self.allUsers.splice(i, 1);
+          self.checkAllUsers();
+        }
       })
     });
   }

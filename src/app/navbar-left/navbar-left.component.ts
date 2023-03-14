@@ -21,6 +21,7 @@ export class NavbarLeftComponent implements OnInit {
   groups = [];
   directMessages = [];
   headlinesOfDirectMessages = [];
+  withWhoDirectMessages = [];
   @Output() whichContentShouldLoad = new EventEmitter<any>();
 
   constructor(public use: UserService, private route: ActivatedRoute, private firestore: AngularFirestore, public dialog: MatDialog) {
@@ -77,6 +78,7 @@ export class NavbarLeftComponent implements OnInit {
   loadDirectMessages() {
     let directMessages = [];
     let alreadyUsedIds = [];
+    this.withWhoDirectMessages = [];
     this.headlinesOfDirectMessages = [];
     this.communicationSections.directMessages.forEach(directMessageId => {
       this.firestore.collection('directMessages').doc(directMessageId).valueChanges({ idField: 'docId' }).subscribe((directMessage: any) => {
@@ -94,6 +96,7 @@ export class NavbarLeftComponent implements OnInit {
   loadUserNameDown(participants) {
     participants.forEach(id => {
       if (id !== this.use.currentUserId) {
+        this.withWhoDirectMessages.push(id);
         this.firestore.collection('users').doc(id).get().toPromise().then((doc: any) => {
           const user = doc.data();
           let result = this.headlinesOfDirectMessages.filter(id => id.includes(`${user.userInfos.firstName} ${user.userInfos.lastName}`))
@@ -115,7 +118,8 @@ export class NavbarLeftComponent implements OnInit {
   }
 
   openDialogMember() {
-    this.dialog.open(DialogAddTeamMemberComponent);
+    const dialog = this.dialog.open(DialogAddTeamMemberComponent);
+    dialog.componentInstance.withWhoDirectMessages = this.withWhoDirectMessages;
   }
 
   openMessageHistory(id, collection, headline) {
