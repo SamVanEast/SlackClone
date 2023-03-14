@@ -46,6 +46,7 @@ import { DialogChangeImgComponent } from './dialog-change-img/dialog-change-img.
 import { ImprintDataprotectionComponent } from './imprint-dataprotection/imprint-dataprotection.component';
 import { DialogMembersComponent } from './dialog-members/dialog-members.component';
 import { DialogAddMemberToGroupComponent } from './dialog-add-member-to-group/dialog-add-member-to-group.component';
+import { NavbarRightComponent } from './navbar-right/navbar-right.component';
 
 @NgModule({
   declarations: [
@@ -64,6 +65,7 @@ import { DialogAddMemberToGroupComponent } from './dialog-add-member-to-group/di
     ImprintDataprotectionComponent,
     DialogMembersComponent,
     DialogAddMemberToGroupComponent,
+    NavbarRightComponent,
   ],
   imports: [
     BrowserModule,

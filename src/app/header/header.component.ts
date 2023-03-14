@@ -3,9 +3,6 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { ActivatedRoute } from '@angular/router';
 import { ImprintDataprotectionComponent } from '../imprint-dataprotection/imprint-dataprotection.component';
 import { MatDialog } from '@angular/material/dialog';
-import { DialogUpdateProfileNameComponent } from '../dialog-update-profile-name/dialog-update-profile-name.component';
-import { DialogUpdateContactComponent } from '../dialog-update-contact/dialog-update-contact.component';
-import { DialogChangeImgComponent } from '../dialog-change-img/dialog-change-img.component';
 
 @Component({
   selector: 'app-header',
@@ -18,13 +15,14 @@ export class HeaderComponent {
   public profileImgSrc = '';
   openOrClose = false; 
   @Output() openNavbarLeft = new EventEmitter<any>();
-  showNavbarRight = false;
   userId: string;
   public firstName;
   public lastName;
   public email;
   public phone;
   enteredSearchValue: string = '';
+  showNavbarRight = false;
+  @Output() openNavbarRight = new EventEmitter<void>();
 
 
   constructor(private route: ActivatedRoute, public elementRef: ElementRef, private firestore: AngularFirestore, public dialog: MatDialog) { }
@@ -64,45 +62,20 @@ export class HeaderComponent {
     this.dialog.open(ImprintDataprotectionComponent);
   }
 
-  openDialog() {
-    const dialog = this.dialog.open(DialogUpdateProfileNameComponent);
-    dialog.componentInstance.currentUserId = this.currentUserId;
-  }
-
-  openDialogContact() {
-    const dialogContact = this.dialog.open(DialogUpdateContactComponent);
-    dialogContact.componentInstance.currentUserId = this.currentUserId;
-  }
-
-  openDialogChangeImg(){
-    const dialogImage= this.dialog.open(DialogChangeImgComponent);
-    dialogImage.componentInstance.currentUserId = this.currentUserId;
-
-    dialogImage.afterClosed().subscribe(result => {
-      if(result){
-        this.profileImgSrc = `../../${result}`;
-
-        this.firestore.collection('users').doc(this.currentUserId).update({
-          'userInfos.profileImg': this.profileImgSrc,
-        })
-      }
-    });
-  }
-
-  openRightNavbar(){
-    this.showNavbarRight = true;
-    
-  }
-
-  closeNavbarRight() {
-    this.showNavbarRight = false;
-  }
-
   @Output()
   searchTextChanged: EventEmitter<string> = new EventEmitter<string>();
 
   onSearchTextChanged() {
     this.searchTextChanged.emit(this.enteredSearchValue); 
+  }
+
+  openNavbarRightEmit() {
+    this.showNavbarRight = true;
+    this.openNavbarRight.emit();
+  }
+
+  closeNavbarRight() {
+    this.showNavbarRight = false;
   }
 
 }
