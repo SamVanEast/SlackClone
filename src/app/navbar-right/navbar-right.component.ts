@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
@@ -23,7 +23,7 @@ export class NavbarRightComponent {
   public phone;
   enteredSearchValue: string = '';
 
-  constructor(public use: UserService, public nav: NavbarService, private route: ActivatedRoute, private firestore: AngularFirestore, public dialog: MatDialog){}
+  constructor(public use: UserService, public nav: NavbarService, private route: ActivatedRoute, private firestore: AngularFirestore, public dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
@@ -38,7 +38,7 @@ export class NavbarRightComponent {
       });
 
       this.firestore.collection('users').doc(this.use.currentUserId).get().subscribe((doc) => {
-        const user:any = doc.data();
+        const user: any = doc.data();
         this.profileImgSrc = user.userInfos.profileImg;
       });
     });
@@ -52,11 +52,11 @@ export class NavbarRightComponent {
     const dialogContact = this.dialog.open(DialogUpdateContactComponent);
   }
 
-  openDialogChangeImg(){
-    const dialogImage= this.dialog.open(DialogChangeImgComponent);
+  openDialogChangeImg() {
+    const dialogImage = this.dialog.open(DialogChangeImgComponent);
 
     dialogImage.afterClosed().subscribe(result => {
-      if(result){
+      if (result) {
         this.profileImgSrc = `../../${result}`;
 
         this.firestore.collection('users').doc(this.use.currentUserId).update({
@@ -66,7 +66,7 @@ export class NavbarRightComponent {
     });
   }
 
-  openRightNavbar(){
+  openRightNavbar() {
     this.nav.toggle();
   }
 
