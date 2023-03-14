@@ -7,6 +7,12 @@
     }
 }
 
+.titleMember{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row-reverse;
+}
+
 .memberCards{
     margin-bottom: 5px;
     margin-left: 16px;

@@ -35,7 +35,7 @@ export class DialogMembersComponent {
     //     });
     //   // });
     console.log(user.userInfos.firstName);
-  console.log(user.userInfos.lastName);
-  console.log(user.userInfos.email);
+    console.log(user.userInfos.lastName);
+    console.log(user.userInfos.email);
   }
 }
