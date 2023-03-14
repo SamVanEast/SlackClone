@@ -22,7 +22,7 @@ export class HeaderComponent {
   public phone;
   enteredSearchValue: string = '';
   public showNavbarRight = true;
-  @Output() messageEvent = new EventEmitter<boolean>();
+  @Output() openNavbarRightEmit = new EventEmitter<boolean>();
 
   constructor(private route: ActivatedRoute, public elementRef: ElementRef, private firestore: AngularFirestore, public dialog: MatDialog) { }
 
@@ -69,7 +69,7 @@ export class HeaderComponent {
   }
 
   openNavbarRight() {
-    this.messageEvent.emit(this.showNavbarRight);
+    this.openNavbarRightEmit.emit(this.showNavbarRight);
   }
 }
 

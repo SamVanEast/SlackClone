@@ -108,9 +108,8 @@ export class SlackOverviewComponent {
     this.mobileContent = true;
   }
 
-  receiveMessage($event) {
+  navbarRightEmit($event) {
     this.showNavbarRight = $event;
-    console.log($event);
   }
 
 }
