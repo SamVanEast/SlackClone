@@ -19,6 +19,9 @@ export class SlackOverviewComponent {
   currentUserId;
   whichContentShouldLoad;
   searchText: string = '';
+  mobileNavBar = true;
+  mobileContent = true;
+  innerWidth: any;
 
   constructor(private router: Router, private firestore: AngularFirestore, private route: ActivatedRoute,) {
 
@@ -38,6 +41,17 @@ export class SlackOverviewComponent {
     // this.generateGoupsDoc();
     // this.generateDirectMessageDoc();
     // this.generateUserDoc();
+  }  
+
+    // scripts
+  
+  @HostListener('window:resize', ['$event'])
+    onResize(event) {
+    this.innerWidth = window.innerWidth;
+    if(this.innerWidth >= 620) {
+      this.mobileNavBar = true;
+      this.mobileContent = true
+    }
   }
 
   ngOnInit() {
@@ -83,4 +97,16 @@ export class SlackOverviewComponent {
     this.searchText = searchValue;
     // console.log(searchValue);
   }
+
+  showChannels() {
+    this.mobileNavBar = true;
+    this.mobileContent = false;
+  }
+
+  showMessages() {
+    this.mobileNavBar = false;
+    this.mobileContent = true;
+  }
+
+
 }
