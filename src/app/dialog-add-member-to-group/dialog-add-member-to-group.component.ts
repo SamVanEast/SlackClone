@@ -13,7 +13,7 @@ export class DialogAddMemberToGroupComponent {
 
   currentUserId;
   allUsers = [];
-  test;
+  memberId;
   whichContentShouldLoad;
   constructor(private dialogRef: MatDialogRef<DialogAddMemberToGroupComponent>, private route: ActivatedRoute, private firestore: AngularFirestore) {
 
@@ -39,14 +39,21 @@ export class DialogAddMemberToGroupComponent {
     
   }
 
-  save() { }
+  save() { 
+    this.firestore.collection(this.whichContentShouldLoad[0]).doc(this.whichContentShouldLoad[1]).get().toPromise().then((doc: any) => {
+      const docData = doc.Data();
+      docData.participants.push(this.memberId);
+    });
+  }
 
   closeDialogAddMember() {
     this.dialogRef.close();
   }
 
-  testFct() {
-    console.log(this.test);
-
+  updateCommunicationSections() {
+    this.firestore.collection(this.whichContentShouldLoad[0]).doc(this.whichContentShouldLoad[1]).update({
+     
+    });
   }
+
 }
