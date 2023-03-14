@@ -15,6 +15,7 @@ export class DialogAddMemberToGroupComponent {
   allUsers = [];
   memberId;
   whichContentShouldLoad;
+  groupDoc;
   constructor(private dialogRef: MatDialogRef<DialogAddMemberToGroupComponent>, private route: ActivatedRoute, private firestore: AngularFirestore) {
 
   }
@@ -41,8 +42,17 @@ export class DialogAddMemberToGroupComponent {
 
   save() { 
     this.firestore.collection(this.whichContentShouldLoad[0]).doc(this.whichContentShouldLoad[1]).get().toPromise().then((doc: any) => {
-      const docData = doc.Data();
+      let docData= doc.data();
+      // console.log(doc.data());
+      
       docData.participants.push(this.memberId);
+      this.updateCommunicationSections(docData);
+    });
+
+    this.firestore.collection('users').doc(this.memberId).get().toPromise().then((doc: any) => {
+      const docData = doc.data();
+      docData.communicationSections.groups.push(this.whichContentShouldLoad[1]);
+      this.updateUserCommunicationSections(docData);
     });
   }
 
@@ -50,10 +60,16 @@ export class DialogAddMemberToGroupComponent {
     this.dialogRef.close();
   }
 
-  updateCommunicationSections() {
+  updateCommunicationSections(docData) {
     this.firestore.collection(this.whichContentShouldLoad[0]).doc(this.whichContentShouldLoad[1]).update({
-     
+     "participants": docData
     });
+  }
+
+  updateUserCommunicationSections(docData){
+    this.firestore.collection('users').doc(this.memberId).update({
+      "communicationSections.groups": docData
+     });
   }
 
 }

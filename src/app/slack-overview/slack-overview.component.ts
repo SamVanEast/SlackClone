@@ -54,26 +54,25 @@ export class SlackOverviewComponent {
     }
   }
 
-  ngOnInit() {
-    this.scrollToBottom();
-  }
+  // ngOnInit() {
+  //   this.scrollToBottom();
+  // }
 
-  scrollToBottom(){
-    this.messagsHistory.nativeElement.scrollTop = this.messagsHistory.nativeElement.scrollHeight;
-  }
+  // scrollToBottom(){
+  //   this.messagsHistory.nativeElement.scrollTop = this.messagsHistory.nativeElement.scrollHeight;
+  // }
 
   setContent(whichContentShouldLoad) {
     this.whichContentShouldLoad = whichContentShouldLoad;
   }
 
   openOrClose(boolean) {
-    if (boolean) {
-      document.getElementById('sidenav-left').classList.remove('closeNavbar');
+    // if (boolean) {
+    //   document.getElementById('sidenav-left').classList.remove('closeNavbar');
 
-    } else {
-      document.getElementById('sidenav-left').classList.add('closeNavbar');
-
-    }
+    // } else {
+    //   document.getElementById('sidenav-left').classList.add('closeNavbar');
+    // }
   }
 
   generateChannelDoc() {
