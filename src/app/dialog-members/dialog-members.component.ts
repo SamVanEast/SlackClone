@@ -32,21 +32,12 @@ export class DialogMembersComponent {
   }
 
   showMemberProfile(user) {
-    // this.firestore.collection('users').doc().get().toPromise().then((snap: any) => {
-    //     // snap.forEach(doc => {
-    //       console.log(snap);
-    //       // console.log(doc.id);
-    //     });
-    //   // });
-    console.log(user.userInfos.firstName);
-    console.log(user.userInfos.lastName);
-    console.log(user.userInfos.email);
-
+    this.nav.toggle();
     this.closeDialogMembers();
+    console.log(user);
   }
 
   closeDialogMembers(){
-    this.nav.toggle();
     this.dialogRef.close();
   }
 }
