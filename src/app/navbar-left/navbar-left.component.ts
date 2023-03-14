@@ -18,6 +18,7 @@ export class NavbarLeftComponent implements OnInit {
   channels = [];
   groups = [];
   directMessages = [];
+  headlinesOfDirectMessages = [];
   @Output() whichContentShouldLoad = new EventEmitter<any>();
 
 
@@ -36,7 +37,6 @@ export class NavbarLeftComponent implements OnInit {
   loadMessagesFromFirestore() {
     this.firestore.collection('users').doc(this.currentUserId).valueChanges().subscribe((user: any) => {
       this.communicationSections = user.communicationSections;
-
       this.loadChannels();
       this.loadGroups();
       this.loadDirectMessages();
@@ -82,11 +82,27 @@ export class NavbarLeftComponent implements OnInit {
         if (result.length == 0 || alreadyUsedIds.length == 0) {
           alreadyUsedIds.push(directMessageId)
           directMessages.push(directMessage);
-
+          this.loadUserNameDown(directMessage.participants);
         }
       });
     });
     this.directMessages = directMessages;
+    
+  }
+
+  loadUserNameDown(participants) {
+    participants.forEach(id => {
+      if (id !== this.currentUserId){
+        this.firestore.collection('users').doc(id).get().toPromise().then((doc: any) => {
+          const user = doc.data();
+          this.headlinesOfDirectMessages.push(`${user.userInfos.firstName} ${user.userInfos.lastName}`);
+          console.log(user);
+          
+        })
+      }
+    });
+    console.log(this.headlinesOfDirectMessages);
+
   }
 
   openDialogChannel() {

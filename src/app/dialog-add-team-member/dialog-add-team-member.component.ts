@@ -16,7 +16,7 @@ export class DialogAddTeamMemberComponent {
   groupsIds = [];
   allUsers = [];
 
-  constructor(private route: ActivatedRoute, private firestore: AngularFirestore, private dialogRef: MatDialogRef<DialogAddTeamMemberComponent>) {
+  constructor(private firestore: AngularFirestore, private dialogRef: MatDialogRef<DialogAddTeamMemberComponent>) {
   }
 
   ngOnInit(): void {
@@ -31,14 +31,17 @@ export class DialogAddTeamMemberComponent {
     this.firestore.collection('directMessages').add(directMessage).then((docRef) => {
       const newDirectMessageId = docRef.id;
       this.pushNewDirectMessageToArray(newDirectMessageId);
-      this.firestore.collection('users').doc(this.memberId).get().toPromise().then((doc: any) => {
-        const docData = doc.data();
-        docData.communicationSections.directMessages.push(newDirectMessageId);
-        this.updateUserCommunicationSections(docData);
-        this.updateHeadlineDirectMessages(docData, newDirectMessageId);
-      });
+      this.loadUser(newDirectMessageId);
     })
+  }
 
+  loadUser(newDirectMessageId) {
+    this.firestore.collection('users').doc(this.memberId).get().toPromise().then((doc: any) => {
+      const docData = doc.data();
+      docData.communicationSections.directMessages.push(newDirectMessageId);
+      this.updateUserCommunicationSections(docData);
+      this.updateParticipantsDirectMessages(newDirectMessageId);
+    });
   }
 
   pushNewDirectMessageToArray(newDirectMessageId) {
@@ -65,9 +68,9 @@ export class DialogAddTeamMemberComponent {
     });
   }
 
-  updateHeadlineDirectMessages(docData, newDirectMessageId){
+  updateParticipantsDirectMessages(newDirectMessageId) {
     this.firestore.collection('directMessages').doc(newDirectMessageId).update({
-      "headline": `${docData.userInfos.firstName} ${docData.userInfos.lastName}`
+      "participants": [this.currentUserId, this.memberId]
     });
   }
 
