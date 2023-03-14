@@ -83,5 +83,6 @@ export class MessagesHistoryComponent {
   openAddMemberToGroup() {
     const dialog = this.dialog.open(DialogAddMemberToGroupComponent);
     dialog.componentInstance.currentUserId = this.currentUserId;    
+    dialog.componentInstance.whichContentShouldLoad = this.whichContentShouldLoad;    
   }
 }

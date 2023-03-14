@@ -5,9 +5,9 @@
   <div>
     <mat-form-field appearance="fill">
       <mat-label>Select user</mat-label>
-      <mat-select>
-        <mat-option *ngFor="let user of allUsers">
-          <img src="{{ user.userInfos.profileImg }}"> {{user.userInfos.firstName }} {{ user.userInfos.lastName }}
+      <mat-select [(ngModel)]="memberId">
+        <mat-option *ngFor="let user of allUsers" [value]="user.docId" (click)="testFct()" >
+          <img class="displayUsersToAddImg" src="{{ user.userInfos.profileImg }}"> {{user.userInfos.firstName }} {{ user.userInfos.lastName }}
         </mat-option>
       </mat-select>
     </mat-form-field>
