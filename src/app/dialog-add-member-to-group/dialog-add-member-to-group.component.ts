@@ -24,15 +24,9 @@ export class DialogAddMemberToGroupComponent {
 
 
   ngOnInit(): void {
-
       this.firestore.collection('users').valueChanges({ idField: 'docId' }).subscribe((users: any) => {
         this.allUsers = users;
       });
-
-      // this.firestore.collection('users').doc(this.currentUserId).get().subscribe((doc) => {
-      //   const user: any = doc.data();
-      //   this.profileImgSrc = user.userInfos.profileImg;
-      // });
   }
 
 
@@ -43,17 +37,15 @@ export class DialogAddMemberToGroupComponent {
   save() { 
     this.firestore.collection(this.whichContentShouldLoad[0]).doc(this.whichContentShouldLoad[1]).get().toPromise().then((doc: any) => {
       let docData= doc.data();
-      // console.log(doc.data());
-      
       docData.participants.push(this.memberId);
       this.updateCommunicationSections(docData);
     });
-
     this.firestore.collection('users').doc(this.memberId).get().toPromise().then((doc: any) => {
       const docData = doc.data();
       docData.communicationSections.groups.push(this.whichContentShouldLoad[1]);
       this.updateUserCommunicationSections(docData);
     });
+    this.dialogRef.close();
   }
 
   closeDialogAddMember() {
