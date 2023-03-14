@@ -16,20 +16,21 @@ export class MessagesHistoryComponent {
   editor: Editor | undefined;
   html = '';
   currentDoc;
+  @Input() whichContentShouldLoad;
   doc;
   @Input() searchText;
   user;
 
   constructor(public use: UserService, private route: ActivatedRoute, private firestore: AngularFirestore, public dialog: MatDialog) {
-    this.use.whichContentShouldLoad = [];
+    this.whichContentShouldLoad = [];
     this.route.params.subscribe((params) => {
       this.use.currentUserId = params['id'];
     });
   }
 
   ngOnChanges() {
-    if (this.use.whichContentShouldLoad !== undefined && this.use.whichContentShouldLoad.length > 0) {
-      this.firestore.collection(this.use.whichContentShouldLoad[0]).doc(this.use.whichContentShouldLoad[1]).valueChanges().subscribe((doc: any) => {
+    if (this.whichContentShouldLoad !== undefined && this.whichContentShouldLoad.length > 0) {
+      this.firestore.collection(this.whichContentShouldLoad[0]).doc(this.whichContentShouldLoad[1]).valueChanges().subscribe((doc: any) => {
         this.doc = doc;
 
       });
@@ -61,7 +62,7 @@ export class MessagesHistoryComponent {
         text: text,
         date: new Date().getTime(),
       })
-      this.firestore.collection(this.use.whichContentShouldLoad[0]).doc(this.use.whichContentShouldLoad[1]).update({
+      this.firestore.collection(this.whichContentShouldLoad[0]).doc(this.whichContentShouldLoad[1]).update({
         'messages': this.doc.messages
       });
     }
@@ -70,6 +71,7 @@ export class MessagesHistoryComponent {
 
   openDialogMembers() {
     const dialog = this.dialog.open(DialogMembersComponent);
+    dialog.componentInstance.whichContentShouldLoad = this.whichContentShouldLoad;
   };
 
   openCreatorProfile(id) {
@@ -78,5 +80,6 @@ export class MessagesHistoryComponent {
 
   openAddMemberToGroup() {
     const dialog = this.dialog.open(DialogAddMemberToGroupComponent);
+    dialog.componentInstance.whichContentShouldLoad = this.whichContentShouldLoad;
   }
 }

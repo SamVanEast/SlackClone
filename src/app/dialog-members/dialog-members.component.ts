@@ -12,13 +12,14 @@ import { NavbarService } from '../../services/navbar.service';
 })
 export class DialogMembersComponent {
   allUsers = [];
+  whichContentShouldLoad;
 
   constructor(public use: UserService, public nav: NavbarService, private firestore: AngularFirestore, private dialogRef: MatDialogRef<DialogMembersComponent>) {
   }
 
   ngOnInit() {
     this.allUsers = [];
-    this.firestore.collection(this.use.whichContentShouldLoad[0]).doc(this.use.whichContentShouldLoad[1]).valueChanges().subscribe((doc: any) => {
+    this.firestore.collection(this.whichContentShouldLoad[0]).doc(this.whichContentShouldLoad[1]).valueChanges().subscribe((doc: any) => {
       doc.participants.forEach((participant: any) => {
         const participantIds = participant;
 

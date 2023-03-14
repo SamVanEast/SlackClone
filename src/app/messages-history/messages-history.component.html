@@ -1,9 +1,9 @@
 <div class="messages_history">
     <div class="header-and-messages">
         <div class="messages_history_header">
-            <span> # {{ use.whichContentShouldLoad[2] }} </span>
+            <span> # {{ whichContentShouldLoad[2] }} </span>
             
-            <div class="addBtn-showMembers" ><mat-icon class="addBtn"  *ngIf="use.whichContentShouldLoad[0] === 'groups'" (click)="openAddMemberToGroup()" matTooltip="Add member" matTooltipPosition="left">person_add</mat-icon>
+            <div class="addBtn-showMembers" ><mat-icon class="addBtn"  *ngIf="whichContentShouldLoad[0] === 'groups'" (click)="openAddMemberToGroup()" matTooltip="Add member" matTooltipPosition="left">person_add</mat-icon>
             <button mat-raised-button (click)="openDialogMembers()" color="primary">Members</button></div>
         </div>
         <div class="messages_history_content">
