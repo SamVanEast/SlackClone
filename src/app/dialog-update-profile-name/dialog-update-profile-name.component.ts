@@ -3,6 +3,7 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { FormControl, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
+import { UserService } from 'src/services/user.service';
 
 @Component({
   selector: 'app-dialog-update-profile-name',
@@ -10,9 +11,7 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./dialog-update-profile-name.component.scss']
 })
 export class DialogUpdateProfileNameComponent {
-
   loading = false;
-  currentUserId;
 
   firstNameFormControl = new FormControl('', [
     Validators.required,
@@ -23,10 +22,10 @@ export class DialogUpdateProfileNameComponent {
     Validators.pattern(/^[a-zA-Z]+$/),
   ]);
 
-  constructor(private route: ActivatedRoute, private firestore: AngularFirestore, private dialogRef: MatDialogRef<DialogUpdateProfileNameComponent>) { }
+  constructor(public use: UserService, private route: ActivatedRoute, private firestore: AngularFirestore, private dialogRef: MatDialogRef<DialogUpdateProfileNameComponent>) { }
 
   ngAfterViewInit(): void {
-    this.firestore.collection('users').doc(this.currentUserId).valueChanges().subscribe((user: any) => {
+    this.firestore.collection('users').doc(this.use.currentUserId).valueChanges().subscribe((user: any) => {
       this.firstNameFormControl.setValue(user.userInfos.firstName);
       this.lastNameFormControl.setValue(user.userInfos.lastName);
     });
@@ -35,7 +34,7 @@ export class DialogUpdateProfileNameComponent {
   saveName() {
     if (this.firstNameFormControl.valid && this.lastNameFormControl.valid) {
       this.loading = true;
-      this.firestore.collection('users').doc(this.currentUserId).update({
+      this.firestore.collection('users').doc(this.use.currentUserId).update({
         'userInfos.firstName': this.firstNameFormControl.value,
         'userInfos.lastName': this.lastNameFormControl.value,
       }).then(() => {

@@ -5,6 +5,7 @@ import { MatDialogRef } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { group } from 'src/models/group';
 import 'firebase/compat/firestore';
+import { UserService } from 'src/services/user.service';
 
 @Component({
   selector: 'app-dialog-add-group',
@@ -12,12 +13,11 @@ import 'firebase/compat/firestore';
   styleUrls: ['./dialog-add-group.component.scss']
 })
 export class DialogAddGroupComponent {
-  currentUserId;
   loading = false;
   group;
   groupsIds = [];
 
-  constructor(private route: ActivatedRoute, private firestore: AngularFirestore, private dialogRef: MatDialogRef<DialogAddGroupComponent>) {
+  constructor(public use: UserService, private route: ActivatedRoute, private firestore: AngularFirestore, private dialogRef: MatDialogRef<DialogAddGroupComponent>) {
     this.group = group;
   }
 
@@ -33,7 +33,7 @@ export class DialogAddGroupComponent {
   }
 
   pushNewGroupToArray(newGroupId) {
-    this.firestore.collection('users').doc(this.currentUserId).get().toPromise().then((userDoc) => {
+    this.firestore.collection('users').doc(this.use.currentUserId).get().toPromise().then((userDoc) => {
       const currentUser: any = userDoc.data();
       const currentGroups = currentUser.communicationSections.groups;
       currentGroups.push(newGroupId);
@@ -44,13 +44,13 @@ export class DialogAddGroupComponent {
 
   updateGroup(newGroupId) {
     this.firestore.collection('groups').doc(newGroupId).update({
-      'participants': [this.currentUserId]
+      'participants': [this.use.currentUserId]
     }).then(() => {
     })
   }
 
   updateUser(currentGroups) {
-    this.firestore.collection('users').doc(this.currentUserId).update({
+    this.firestore.collection('users').doc(this.use.currentUserId).update({
       'communicationSections.groups': currentGroups
     }).then(() => {
       this.loading = false;

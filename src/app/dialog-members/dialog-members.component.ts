@@ -1,6 +1,7 @@
 import { Component, Output } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { MatDialogRef } from '@angular/material/dialog';
+import { UserService } from 'src/services/user.service';
 import { NavbarService } from '../../services/navbar.service';
 
 
@@ -13,7 +14,7 @@ export class DialogMembersComponent {
   allUsers = [];
   whichContentShouldLoad;
 
-  constructor(public nav: NavbarService, private firestore: AngularFirestore, private dialogRef: MatDialogRef<DialogMembersComponent>) {
+  constructor(public use: UserService, public nav: NavbarService, private firestore: AngularFirestore, private dialogRef: MatDialogRef<DialogMembersComponent>) {
   }
 
   ngOnInit() {

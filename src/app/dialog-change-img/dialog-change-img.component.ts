@@ -11,7 +11,6 @@ import { DialogUpdateContactComponent } from '../dialog-update-contact/dialog-up
 })
 export class DialogChangeImgComponent {
   loading = false;
-  currentUserId;
   public selectedImageId;
 
   public images = [

@@ -3,6 +3,7 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { FormControl, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
+import { UserService } from 'src/services/user.service';
 
 @Component({
   selector: 'app-dialog-update-contact',
@@ -10,9 +11,7 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./dialog-update-contact.component.scss']
 })
 export class DialogUpdateContactComponent {
-
   loading = false;
-  currentUserId;
 
   emailFormControl = new FormControl('', [
     Validators.required,
@@ -23,10 +22,10 @@ export class DialogUpdateContactComponent {
     Validators.pattern(/^\d*$/),
   ]);
 
-  constructor(private route: ActivatedRoute, private firestore: AngularFirestore, private dialogRef: MatDialogRef<DialogUpdateContactComponent>) { }
+  constructor(public use: UserService, private route: ActivatedRoute, private firestore: AngularFirestore, private dialogRef: MatDialogRef<DialogUpdateContactComponent>) { }
 
   ngAfterViewInit(): void {
-    this.firestore.collection('users').doc(this.currentUserId).valueChanges().subscribe((user: any) => {
+    this.firestore.collection('users').doc(this.use.currentUserId).valueChanges().subscribe((user: any) => {
       this.emailFormControl.setValue(user.userInfos.email);
       this.phoneFormControl.setValue(user.userInfos.phone);
     });
@@ -37,7 +36,7 @@ export class DialogUpdateContactComponent {
     if (this.emailFormControl.valid && this.phoneFormControl.valid) {
       this.loading = true;
       
-      this.firestore.collection('users').doc(this.currentUserId).update({
+      this.firestore.collection('users').doc(this.use.currentUserId).update({
         'userInfos.email': this.emailFormControl.value,
         'userInfos.phone': this.phoneFormControl.value,
       }).then(() => {

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { MatDialogRef } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
+import { UserService } from 'src/services/user.service';
 
 @Component({
   selector: 'app-dialog-add-channel',
@@ -9,10 +10,9 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./dialog-add-channel.component.scss']
 })
 export class DialogAddChannelComponent {
-  currentUserId: any;
   loading = false;
 
-  constructor(private route: ActivatedRoute, private firestore: AngularFirestore, private dialogRef: MatDialogRef<DialogAddChannelComponent>) { }
+  constructor(public use: UserService, private route: ActivatedRoute, private firestore: AngularFirestore, private dialogRef: MatDialogRef<DialogAddChannelComponent>) { }
 
   closeDialogChannel() {
     this.dialogRef.close();

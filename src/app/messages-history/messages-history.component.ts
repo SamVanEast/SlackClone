@@ -3,6 +3,7 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { Editor } from 'ngx-editor';
+import { UserService } from 'src/services/user.service';
 import { DialogAddMemberToGroupComponent } from '../dialog-add-member-to-group/dialog-add-member-to-group.component';
 import { DialogMembersComponent } from '../dialog-members/dialog-members.component';
 
@@ -14,17 +15,16 @@ import { DialogMembersComponent } from '../dialog-members/dialog-members.compone
 export class MessagesHistoryComponent {
   editor: Editor | undefined;
   html = '';
-  currentUserId;
   currentDoc;
   @Input() whichContentShouldLoad;
   doc;
   @Input() searchText;
   user;
 
-  constructor(private route: ActivatedRoute, private firestore: AngularFirestore, public dialog: MatDialog) {
+  constructor(public use: UserService, private route: ActivatedRoute, private firestore: AngularFirestore, public dialog: MatDialog) {
     this.whichContentShouldLoad = [];
     this.route.params.subscribe((params) => {
-      this.currentUserId = params['id'];
+      this.use.currentUserId = params['id'];
     });
   }
 
@@ -39,7 +39,7 @@ export class MessagesHistoryComponent {
 
   ngOnInit(): void {
     this.editor = new Editor();
-    this.firestore.collection('users').doc(this.currentUserId).valueChanges().subscribe((user: any) => {
+    this.firestore.collection('users').doc(this.use.currentUserId).valueChanges().subscribe((user: any) => {
       this.user = user;
     });
   }
@@ -57,7 +57,7 @@ export class MessagesHistoryComponent {
     if (text !== '') {
       this.doc.messages.push({
         creatorImg: this.user.userInfos.profileImg,
-        creatorId: this.currentUserId,
+        creatorId: this.use.currentUserId,
         creator: `${this.user.userInfos.firstName} ${this.user.userInfos.lastName}`,
         text: text,
         date: new Date().getTime(),
@@ -76,12 +76,10 @@ export class MessagesHistoryComponent {
 
   openCreatorProfile(id) {
     console.log(id);
-
   };
 
   openAddMemberToGroup() {
     const dialog = this.dialog.open(DialogAddMemberToGroupComponent);
-    dialog.componentInstance.currentUserId = this.currentUserId;
     dialog.componentInstance.whichContentShouldLoad = this.whichContentShouldLoad;
   }
 }

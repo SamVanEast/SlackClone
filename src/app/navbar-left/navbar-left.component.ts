@@ -2,18 +2,20 @@ import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
+import { UserService } from 'src/services/user.service';
 import { DialogAddChannelComponent } from '../dialog-add-channel/dialog-add-channel.component';
 import { DialogAddGroupComponent } from '../dialog-add-group/dialog-add-group.component';
 import { DialogAddTeamMemberComponent } from '../dialog-add-team-member/dialog-add-team-member.component';
+
 @Component({
   selector: 'app-navbar-left',
   templateUrl: './navbar-left.component.html',
   styleUrls: ['./navbar-left.component.scss']
 })
+
 export class NavbarLeftComponent implements OnInit {
   @Input() groupId: string;
   drawer = true;
-  currentUserId;
   public communicationSections;
   channels = [];
   groups = [];
@@ -21,13 +23,12 @@ export class NavbarLeftComponent implements OnInit {
   headlinesOfDirectMessages = [];
   @Output() whichContentShouldLoad = new EventEmitter<any>();
 
-
-  constructor(private route: ActivatedRoute, private firestore: AngularFirestore, public dialog: MatDialog) {
+  constructor(public use: UserService, private route: ActivatedRoute, private firestore: AngularFirestore, public dialog: MatDialog) {
   }
 
   ngOnInit() {
     this.route.params.subscribe((params) => {
-      this.currentUserId = params['id'];
+      this.use.currentUserId = params['id'];
     });
     this.loadMessagesFromFirestore();
     this.openMessageHistory('KlTnEdj7XuVLzYnB13Iw', 'channels', 'General');
@@ -35,7 +36,7 @@ export class NavbarLeftComponent implements OnInit {
 
 
   loadMessagesFromFirestore() {
-    this.firestore.collection('users').doc(this.currentUserId).valueChanges().subscribe((user: any) => {
+    this.firestore.collection('users').doc(this.use.currentUserId).valueChanges().subscribe((user: any) => {
       this.communicationSections = user.communicationSections;
       this.loadChannels();
       this.loadGroups();
@@ -92,7 +93,7 @@ export class NavbarLeftComponent implements OnInit {
 
   loadUserNameDown(participants) {
     participants.forEach(id => {
-      if (id !== this.currentUserId) {
+      if (id !== this.use.currentUserId) {
         this.firestore.collection('users').doc(id).get().toPromise().then((doc: any) => {
           const user = doc.data();
           let result = this.headlinesOfDirectMessages.filter(id => id.includes(`${user.userInfos.firstName} ${user.userInfos.lastName}`))
@@ -106,18 +107,15 @@ export class NavbarLeftComponent implements OnInit {
   }
 
   openDialogChannel() {
-    const dialogChannel = this.dialog.open(DialogAddChannelComponent);
-    dialogChannel.componentInstance.currentUserId = this.currentUserId;
+    this.dialog.open(DialogAddChannelComponent);
   }
 
   openDialogGroups() {
-    const dialogGroup = this.dialog.open(DialogAddGroupComponent);
-    dialogGroup.componentInstance.currentUserId = this.currentUserId;
+    this.dialog.open(DialogAddGroupComponent);
   }
 
   openDialogMember() {
-    const dialogMember = this.dialog.open(DialogAddTeamMemberComponent);
-    dialogMember.componentInstance.currentUserId = this.currentUserId;
+    this.dialog.open(DialogAddTeamMemberComponent);
   }
 
   openMessageHistory(id, collection, headline) {

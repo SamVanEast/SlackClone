@@ -3,6 +3,7 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { MatDialogRef } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { directMessage } from 'src/models/directMessage';
+import { UserService } from 'src/services/user.service';
 
 @Component({
   selector: 'app-dialog-add-team-member',
@@ -10,13 +11,12 @@ import { directMessage } from 'src/models/directMessage';
   styleUrls: ['./dialog-add-team-member.component.scss']
 })
 export class DialogAddTeamMemberComponent {
-  currentUserId;
   memberId;
   loading = false;
   groupsIds = [];
   allUsers = [];
 
-  constructor(private firestore: AngularFirestore, private dialogRef: MatDialogRef<DialogAddTeamMemberComponent>) {
+  constructor(public use: UserService, private firestore: AngularFirestore, private dialogRef: MatDialogRef<DialogAddTeamMemberComponent>) {
   }
 
   ngOnInit(): void {
@@ -53,7 +53,7 @@ export class DialogAddTeamMemberComponent {
   }
 
   pushNewDirectMessageToArray(newDirectMessageId) {
-    this.firestore.collection('users').doc(this.currentUserId).get().toPromise().then((userDoc) => {
+    this.firestore.collection('users').doc(this.use.currentUserId).get().toPromise().then((userDoc) => {
       const currentUser: any = userDoc.data();
       const currentDirectMessagesIds = currentUser.communicationSections.directMessages;
       currentDirectMessagesIds.push(newDirectMessageId);
@@ -62,7 +62,7 @@ export class DialogAddTeamMemberComponent {
   }
 
   updateUser(currentDirectMessagesIds) {
-    this.firestore.collection('users').doc(this.currentUserId).update({
+    this.firestore.collection('users').doc(this.use.currentUserId).update({
       'communicationSections.directMessages': currentDirectMessagesIds
     }).then(() => {
       this.loading = false;
@@ -78,7 +78,7 @@ export class DialogAddTeamMemberComponent {
 
   updateParticipantsDirectMessages(newDirectMessageId) {
     this.firestore.collection('directMessages').doc(newDirectMessageId).update({
-      "participants": [this.currentUserId, this.memberId]
+      "participants": [this.use.currentUserId, this.memberId]
     });
   }
 

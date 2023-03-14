@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ImprintDataprotectionComponent } from '../imprint-dataprotection/imprint-dataprotection.component';
 import { MatDialog } from '@angular/material/dialog';
 import { NavbarService } from '../../services/navbar.service';
+import { UserService } from 'src/services/user.service';
 
 @Component({
   selector: 'app-header',
@@ -12,7 +13,6 @@ import { NavbarService } from '../../services/navbar.service';
 })
 
 export class HeaderComponent {
-  currentUserId;
   public profileImgSrc = '';
   openOrClose = false; 
   @Output() openNavbarLeft = new EventEmitter<any>();
@@ -23,21 +23,21 @@ export class HeaderComponent {
   public phone;
   enteredSearchValue: string = '';
 
-  constructor(public nav: NavbarService, private route: ActivatedRoute, public elementRef: ElementRef, private firestore: AngularFirestore, public dialog: MatDialog) { }
+  constructor(public use: UserService, public nav: NavbarService, private route: ActivatedRoute, public elementRef: ElementRef, private firestore: AngularFirestore, public dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
 
-      this.currentUserId = params['id'];
+      this.use.currentUserId = params['id'];
 
-      this.firestore.collection('users').doc(this.currentUserId).valueChanges().subscribe((user: any) => {
+      this.firestore.collection('users').doc(this.use.currentUserId).valueChanges().subscribe((user: any) => {
         this.firstName = user.userInfos.firstName;
         this.lastName = user.userInfos.lastName;
         this.email = user.userInfos.email;
         this.phone = user.userInfos.phone;
       });
 
-      this.firestore.collection('users').doc(this.currentUserId).get().subscribe((doc) => {
+      this.firestore.collection('users').doc(this.use.currentUserId).get().subscribe((doc) => {
         const user:any = doc.data();
         this.profileImgSrc = user.userInfos.profileImg;
       });

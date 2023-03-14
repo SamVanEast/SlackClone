@@ -5,6 +5,7 @@ import { channels } from 'src/models/channels';
 import { group } from 'src/models/group';
 import { directMessage } from 'src/models/directMessage';
 import { ActivatedRoute, Router } from '@angular/router';
+import { UserService } from 'src/services/user.service';
 
 @Component({
   selector: 'app-slack-overview',
@@ -15,17 +16,16 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class SlackOverviewComponent {
   @ViewChild('header') header;
   @ViewChild('messagsHistory') messagsHistory;
-  currentUserId;
   whichContentShouldLoad;
   searchText: string = '';
   mobileNavBar = true;
   mobileContent = true;
   innerWidth: any;
 
-  constructor(private router: Router, private firestore: AngularFirestore, private route: ActivatedRoute,) {
+  constructor(public use: UserService, private router: Router, private firestore: AngularFirestore, private route: ActivatedRoute,) {
 
     this.route.params.subscribe((params) => {
-      this.currentUserId = params['id'];
+      this.use.currentUserId= params['id'];
     });
 
     this.firestore.collection('users').valueChanges({ idField: 'docId' }).subscribe((changes: any) => {

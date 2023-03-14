@@ -6,6 +6,7 @@ import { DialogChangeImgComponent } from '../dialog-change-img/dialog-change-img
 import { DialogUpdateContactComponent } from '../dialog-update-contact/dialog-update-contact.component';
 import { DialogUpdateProfileNameComponent } from '../dialog-update-profile-name/dialog-update-profile-name.component';
 import { NavbarService } from '../../services/navbar.service';
+import { UserService } from 'src/services/user.service';
 
 
 @Component({
@@ -14,7 +15,6 @@ import { NavbarService } from '../../services/navbar.service';
   styleUrls: ['./navbar-right.component.scss']
 })
 export class NavbarRightComponent {
-  currentUserId;
   public profileImgSrc = '';
   userId: string;
   public firstName;
@@ -23,21 +23,21 @@ export class NavbarRightComponent {
   public phone;
   enteredSearchValue: string = '';
 
-  constructor(public nav: NavbarService, private route: ActivatedRoute, private firestore: AngularFirestore, public dialog: MatDialog){}
+  constructor(public use: UserService, public nav: NavbarService, private route: ActivatedRoute, private firestore: AngularFirestore, public dialog: MatDialog){}
 
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
 
-      this.currentUserId = params['id'];
+      this.use.currentUserId = params['id'];
 
-      this.firestore.collection('users').doc(this.currentUserId).valueChanges().subscribe((user: any) => {
+      this.firestore.collection('users').doc(this.use.currentUserId).valueChanges().subscribe((user: any) => {
         this.firstName = user.userInfos.firstName;
         this.lastName = user.userInfos.lastName;
         this.email = user.userInfos.email;
         this.phone = user.userInfos.phone;
       });
 
-      this.firestore.collection('users').doc(this.currentUserId).get().subscribe((doc) => {
+      this.firestore.collection('users').doc(this.use.currentUserId).get().subscribe((doc) => {
         const user:any = doc.data();
         this.profileImgSrc = user.userInfos.profileImg;
       });
@@ -46,23 +46,20 @@ export class NavbarRightComponent {
 
   openDialog() {
     const dialog = this.dialog.open(DialogUpdateProfileNameComponent);
-    dialog.componentInstance.currentUserId = this.currentUserId;
   }
 
   openDialogContact() {
     const dialogContact = this.dialog.open(DialogUpdateContactComponent);
-    dialogContact.componentInstance.currentUserId = this.currentUserId;
   }
 
   openDialogChangeImg(){
     const dialogImage= this.dialog.open(DialogChangeImgComponent);
-    dialogImage.componentInstance.currentUserId = this.currentUserId;
 
     dialogImage.afterClosed().subscribe(result => {
       if(result){
         this.profileImgSrc = `../../${result}`;
 
-        this.firestore.collection('users').doc(this.currentUserId).update({
+        this.firestore.collection('users').doc(this.use.currentUserId).update({
           'userInfos.profileImg': this.profileImgSrc,
         })
       }

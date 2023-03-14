@@ -3,15 +3,12 @@ import { MatDialogRef } from '@angular/material/dialog';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { ActivatedRoute } from '@angular/router';
 
-
 @Component({
   selector: 'app-dialog-add-member-to-group',
   templateUrl: './dialog-add-member-to-group.component.html',
   styleUrls: ['./dialog-add-member-to-group.component.scss']
 })
 export class DialogAddMemberToGroupComponent {
-
-  currentUserId;
   allUsers = [];
   memberId;
   whichContentShouldLoad;

@@ -7,6 +7,4 @@ export class NavbarService {
   constructor() { this.showNavbarRight = false; }
   
   toggle() { this.showNavbarRight = !this.showNavbarRight; }
-
-  doSomethingElseUseful() { }
 }
