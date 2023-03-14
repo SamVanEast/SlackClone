@@ -21,7 +21,6 @@ export class NavbarLeftComponent implements OnInit {
   groups = [];
   directMessages = [];
   headlinesOfDirectMessages = [];
-  @Output() whichContentShouldLoad = new EventEmitter<any>();
 
   constructor(public use: UserService, private route: ActivatedRoute, private firestore: AngularFirestore, public dialog: MatDialog) {
   }
@@ -119,7 +118,7 @@ export class NavbarLeftComponent implements OnInit {
   }
 
   openMessageHistory(id, collection, headline) {
-    this.whichContentShouldLoad.emit([collection, id, headline]);
+    this.use.whichContentShouldLoad = [collection, id, headline];
   }
 
 
