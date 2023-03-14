@@ -67,10 +67,10 @@ export class NavbarRightComponent {
   }
 
   openRightNavbar() {
-    this.nav.toggle();
+    this.nav.toggleRight();
   }
 
   closeNavbarRight() {
-    this.nav.toggle();
+    this.nav.toggleRight();
   }
 }

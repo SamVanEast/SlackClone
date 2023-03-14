@@ -68,7 +68,7 @@ export class HeaderComponent {
   }
 
   openNavbarRight() {
-    this.nav.toggle();
+    this.nav.toggleRight();
   }
 }
 
