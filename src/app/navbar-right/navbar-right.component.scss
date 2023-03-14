@@ -1,7 +1,9 @@
 .navbar-right-container {
     max-width: 275px;
-    height: 100vh;
+    height: calc(100vh - 64px);
     overflow: auto;
+    border: 1px solid rgba($color: rgb(0, 0, 0), $alpha: 0.1);
+    border-radius: unset;
 
     mat-icon {
         color: black;
@@ -17,7 +19,7 @@
     padding-bottom: 0;
     border-bottom: 1px solid rgba($color: rgb(0, 0, 0), $alpha: 0.1);
     margin-bottom: 16px;
-    height: 48px;
+    height: 47px;
 
     button {
         position: absolute;
