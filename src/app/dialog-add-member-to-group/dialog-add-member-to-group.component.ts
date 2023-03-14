@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-dialog-add-member-to-group',
@@ -7,4 +8,22 @@ import { Component } from '@angular/core';
 })
 export class DialogAddMemberToGroupComponent {
 
+
+  constructor(private dialogRef: MatDialogRef<DialogAddMemberToGroupComponent>) {
+
+  }
+
+  loading = false;
+
+
+  ngOnInit(): void {
+    
+  }
+
+
+  save() {}
+
+  closeDialogAddMember() {
+    this.dialogRef.close();
+  }
 }

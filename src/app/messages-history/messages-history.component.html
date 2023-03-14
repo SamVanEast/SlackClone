@@ -3,10 +3,11 @@
         <div class="messages_history_header">
             <span> # {{ doc?.headline }} </span>
             
-            <div class="addBtn-showMembers" ><mat-icon class="addBtn" *ngIf="whichContentShouldLoad == 'groups'" (click)="openAddMemberToGroup()" matTooltip="Add member" matTooltipPosition="left">person_add</mat-icon>
+            <div class="addBtn-showMembers" ><mat-icon class="addBtn"  *ngIf="whichContentShouldLoad[0] === 'groups'" (click)="openAddMemberToGroup()" matTooltip="Add member" matTooltipPosition="left">person_add</mat-icon>
             <button mat-raised-button (click)="openDialogMembers()" color="primary">Members</button></div>
         </div>
         <div class="messages_history_content">
+            
             <ng-container *ngFor="let message of doc?.messages">
                 <div class="single-post"
                     *ngIf="searchText === '' || message.text.toLowerCase().includes(searchText.toLowerCase()) || message.creator.toLowerCase().includes(searchText.toLowerCase())">
@@ -19,8 +20,8 @@
                         <span>{{ message.text }}</span>
                     </div>
                 </div>
-
             </ng-container>
+        
         </div>
     </div>
 
