@@ -62,13 +62,13 @@ export class DialogAddMemberToGroupComponent {
 
   updateCommunicationSections(docData) {
     this.firestore.collection(this.whichContentShouldLoad[0]).doc(this.whichContentShouldLoad[1]).update({
-     "participants": docData
+     "participants": docData.participants
     });
   }
 
   updateUserCommunicationSections(docData){
     this.firestore.collection('users').doc(this.memberId).update({
-      "communicationSections.groups": docData
+      "communicationSections.groups": docData.communicationSections.groups
      });
   }
 
