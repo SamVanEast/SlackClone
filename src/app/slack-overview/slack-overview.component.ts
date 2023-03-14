@@ -22,6 +22,7 @@ export class SlackOverviewComponent {
   mobileNavBar = true;
   mobileContent = true;
   innerWidth: any;
+  public showNavbarRight;
 
   constructor(private router: Router, private firestore: AngularFirestore, private route: ActivatedRoute,) {
 
@@ -107,5 +108,9 @@ export class SlackOverviewComponent {
     this.mobileContent = true;
   }
 
+  receiveMessage($event) {
+    this.showNavbarRight = $event;
+    console.log($event);
+  }
 
 }

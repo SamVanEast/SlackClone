@@ -21,9 +21,8 @@ export class HeaderComponent {
   public email;
   public phone;
   enteredSearchValue: string = '';
-  showNavbarRight = false;
-  @Output() openNavbarRight = new EventEmitter<void>();
-
+  public showNavbarRight = true;
+  @Output() messageEvent = new EventEmitter<boolean>();
 
   constructor(private route: ActivatedRoute, public elementRef: ElementRef, private firestore: AngularFirestore, public dialog: MatDialog) { }
 
@@ -69,14 +68,8 @@ export class HeaderComponent {
     this.searchTextChanged.emit(this.enteredSearchValue); 
   }
 
-  openNavbarRightEmit() {
-    this.showNavbarRight = true;
-    this.openNavbarRight.emit();
+  openNavbarRight() {
+    this.messageEvent.emit(this.showNavbarRight);
   }
-
-  closeNavbarRight() {
-    this.showNavbarRight = false;
-  }
-
 }
 

@@ -1,10 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, Input, ViewChild } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { DialogChangeImgComponent } from '../dialog-change-img/dialog-change-img.component';
 import { DialogUpdateContactComponent } from '../dialog-update-contact/dialog-update-contact.component';
 import { DialogUpdateProfileNameComponent } from '../dialog-update-profile-name/dialog-update-profile-name.component';
+import { HeaderComponent } from '../header/header.component'
 
 @Component({
   selector: 'app-navbar-right',
@@ -14,7 +15,7 @@ import { DialogUpdateProfileNameComponent } from '../dialog-update-profile-name/
 export class NavbarRightComponent {
   currentUserId;
   public profileImgSrc = '';
-  showNavbarRight = false;
+  @Input()showNavbarRight = true;
   userId: string;
   public firstName;
   public lastName;
@@ -41,6 +42,11 @@ export class NavbarRightComponent {
         this.profileImgSrc = user.userInfos.profileImg;
       });
     });
+  }
+
+  ngOnChanges(){
+    console.log(this.showNavbarRight);
+    
   }
 
   openDialog() {
