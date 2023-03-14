@@ -40,6 +40,14 @@ export class SlackOverviewComponent {
     // this.generateUserDoc();
   }
 
+  ngOnInit() {
+    this.scrollToBottom();
+  }
+
+  scrollToBottom(){
+    this.messagsHistory.nativeElement.scrollTop = this.messagsHistory.nativeElement.scrollHeight;
+  }
+
   setContent(whichContentShouldLoad) {
     this.whichContentShouldLoad = whichContentShouldLoad;
   }
