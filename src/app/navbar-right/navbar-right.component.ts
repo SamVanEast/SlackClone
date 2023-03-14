@@ -45,11 +45,11 @@ export class NavbarRightComponent {
   }
 
   openDialog() {
-    const dialog = this.dialog.open(DialogUpdateProfileNameComponent);
+    this.dialog.open(DialogUpdateProfileNameComponent);
   }
 
   openDialogContact() {
-    const dialogContact = this.dialog.open(DialogUpdateContactComponent);
+    this.dialog.open(DialogUpdateContactComponent);
   }
 
   openDialogChangeImg() {
