@@ -36,7 +36,6 @@ export class MessagesHistoryComponent {
 
       });
     }
-    console.log(this.searchText)
   }
 
   ngOnInit(): void {
