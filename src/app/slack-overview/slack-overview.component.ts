@@ -65,15 +65,6 @@ export class SlackOverviewComponent {
     this.whichContentShouldLoad = whichContentShouldLoad;
   }
 
-  openOrClose(boolean) {
-    // if (boolean) {
-    //   document.getElementById('sidenav-left').classList.remove('closeNavbar');
-
-    // } else {
-    //   document.getElementById('sidenav-left').classList.add('closeNavbar');
-    // }
-  }
-
   generateChannelDoc() {
     this.firestore.collection('channels').add(channels).then((user) => {
     })

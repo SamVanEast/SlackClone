@@ -2,6 +2,7 @@ import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
+import { NavbarService } from 'src/services/navbar.service';
 import { UserService } from 'src/services/user.service';
 import { DialogAddChannelComponent } from '../dialog-add-channel/dialog-add-channel.component';
 import { DialogAddGroupComponent } from '../dialog-add-group/dialog-add-group.component';
@@ -24,7 +25,7 @@ export class NavbarLeftComponent implements OnInit {
   withWhoDirectMessages = [];
   @Output() whichContentShouldLoad = new EventEmitter<any>();
 
-  constructor(public use: UserService, private route: ActivatedRoute, private firestore: AngularFirestore, public dialog: MatDialog) {
+  constructor(public use: UserService, public nav: NavbarService, private route: ActivatedRoute, private firestore: AngularFirestore, public dialog: MatDialog) {
   }
 
   ngOnInit() {

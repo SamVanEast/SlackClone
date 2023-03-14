@@ -66,10 +66,6 @@ export class NavbarRightComponent {
     });
   }
 
-  openRightNavbar() {
-    this.nav.toggleRight();
-  }
-
   closeNavbarRight() {
     this.nav.toggleRight();
   }

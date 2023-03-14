@@ -1,4 +1,4 @@
-import { Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Output } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { ActivatedRoute } from '@angular/router';
 import { ImprintDataprotectionComponent } from '../imprint-dataprotection/imprint-dataprotection.component';
@@ -14,8 +14,6 @@ import { UserService } from 'src/services/user.service';
 
 export class HeaderComponent {
   public profileImgSrc = '';
-  openOrClose = false; 
-  @Output() openNavbarLeft = new EventEmitter<any>();
   userId: string;
   public firstName;
   public lastName;
@@ -42,19 +40,10 @@ export class HeaderComponent {
         this.profileImgSrc = user.userInfos.profileImg;
       });
     });
-
-    this.openOrCloseNavbarLeft();
   }
 
   sub(): void {
   }
-
-
-  openOrCloseNavbarLeft() {
-    this.openOrClose = !this.openOrClose
-    this.openNavbarLeft.emit(this.openOrClose);
-  }
-
 
   openImprint() {
     this.dialog.open(ImprintDataprotectionComponent);
@@ -65,6 +54,10 @@ export class HeaderComponent {
 
   onSearchTextChanged() {
     this.searchTextChanged.emit(this.enteredSearchValue); 
+  }
+
+  toggleNavbarLeft(){
+    this.nav.toggleLeft();
   }
 
   openNavbarRight() {
