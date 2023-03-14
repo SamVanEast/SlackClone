@@ -14,8 +14,8 @@ export class DialogAddMemberToGroupComponent {
   memberId;
   whichContentShouldLoad;
   groupDoc;
+  withWhoMakeGroup
   constructor(public use: UserService, private dialogRef: MatDialogRef<DialogAddMemberToGroupComponent>, private route: ActivatedRoute, private firestore: AngularFirestore) {
-
   }
 
   loading = false;
@@ -23,25 +23,37 @@ export class DialogAddMemberToGroupComponent {
 
   ngOnInit(): void {
     let self = this;
-      this.firestore.collection('users').valueChanges({ idField: 'docId' }).subscribe((users: any) => {
-        this.allUsers = users;
-        this.allUsers.forEach(function (user, i) {
-          let result = user.docId === self.use.currentUserId;
-          if (result) {
-            self.allUsers.splice(i, 1)
-          }
-        })
-      });
+    this.firestore.collection('users').valueChanges({ idField: 'docId' }).subscribe((users: any) => {
+      this.allUsers = users;
+      this.allUsers.forEach(function (user, i) {
+        let result = user.docId === self.use.currentUserId;
+        if (result) {
+          self.allUsers.splice(i, 1)
+        }
+        if (i === self.allUsers.length - 1) {
+          self.checkAllUsers();
+        }
+      })
+    });
+  }
+
+  checkAllUsers() {
+    let self = this;
+    this.allUsers.forEach(function (user, i) {
+      self.withWhoMakeGroup.forEach((id) => {
+        let result = user.docId === id;
+        if (result) {
+          self.allUsers.splice(i, 1);
+          self.checkAllUsers();
+        }
+      })
+    });
   }
 
 
-  ngOnChanges() {
-    
-  }
-
-  save() { 
+  save() {
     this.firestore.collection(this.whichContentShouldLoad[0]).doc(this.whichContentShouldLoad[1]).get().toPromise().then((doc: any) => {
-      let docData= doc.data();
+      let docData = doc.data();
       docData.participants.push(this.memberId);
       this.updateCommunicationSections(docData);
     });
@@ -59,14 +71,14 @@ export class DialogAddMemberToGroupComponent {
 
   updateCommunicationSections(docData) {
     this.firestore.collection(this.whichContentShouldLoad[0]).doc(this.whichContentShouldLoad[1]).update({
-     "participants": docData.participants
+      "participants": docData.participants
     });
   }
 
-  updateUserCommunicationSections(docData){
+  updateUserCommunicationSections(docData) {
     this.firestore.collection('users').doc(this.memberId).update({
       "communicationSections.groups": docData.communicationSections.groups
-     });
+    });
   }
 
 }

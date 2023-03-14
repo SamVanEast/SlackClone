@@ -20,6 +20,7 @@ export class MessagesHistoryComponent {
   doc;
   @Input() searchText;
   user;
+  withWhoMakeGroup;
 
   constructor(public use: UserService, private route: ActivatedRoute, private firestore: AngularFirestore, public dialog: MatDialog) {
     this.whichContentShouldLoad = [];
@@ -32,7 +33,7 @@ export class MessagesHistoryComponent {
     if (this.whichContentShouldLoad !== undefined && this.whichContentShouldLoad.length > 0) {
       this.firestore.collection(this.whichContentShouldLoad[0]).doc(this.whichContentShouldLoad[1]).valueChanges().subscribe((doc: any) => {
         this.doc = doc;
-
+        this.withWhoMakeGroup = doc.participants;
       });
     }
   }
@@ -81,5 +82,6 @@ export class MessagesHistoryComponent {
   openAddMemberToGroup() {
     const dialog = this.dialog.open(DialogAddMemberToGroupComponent);
     dialog.componentInstance.whichContentShouldLoad = this.whichContentShouldLoad;
+    dialog.componentInstance.withWhoMakeGroup = this.withWhoMakeGroup;
   }
 }

@@ -35,7 +35,6 @@ export class DialogAddTeamMemberComponent {
         self.allUsers.splice(i, 1)
       }
       if (i === self.allUsers.length - 1) {
-        console.log(self.allUsers);
         self.checkAllUsers();
       }
     })
