@@ -6,8 +6,8 @@
         </button>
     </mat-card-header>
     <div class="profileImage">
-        <button mat-icon-button (click)="openDialogChangeImg()">
-            <mat-icon *ngIf="isItMe">edit</mat-icon>
+        <button *ngIf="isItMe" mat-icon-button (click)="openDialogChangeImg()">
+            <mat-icon>edit</mat-icon>
         </button>
             <img mat-card-image id="profile-img" [src]="profileImgSrc">
     </div>

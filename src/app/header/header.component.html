@@ -20,7 +20,7 @@
     </div>
 
     <div class="header-right">
-        <mat-icon style="cursor: pointer;" (click)="openImprint()">help</mat-icon>
+        <mat-icon matTooltip="Imprint and Data protection" matTooltipPosition="left" style="cursor: pointer;" (click)="openImprint()">help</mat-icon>
         <img class="profile-pic" id="profile-img" [src]="profileImgSrc" [matMenuTriggerFor]="menu">
 
         <mat-menu #menu="matMenu" >
