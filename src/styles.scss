@@ -83,7 +83,6 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
   @media screen and (max-width: 620px) {
     max-width: 100vw !important;
-
   }
   
 }
@@ -94,3 +93,15 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 }
 }
 
+app-dialog-change-img {
+
+  
+  @media screen and (max-width: 620px) {
+    height: 100vh;
+    display: block;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+   
+  }
+}
