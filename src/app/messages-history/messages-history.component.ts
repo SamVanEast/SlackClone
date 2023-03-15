@@ -1,4 +1,4 @@
-import { Component, Input, HostListener, OnChanges, ElementRef, Renderer2, ViewChild } from '@angular/core';
+import { Component, Input, ElementRef, Renderer2, ViewChild } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
@@ -31,15 +31,13 @@ export class MessagesHistoryComponent {
   ngAfterViewInit() {
     this.scrollToBottom();
   }
-  
+
   ngAfterViewChecked() {
     this.scrollToBottom();
   }
 
   private scrollToBottom(): void {
-    try {
-      this.messagesHistoryContent.nativeElement.scrollTop = this.messagesHistoryContent.nativeElement.scrollHeight;
-    } catch(err) { }
+    this.messagesHistoryContent.nativeElement.scrollTop = this.messagesHistoryContent.nativeElement.scrollHeight;
   }
 
   ngOnChanges() {
@@ -64,7 +62,7 @@ export class MessagesHistoryComponent {
 
   sendMessage() {
     var oParser = new DOMParser();
-    var oDOM = oParser.parseFromString(this.html, "text/html"); 
+    var oDOM = oParser.parseFromString(this.html, "text/html");
     var text = oDOM.body.innerText;
 
     if (text !== '') {
