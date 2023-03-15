@@ -39,7 +39,7 @@ export class NavbarLeftComponent implements OnInit {
    */
   ngOnInit() {
     this.loadCommunicationSectionsFromFirestore();
-    this.openMessageHistory('KlTnEdj7XuVLzYnB13Iw', 'channels', 'General');
+    this.openMessageHistory('KlTnEdj7XuVLzYnB13Iw', 'channels', 'General', true);
   }
 
 
@@ -167,7 +167,11 @@ export class NavbarLeftComponent implements OnInit {
    * @param collection name of collection
    * @param headline text for headline
    */
-  openMessageHistory(id, collection, headline) {
+  openMessageHistory(id, collection, headline, boolean) {
+    if (!boolean && window.innerWidth <= 620) {
+      this.nav.showNavbarLeft = false;
+      this.nav.showContent = true;
+    }
     this.whichContentShouldLoad.emit([collection, id, headline]);
   }
 }

@@ -45,6 +45,10 @@
     img {
         width: 100%;
         border-radius: 10px;
+
+        @media screen and (max-width: 620px) {
+            width: 30%;
+        }
     }
 
     button {
