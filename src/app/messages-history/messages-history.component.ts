@@ -88,7 +88,9 @@ export class MessagesHistoryComponent {
   };
 
   openCreatorProfile(id) {
-    this.nav.whichProfileShouldLoad.next(this.use.currentUserId);
+    this.nav.openRight();
+    this.nav.whichProfileShouldLoad.next(id);
+    
   };
 
   openAddMemberToGroup() {

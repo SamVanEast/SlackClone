@@ -42,7 +42,7 @@ export class NavbarRightComponent {
           this.phone = user.userInfos.phone;
           this.profileImgSrc = user.userInfos.profileImg;
         });
-      }else {
+      } else {
         this.isItMe = false;
         this.firestore.collection('users').doc(id).valueChanges(id).subscribe((user: any) => {
           this.firstName = user.userInfos.firstName;
