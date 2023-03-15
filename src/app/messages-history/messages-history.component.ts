@@ -55,6 +55,7 @@ export class MessagesHistoryComponent {
         this.withWhoMakeGroup = doc.participants;
       });
     }
+    this.autoScrollOn();
   }
 
   ngOnInit(): void {
@@ -66,7 +67,7 @@ export class MessagesHistoryComponent {
     this.nav.autoScroll = true;
     setTimeout(() => {
       this.nav.autoScroll = false;
-    }, 300);
+    }, 1000);
   }
 
   ngOnDestroy(): void {
