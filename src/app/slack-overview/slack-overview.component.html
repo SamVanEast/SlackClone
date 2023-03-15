@@ -1,8 +1,8 @@
 <app-header></app-header>
 <div class="content">
-    <app-navbar-left (whichContentShouldLoad)="setContent($event)" id="sidenav-leftt" *ngIf="mobileNavBar"></app-navbar-left>
-    <app-messages-history [whichContentShouldLoad]="whichContentShouldLoad" *ngIf="mobileContent"></app-messages-history>
-    <app-navbar-right *ngIf="navBarRight"></app-navbar-right>
+    <app-navbar-left (whichContentShouldLoad)="setContent($event)" id="sidenav-leftt" *ngIf="mobile.mobileNavBar"></app-navbar-left>
+    <app-messages-history [whichContentShouldLoad]="whichContentShouldLoad" *ngIf="mobile.mobileContent"></app-messages-history>
+    <app-navbar-right *ngIf="mobile.navBarRight"></app-navbar-right>
 </div>
 <div class="mobile-footer">
     <mat-icon fontIcon="home" (click)="showChannels()" ></mat-icon>

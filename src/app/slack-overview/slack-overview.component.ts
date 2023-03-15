@@ -1,5 +1,6 @@
 import { Component, HostListener } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Mobile } from 'src/services/mobile.service';
 import { UserService } from 'src/services/user.service';
 
 @Component({
@@ -10,12 +11,9 @@ import { UserService } from 'src/services/user.service';
 
 export class SlackOverviewComponent {
   whichContentShouldLoad;
-  mobileNavBar = true;
-  mobileContent = true;
-  navBarRight = true;
   innerWidth: any;
 
-  constructor(public use: UserService, private route: ActivatedRoute,) {
+  constructor(public use: UserService, private route: ActivatedRoute, public mobile: Mobile) {
     this.route.params.subscribe((params) => {
       this.use.currentUserId= params['id'];
     });
@@ -31,9 +29,9 @@ export class SlackOverviewComponent {
     onResize(event) {
     this.innerWidth = window.innerWidth;
     if(this.innerWidth >= 620) {
-      this.mobileNavBar = true;
-      this.mobileContent = true;
-      this.navBarRight = true;
+      this.mobile.mobileNavBar = true;
+      this.mobile.mobileContent = true;
+      this.mobile.navBarRight = true;
     }
   }
 
@@ -51,8 +49,8 @@ export class SlackOverviewComponent {
    * open the communication area
    */
   showChannels() {
-    this.mobileNavBar = true;
-    this.mobileContent = false;
+    this.mobile.closeAll();
+    this.mobile.mobileNavBar = true;
   }
 
 
@@ -60,7 +58,7 @@ export class SlackOverviewComponent {
    * open the chat area
    */
   showMessages() {
-    this.mobileNavBar = false;
-    this.mobileContent = true;
+    this.mobile.closeAll();
+    this.mobile.mobileContent = true;
   }
 }

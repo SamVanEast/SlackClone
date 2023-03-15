@@ -50,6 +50,7 @@ import { NavbarRightComponent } from './navbar-right/navbar-right.component';
 import { NavbarService } from '../services/navbar.service';
 import { UserService } from 'src/services/user.service';
 import { SearchBarService } from 'src/services/searchBar.service';
+import { Mobile } from 'src/services/mobile.service';
 
 @NgModule({
   declarations: [
@@ -103,7 +104,7 @@ import { SearchBarService } from 'src/services/searchBar.service';
     ReactiveFormsModule,
     NgxEditorModule,
   ],
-  providers: [NavbarService, UserService, SearchBarService],
+  providers: [NavbarService, UserService, SearchBarService, Mobile],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
