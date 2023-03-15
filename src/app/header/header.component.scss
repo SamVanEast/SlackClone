@@ -6,7 +6,7 @@
     border-bottom: 1px solid black;
     
     @media screen and (max-width: 620px) {
-        position: absolute;
+        position: fixed;
         left: 0;
         right: 0;
         top: 0;

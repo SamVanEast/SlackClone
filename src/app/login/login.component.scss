@@ -9,16 +9,9 @@
   animation-duration: 0.5s;
   gap: 14px;
 
-<<<<<<< HEAD
   @media screen and (max-width: 600px) {
     padding-left: 12px;
     padding-right: 12px;
-=======
-  @media screen and (max-height: 550px) {
-    padding-left: 12px;
-    padding-right: 12px;
-    gap: 0px;
->>>>>>> parent of 778fc78 (responsive update)
     }
 
 
@@ -41,11 +34,7 @@ h1 {
     font-size: 48px;
 
     @media screen and (max-width: 600px) {
-<<<<<<< HEAD
       font-size: 34px;
-=======
-      font-size: 32px;
->>>>>>> parent of 778fc78 (responsive update)
     }
 }
 

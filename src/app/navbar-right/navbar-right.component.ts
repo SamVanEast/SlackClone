@@ -1,4 +1,4 @@
-import { Component, HostListener } from '@angular/core';
+import { Component } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogChangeImgComponent } from '../dialog-change-img/dialog-change-img.component';
@@ -6,7 +6,6 @@ import { DialogUpdateContactComponent } from '../dialog-update-contact/dialog-up
 import { DialogUpdateProfileNameComponent } from '../dialog-update-profile-name/dialog-update-profile-name.component';
 import { NavbarService } from '../../services/navbar.service';
 import { UserService } from 'src/services/user.service';
-import { Mobile } from 'src/services/mobile.service';
 
 
 @Component({
@@ -23,33 +22,13 @@ export class NavbarRightComponent {
   public phone;
   isItMe = true;
   isGuest;
-  isMobile = false;
 
-  constructor(public use: UserService, public nav: NavbarService, private firestore: AngularFirestore, public dialog: MatDialog, private mobile: Mobile) { 
+  constructor(public use: UserService, public nav: NavbarService, private firestore: AngularFirestore, public dialog: MatDialog) { 
+
     if(this.use.currentUserId == 'TzlCRRHBcjQ30Oml2Tb8') {
       this.isGuest = true;
     } else {
       this.isGuest = false;
-    }
-    if (window.innerWidth <= 620) {
-      this.isMobile = true;
-    } else {
-      this.isMobile = false;
-    }
-  }
-
-
-  @HostListener('window:resize', ['$event'])
-
-
-  /**
-   * detects if you are in mobile mode
-   */
-  onResize(event) {
-    if (window.innerWidth <= 620) {
-      this.isMobile = true;
-    } else {
-      this.isMobile = false;
     }
   }
 
@@ -60,13 +39,9 @@ export class NavbarRightComponent {
   ngOnInit(): void {
     this.nav.whichProfileShouldLoad.subscribe((id) => {
       if (id == this.use.currentUserId) {
-        console.log('itsMe');
-        
         this.isItMe = true;
         this.loadUserInfos(id);
       } else {
-        console.log('not me');
-        
         this.isItMe = false;
         this.loadUserInfos(id);
       }
@@ -125,9 +100,5 @@ export class NavbarRightComponent {
    */
   closeNavbarRight() {
     this.nav.toggleRight();
-      if (this.isMobile) {
-        this.mobile.closeAll();
-        this.mobile.mobileContent = true;
-      }
   }
 }

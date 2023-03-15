@@ -6,7 +6,7 @@
         <summary>Channels</summary>
         <div class="channels-content">
             <div class="single-channel" *ngFor="let channel of channels"
-                (click)="openMessageHistory(channel.docId, channel.collection, channel.headline); autoScrollOn()">
+                (click)="openMessageHistory(channel.docId, channel.collection, channel.headline, false); autoScrollOn()">
                 <div class="hashes">#</div>
                 <div class="channel-name"><span>{{ channel.headline }}</span></div>
             </div>
@@ -21,7 +21,7 @@
         <summary>Groups</summary>
         <div class="channels-content">
             <div class="single-channel" *ngFor="let group of groups"
-                (click)="openMessageHistory(group.docId, group.collection, group.headline)">
+                (click)="openMessageHistory(group.docId, group.collection, group.headline, false)">
                 <div class="hashes">#</div>
                 <div class="channel-name"><span>{{ group.headline }}</span></div>
             </div>
@@ -36,7 +36,7 @@
         <summary>Direct Messages</summary>
         <div class="directMessages-content">
             <div class="single-dm" *ngFor="let directMessage of directMessages; let i = index"
-                (click)="openMessageHistory(directMessage.docId, directMessage.collection, headlinesOfDirectMessages[i])">
+                (click)="openMessageHistory(directMessage.docId, directMessage.collection, headlinesOfDirectMessages[i], false)">
                 <mat-icon>radio_button_unchecked</mat-icon>
                 <div class="channel-name"><span>{{ headlinesOfDirectMessages[i] }}</span></div>
             </div>

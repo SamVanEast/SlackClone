@@ -5,6 +5,7 @@ import { Subject } from 'rxjs';
 export class NavbarService {
   showNavbarRight: boolean;
   showNavbarLeft: boolean;
+  showContent: boolean;
   whichProfileShouldLoad = new Subject<any>();
   autoScroll: boolean;
 
@@ -13,4 +14,9 @@ export class NavbarService {
   openRight() { this.showNavbarRight = true }
   toggleRight() { this.showNavbarRight = !this.showNavbarRight }
   toggleLeft() { this.showNavbarLeft = !this.showNavbarLeft }
+  closeAll() {
+    this.showNavbarRight = false;
+    this.showNavbarLeft = false;
+    this.showContent = false;
+  }
 }

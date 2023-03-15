@@ -1,8 +1,7 @@
-import { Component, Input, ElementRef, ViewChild, HostListener } from '@angular/core';
+import { Component, Input, ElementRef, ViewChild } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { MatDialog } from '@angular/material/dialog';
 import { Editor } from 'ngx-editor';
-import { Mobile } from 'src/services/mobile.service';
 import { NavbarService } from 'src/services/navbar.service';
 import { SearchBarService } from 'src/services/searchBar.service';
 import { UserService } from 'src/services/user.service';
@@ -23,30 +22,9 @@ export class MessagesHistoryComponent {
   doc;
   user;
   withWhoMakeGroup;
-  isMobile = false
 
-  constructor(public search: SearchBarService, public use: UserService, private firestore: AngularFirestore, public dialog: MatDialog, public nav: NavbarService, private mobile: Mobile) {
+  constructor(public search: SearchBarService, public use: UserService, private firestore: AngularFirestore, public dialog: MatDialog, public nav: NavbarService) {
     this.whichContentShouldLoad = [];
-    if (window.innerWidth <= 620) {
-      this.isMobile = true;
-    } else {
-      this.isMobile = false;
-    }
-  }
-
-
-  @HostListener('window:resize', ['$event'])
-
-
-  /**
-   * detects if you are in mobile mode
-   */
-  onResize(event) {
-    if (window.innerWidth <= 620) {
-      this.isMobile = true;
-    } else {
-      this.isMobile = false;
-    }
   }
 
 
@@ -148,9 +126,9 @@ export class MessagesHistoryComponent {
   }
 
 
-  /**
-   * open dialog and returns an array with
-   */
+/**
+ * open dialog and returns an array with
+ */
   openDialogMembers() {
     const dialog = this.dialog.open(DialogMembersComponent);
     dialog.componentInstance.whichContentShouldLoad = this.whichContentShouldLoad;
@@ -162,12 +140,9 @@ export class MessagesHistoryComponent {
    * @param id id from user document
    */
   openCreatorProfile(id) {
-    if (this.isMobile) {
-      this.mobile.closeAll();
-      this.mobile.navBarRight = true;
-    }
     this.nav.openRight();
     this.nav.whichProfileShouldLoad.next(id);
+
   };
 
 
