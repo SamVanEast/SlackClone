@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
+import { Subject } from 'rxjs';
 
 @Injectable()
 export class UserService {
-    currentUserId;
-  constructor() {  }
+  currentUserId;
+  whichContentShouldLoad = new Subject<any>();
+  constructor() {}
 }

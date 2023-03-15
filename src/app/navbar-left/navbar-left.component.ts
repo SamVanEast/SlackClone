@@ -1,6 +1,7 @@
-import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, HostListener, Input, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { MatDialog } from '@angular/material/dialog';
+import { Mobile } from 'src/services/mobile.service';
 import { NavbarService } from 'src/services/navbar.service';
 import { UserService } from 'src/services/user.service';
 import { DialogAddChannelComponent } from '../dialog-add-channel/dialog-add-channel.component';
@@ -21,11 +22,35 @@ export class NavbarLeftComponent implements OnInit {
   directMessages = [];
   headlinesOfDirectMessages = [];
   withWhoDirectMessages = [];
-  @Output() whichContentShouldLoad = new EventEmitter<any>();
+  isMobile = false;
 
-  constructor(public use: UserService, public nav: NavbarService, private firestore: AngularFirestore, public dialog: MatDialog) {
+  constructor(public use: UserService, public nav: NavbarService, private firestore: AngularFirestore, public dialog: MatDialog, private mobile: Mobile) {
+    if (window.innerWidth <= 620) {
+      this.isMobile = true;
+    } else {
+      this.isMobile = false;
+    }
   }
 
+
+  @HostListener('window:resize', ['$event'])
+
+
+  /**
+   * detects if you are in mobile mode
+   */
+  onResize(event) {
+    if (window.innerWidth <= 620) {
+      this.isMobile = true;
+    } else {
+      this.isMobile = false;
+    }
+  }
+
+
+  /**
+   * set scroll of true
+   */
   autoScrollOn() {
     this.nav.autoScroll = true;
     setTimeout(() => {
@@ -39,7 +64,6 @@ export class NavbarLeftComponent implements OnInit {
    */
   ngOnInit() {
     this.loadCommunicationSectionsFromFirestore();
-    this.openMessageHistory('KlTnEdj7XuVLzYnB13Iw', 'channels', 'General');
   }
 
 
@@ -116,10 +140,10 @@ export class NavbarLeftComponent implements OnInit {
   }
 
 
-/**
- * loads the name for the heading from the other participant
- * @param participants participants from chat
- */
+  /**
+   * loads the name for the heading from the other participant
+   * @param participants participants from chat
+   */
   loadUserNameDown(participants) {
     participants.forEach(id => {
       if (id !== this.use.currentUserId) {
@@ -142,7 +166,7 @@ export class NavbarLeftComponent implements OnInit {
   openDialogChannel() {
     this.dialog.open(DialogAddChannelComponent);
   }
- 
+
 
   /**
    * opens a dialog
@@ -168,6 +192,10 @@ export class NavbarLeftComponent implements OnInit {
    * @param headline text for headline
    */
   openMessageHistory(id, collection, headline) {
-    this.whichContentShouldLoad.emit([collection, id, headline]);
+    this.use.whichContentShouldLoad.next([collection, id, headline]);
+    if (this.isMobile) {
+      this.mobile.closeAll();
+      this.mobile.mobileContent = true;
+    }
   }
 }
