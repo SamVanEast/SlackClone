@@ -8,18 +8,17 @@
 
         <div class="messages_history_content" #messagesHistoryContent id="ng-container">
             <ng-container *ngFor="let message of doc?.messages; let i = index" >
-                <div class="single-post"
-                    *ngIf="searchText === '' || message.text.toLowerCase().includes(searchText.toLowerCase()) || message.creator.toLowerCase().includes(searchText.toLowerCase())">
-                    <img class="profile-pic" src="{{ message.creatorImg }}">
-                    <div class="author-and-text">
-                        <div><span class="author" (click)="openCreatorProfile(message.creatorId)">{{ message.creator }}
-                            </span>
-                            <span class="time">{{ message.date | date:'dd.MM.yyyy' }}</span>
-                        </div>
-                        <span>{{ message.text }}</span>
+                <div class="single-post" *ngIf="search.enteredSearchValue === '' || message.text.toLowerCase().includes(search.enteredSearchValue.toLowerCase()) || message.creator.toLowerCase().includes(search.enteredSearchValue.toLowerCase())">
+                  <img class="profile-pic" src="{{ message.creatorImg }}">
+                  <div class="author-and-text">
+                    <div><span class="author" (click)="openCreatorProfile(message.creatorId)">{{ message.creator }}
+                        </span>
+                      <span class="time">{{ message.date | date:'dd.MM.yyyy' }}</span>
                     </div>
+                    <span>{{ message.text }}</span>
+                  </div>
                 </div>
-            </ng-container>
+              </ng-container>
         </div>
     </div>
 

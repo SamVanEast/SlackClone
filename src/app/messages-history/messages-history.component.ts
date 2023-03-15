@@ -3,6 +3,7 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { MatDialog } from '@angular/material/dialog';
 import { Editor } from 'ngx-editor';
 import { NavbarService } from 'src/services/navbar.service';
+import { SearchBarService } from 'src/services/searchBar.service';
 import { UserService } from 'src/services/user.service';
 import { DialogAddMemberToGroupComponent } from '../dialog-add-member-to-group/dialog-add-member-to-group.component';
 import { DialogMembersComponent } from '../dialog-members/dialog-members.component';
@@ -19,11 +20,10 @@ export class MessagesHistoryComponent {
   currentDoc;
   @Input() whichContentShouldLoad;
   doc;
-  @Input() searchText;
   user;
   withWhoMakeGroup;
 
-  constructor(public use: UserService, private firestore: AngularFirestore, public dialog: MatDialog, public nav: NavbarService) {
+  constructor(public search: SearchBarService, public use: UserService, private firestore: AngularFirestore, public dialog: MatDialog, public nav: NavbarService) {
     this.whichContentShouldLoad = [];
   }
 

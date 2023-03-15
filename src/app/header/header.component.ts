@@ -1,9 +1,10 @@
-import { Component, ElementRef, EventEmitter, Output } from '@angular/core';
+import { Component, ElementRef } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { ImprintDataprotectionComponent } from '../imprint-dataprotection/imprint-dataprotection.component';
 import { MatDialog } from '@angular/material/dialog';
 import { NavbarService } from '../../services/navbar.service';
 import { UserService } from 'src/services/user.service';
+import { SearchBarService } from 'src/services/searchBar.service';
 
 @Component({
   selector: 'app-header',
@@ -14,9 +15,8 @@ import { UserService } from 'src/services/user.service';
 export class HeaderComponent {
   public profileImgSrc = '';
   enteredSearchValue: string = '';
-  @Output() searchTextChanged: EventEmitter<string> = new EventEmitter<string>();
 
-  constructor(public use: UserService, public nav: NavbarService, public elementRef: ElementRef, private firestore: AngularFirestore, public dialog: MatDialog) { }
+  constructor(public search: SearchBarService, public use: UserService, public nav: NavbarService, public elementRef: ElementRef, private firestore: AngularFirestore, public dialog: MatDialog) { }
 
   /**
    * load user information 
@@ -41,9 +41,12 @@ export class HeaderComponent {
   /**
    * ouput search text
    */
-  onSearchTextChanged() {
-    this.searchTextChanged.emit(this.enteredSearchValue);
+  onSearchTextChanged(event: Event) {
+    const inputElement = event.target as HTMLInputElement;
+    this.search.enteredSearchValue = inputElement.value;
+    console.log(this.enteredSearchValue);
   }
+  
 
 
   /**
