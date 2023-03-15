@@ -22,8 +22,7 @@ export class HeaderComponent {
    * load user information 
    */
   ngOnInit(): void {
-    this.firestore.collection('users').doc(this.use.currentUserId).get().subscribe((doc) => {
-      const user: any = doc.data();
+    this.firestore.collection('users').doc(this.use.currentUserId).valueChanges().subscribe((user: any) => {
       this.profileImgSrc = user.userInfos.profileImg;
     });
   }
