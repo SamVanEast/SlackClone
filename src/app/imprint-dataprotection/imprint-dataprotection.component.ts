@@ -9,14 +9,13 @@ import { DialogAddGroupComponent } from '../dialog-add-group/dialog-add-group.co
 })
 export class ImprintDataprotectionComponent {
 
-  constructor(private dialogRef: MatDialogRef<DialogAddGroupComponent>) {
-
-  }
+  constructor(private dialogRef: MatDialogRef<DialogAddGroupComponent>) { }
 
 
+  /**
+   * close dialog
+   */
   closeImprint() {
     this.dialogRef.close();
   }
-
-
 }

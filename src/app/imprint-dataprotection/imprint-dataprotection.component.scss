@@ -17,7 +17,6 @@ h3 {
     &:first-child {
         padding-top: 0;
     }
-
 }
 
 span {
@@ -37,7 +36,7 @@ h2 {
 }
 
 h1 {
-    @media screen and (max-width: 620px){
+    @media screen and (max-width: 620px) {
         padding-top: 26px;
         word-break: break-all;
     }
@@ -54,7 +53,6 @@ h1 {
         padding-right: 0px;
     }
 
-
     & {
         mat-icon {
             @media screen and (max-width: 620px) {
@@ -62,11 +60,7 @@ h1 {
                 right: 16px;
                 top: 16px;
                 cursor: pointer;
-
             }
         }
     }
 }
-
-
-
