@@ -44,7 +44,6 @@ export class HeaderComponent {
   onSearchTextChanged(event: Event) {
     const inputElement = event.target as HTMLInputElement;
     this.search.enteredSearchValue = inputElement.value;
-    console.log(this.enteredSearchValue);
   }
   
 
