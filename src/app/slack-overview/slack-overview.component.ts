@@ -14,8 +14,6 @@ import { UserService } from 'src/services/user.service';
 })
 
 export class SlackOverviewComponent {
-  @ViewChild('header') header;
-  @ViewChild('messagsHistory') messagsHistory;
   whichContentShouldLoad;
   searchText: string = '';
   mobileNavBar = true;
@@ -23,28 +21,16 @@ export class SlackOverviewComponent {
   innerWidth: any;
 
   constructor(public use: UserService, private router: Router, private firestore: AngularFirestore, private route: ActivatedRoute,) {
-
     this.route.params.subscribe((params) => {
       this.use.currentUserId= params['id'];
     });
-
-    this.firestore.collection('users').valueChanges({ idField: 'docId' }).subscribe((changes: any) => {
-      // console.log(changes);
-    })
-
-    // this.firestore.collection('users').doc(this.currentUserId).update(user).then((user) => {
-    // })
-
-
-    // this.generateChannelDoc();
-    // this.generateGoupsDoc();
-    // this.generateDirectMessageDoc();
-    // this.generateUserDoc();
   }  
-
-    // scripts
   
   @HostListener('window:resize', ['$event'])
+
+  /**
+   * detects if you are in mobile mode
+   */
     onResize(event) {
     this.innerWidth = window.innerWidth;
     if(this.innerWidth >= 620) {
@@ -53,44 +39,33 @@ export class SlackOverviewComponent {
     }
   }
 
-  // ngOnInit() {
-  //   this.scrollToBottom();
-  // }
-
-  // scrollToBottom(){
-  //   this.messagsHistory.nativeElement.scrollTop = this.messagsHistory.nativeElement.scrollHeight;
-  // }
-
+  /**
+   * stores output variable
+   * @param whichContentShouldLoad collection name, doc id and headline name
+   */
   setContent(whichContentShouldLoad) {
     this.whichContentShouldLoad = whichContentShouldLoad;
   }
 
-  generateChannelDoc() {
-    this.firestore.collection('channels').add(channels).then((user) => {
-    })
-  }
-  generateUserDoc() {
-    this.firestore.collection('users').add(user).then((user) => {
-    })
-  }
-  generateGoupsDoc() {
-    this.firestore.collection('groups').add(group).then((user) => {
-    })
-  }
-  generateDirectMessageDoc() {
-    this.firestore.collection('directMessages').add(directMessage).then((user) => {
-    })
-  }
-
+/**
+ * stores output variable
+ * @param searchValue what to look for
+ */
   onSearchTextEntered(searchValue: string) {
     this.searchText = searchValue;
   }
 
+  /**
+   * open the communication area
+   */
   showChannels() {
     this.mobileNavBar = true;
     this.mobileContent = false;
   }
 
+  /**
+   * open the chat area
+   */
   showMessages() {
     this.mobileNavBar = false;
     this.mobileContent = true;

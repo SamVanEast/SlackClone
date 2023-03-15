@@ -5,7 +5,6 @@ export let user = {
         "email": "",
         "password": "",
         "phone": [] as number[] ,
-        "isLoggedIn": false,
         "profileImg": '../../assets/img/blank-profile.png'
     },
     "communicationSections": {
