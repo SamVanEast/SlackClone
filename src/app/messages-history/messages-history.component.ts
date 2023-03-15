@@ -92,6 +92,7 @@ export class MessagesHistoryComponent {
       });
     }
     this.editor.setContent('');
+    this.autoScrollOn();
   };
 
   openDialogMembers() {
