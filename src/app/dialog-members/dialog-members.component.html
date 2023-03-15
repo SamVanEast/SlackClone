@@ -7,6 +7,7 @@
         <h2>Members</h2>
     </div>
     <mat-card class="memberCards" *ngFor="let user of allUsers" (click)="showMemberProfile(user)">
-        <mat-card-content>{{ user.userInfos.firstName }} {{ user.userInfos.lastName }}</mat-card-content>
+        <mat-card-content><img class="displayUsersImg" src="{{ user.userInfos.profileImg  }}" alt=""> {{
+            user.userInfos.firstName }} {{ user.userInfos.lastName }}</mat-card-content>
     </mat-card>
 </div>

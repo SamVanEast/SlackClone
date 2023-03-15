@@ -17,12 +17,14 @@ export class DialogMembersComponent {
   constructor(public use: UserService, public nav: NavbarService, private firestore: AngularFirestore, private dialogRef: MatDialogRef<DialogMembersComponent>) {
   }
 
+
+  /**
+   * downloads from the respective document the participant information 
+   */
   ngOnInit() {
     this.allUsers = [];
     this.firestore.collection(this.whichContentShouldLoad[0]).doc(this.whichContentShouldLoad[1]).valueChanges({ idField: 'docId' }).subscribe((doc: any) => {
       doc.participants.forEach((participant: any) => {
-        const participantIds = participant;
-
         this.firestore.collection('users').doc(participant).get().toPromise().then((doc: any) => {
           const user = doc.data();
           user.docId = participant;
@@ -32,12 +34,21 @@ export class DialogMembersComponent {
     });
   }
 
+
+  /**
+   * opens navbar right and sets which user should be loaded
+   * @param user user information
+   */
   showMemberProfile(user) {
     this.nav.openRight();
     this.closeDialogMembers();
     this.nav.whichProfileShouldLoad.next(user.docId);
   }
 
+
+  /**
+   * close dialog
+   */
   closeDialogMembers(){
     this.dialogRef.close();
   }
