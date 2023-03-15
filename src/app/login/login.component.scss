@@ -12,6 +12,7 @@
   @media screen and (max-width: 600px) {
     padding-left: 12px;
     padding-right: 12px;
+    gap: 0px;
     }
 
 
@@ -91,6 +92,10 @@ form {
 
 .new-user-link {
     padding-top: 16px;
+
+    @media screen and (max-width: 600px) {
+      padding-top: 0px;
+    }
 
     span {
         font-weight: 700;
