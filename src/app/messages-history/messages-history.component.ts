@@ -27,27 +27,41 @@ export class MessagesHistoryComponent {
     this.whichContentShouldLoad = [];
   }
 
-  autoScrollOn(){
+
+  /**
+   * scroll to bottom of div
+   */
+  autoScrollOn() {
     this.nav.autoScroll = true;
     setTimeout(() => {
       this.nav.autoScroll = false;
     }, 1000);
   }
 
+
   ngAfterViewInit() {
     this.scrollToBottom();
   }
+
 
   ngAfterViewChecked() {
     this.scrollToBottom();
   }
 
+
+  /**
+   * scroll to bottom of div
+   */
   private scrollToBottom(): void {
-      if (this.nav.autoScroll) {
-        this.messagesHistoryContent.nativeElement.scrollTop = this.messagesHistoryContent.nativeElement.scrollHeight;
-      }
+    if (this.nav.autoScroll) {
+      this.messagesHistoryContent.nativeElement.scrollTop = this.messagesHistoryContent.nativeElement.scrollHeight;
+    }
   }
 
+
+  /**
+   * load the chat history
+   */
   ngOnChanges() {
     if (this.whichContentShouldLoad !== undefined && this.whichContentShouldLoad.length > 0) {
       this.firestore.collection(this.whichContentShouldLoad[0]).doc(this.whichContentShouldLoad[1]).valueChanges().subscribe((doc: any) => {
@@ -58,35 +72,36 @@ export class MessagesHistoryComponent {
     }
   }
 
+
+  /**
+   * download the user information
+   */
   ngOnInit(): void {
     this.editor = new Editor();
     this.firestore.collection('users').doc(this.use.currentUserId).valueChanges().subscribe((user: any) => {
       this.user = user;
     });
-
     this.nav.autoScroll = true;
     setTimeout(() => {
       this.nav.autoScroll = false;
     }, 1000);
   }
 
+
   ngOnDestroy(): void {
     this.editor?.destroy();
   }
 
+
+  /**
+   * when you write a new message, the chat history is updated
+   */
   sendMessage() {
     var oParser = new DOMParser();
     var oDOM = oParser.parseFromString(this.html, "text/html");
     var text = oDOM.body.innerText;
-
     if (text !== '') {
-      this.doc.messages.push({
-        creatorImg: this.user.userInfos.profileImg,
-        creatorId: this.use.currentUserId,
-        creator: `${this.user.userInfos.firstName} ${this.user.userInfos.lastName}`,
-        text: text,
-        date: new Date().getTime(),
-      })
+      this.pushNewMessage(text);
       this.firestore.collection(this.whichContentShouldLoad[0]).doc(this.whichContentShouldLoad[1]).update({
         'messages': this.doc.messages
       });
@@ -95,17 +110,45 @@ export class MessagesHistoryComponent {
     this.autoScrollOn();
   };
 
+
+  /**
+   * adds the new message to array
+   * @param text string with message
+   */
+  pushNewMessage(text) {
+    this.doc.messages.push({
+      creatorImg: this.user.userInfos.profileImg,
+      creatorId: this.use.currentUserId,
+      creator: `${this.user.userInfos.firstName} ${this.user.userInfos.lastName}`,
+      text: text,
+      date: new Date().getTime(),
+    })
+  }
+
+
+/**
+ * open dialog and returns an array with
+ */
   openDialogMembers() {
     const dialog = this.dialog.open(DialogMembersComponent);
     dialog.componentInstance.whichContentShouldLoad = this.whichContentShouldLoad;
   };
 
+
+  /**
+   * open navbar right 
+   * @param id id from user document
+   */
   openCreatorProfile(id) {
     this.nav.openRight();
     this.nav.whichProfileShouldLoad.next(id);
 
   };
 
+
+  /**
+   * open dialog and returns information with
+   */
   openAddMemberToGroup() {
     const dialog = this.dialog.open(DialogAddMemberToGroupComponent);
     dialog.componentInstance.whichContentShouldLoad = this.whichContentShouldLoad;
