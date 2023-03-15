@@ -20,7 +20,6 @@ export class SlackOverviewComponent {
      
       this.innerWidth = window.innerWidth;
       if(this.innerWidth >= 620) {
-        this.nav.showNavbarRight = true;
         this.nav.showContent = true;
         this.nav.showNavbarLeft = true;
       }
@@ -40,7 +39,6 @@ export class SlackOverviewComponent {
     onResize(event) {
     this.innerWidth = window.innerWidth;
     if(this.innerWidth >= 620) {
-      this.nav.showNavbarRight = true;
       this.nav.showContent = true;
       this.nav.showNavbarLeft = true;
     }

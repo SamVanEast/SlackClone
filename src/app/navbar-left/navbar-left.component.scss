@@ -3,6 +3,7 @@
     background-color: #3E103F;
     color: #FFFFFF;
     min-width: 250px;
+    overflow: auto;
 
     @media screen and (max-width: 620px) {
         height: calc(100vh - 30px);
