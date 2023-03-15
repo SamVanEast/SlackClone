@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { FormControl, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
-import { ActivatedRoute } from '@angular/router';
 import { UserService } from 'src/services/user.service';
 
 @Component({
@@ -22,8 +21,12 @@ export class DialogUpdateContactComponent {
     Validators.pattern(/^\d*$/),
   ]);
 
-  constructor(public use: UserService, private route: ActivatedRoute, private firestore: AngularFirestore, private dialogRef: MatDialogRef<DialogUpdateContactComponent>) { }
+  constructor(public use: UserService, private firestore: AngularFirestore, private dialogRef: MatDialogRef<DialogUpdateContactComponent>) { }
 
+
+  /**
+   * load information from user
+   */
   ngAfterViewInit(): void {
     this.firestore.collection('users').doc(this.use.currentUserId).valueChanges().subscribe((user: any) => {
       this.emailFormControl.setValue(user.userInfos.email);
@@ -32,10 +35,12 @@ export class DialogUpdateContactComponent {
   }
 
 
+  /**
+   * Update changes and close the dialog
+   */
   saveContact() {
     if (this.emailFormControl.valid && this.phoneFormControl.valid) {
       this.loading = true;
-      
       this.firestore.collection('users').doc(this.use.currentUserId).update({
         'userInfos.email': this.emailFormControl.value,
         'userInfos.phone': this.phoneFormControl.value,
@@ -47,6 +52,9 @@ export class DialogUpdateContactComponent {
   }
 
 
+  /**
+   * close dialog
+   */
   closeDialogContact() {
     this.dialogRef.close();
   }
