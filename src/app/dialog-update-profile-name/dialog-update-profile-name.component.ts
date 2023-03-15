@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { FormControl, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
-import { ActivatedRoute } from '@angular/router';
 import { UserService } from 'src/services/user.service';
 
 @Component({
@@ -22,8 +21,12 @@ export class DialogUpdateProfileNameComponent {
     Validators.pattern(/^[a-zA-Z]+$/),
   ]);
 
-  constructor(public use: UserService, private route: ActivatedRoute, private firestore: AngularFirestore, private dialogRef: MatDialogRef<DialogUpdateProfileNameComponent>) { }
+  constructor(public use: UserService, private firestore: AngularFirestore, private dialogRef: MatDialogRef<DialogUpdateProfileNameComponent>) { }
 
+
+  /**
+   * load information from user
+   */
   ngAfterViewInit(): void {
     this.firestore.collection('users').doc(this.use.currentUserId).valueChanges().subscribe((user: any) => {
       this.firstNameFormControl.setValue(user.userInfos.firstName);
@@ -31,6 +34,10 @@ export class DialogUpdateProfileNameComponent {
     });
   }
 
+
+  /**
+   * Update changes and close the dialog
+   */
   saveName() {
     if (this.firstNameFormControl.valid && this.lastNameFormControl.valid) {
       this.loading = true;
@@ -44,6 +51,10 @@ export class DialogUpdateProfileNameComponent {
     }
   }
 
+
+  /**
+   * close dialog
+   */
   closeDialogName() {
     this.dialogRef.close();
   }
