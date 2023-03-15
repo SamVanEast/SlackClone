@@ -22,16 +22,15 @@ export class MessagesHistoryComponent {
   @Input() searchText;
   user;
   withWhoMakeGroup;
-  autoScroll = false;
 
   constructor(public use: UserService, private firestore: AngularFirestore, public dialog: MatDialog, public nav: NavbarService) {
     this.whichContentShouldLoad = [];
   }
 
   autoScrollOn(){
-    this.autoScroll = true;
+    this.nav.autoScroll = true;
     setTimeout(() => {
-      this.autoScroll = false;
+      this.nav.autoScroll = false;
     }, 1000);
   }
 
@@ -44,7 +43,7 @@ export class MessagesHistoryComponent {
   }
 
   private scrollToBottom(): void {
-      if (this.autoScroll) {
+      if (this.nav.autoScroll) {
         this.messagesHistoryContent.nativeElement.scrollTop = this.messagesHistoryContent.nativeElement.scrollHeight;
       }
   }

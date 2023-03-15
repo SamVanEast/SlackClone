@@ -6,7 +6,7 @@
         <summary>Channels</summary>
         <div class="channels-content">
             <div class="single-channel" *ngFor="let channel of channels"
-                (click)="openMessageHistory(channel.docId, channel.collection, channel.headline)">
+                (click)="openMessageHistory(channel.docId, channel.collection, channel.headline); autoScrollOn()">
                 <div class="hashes">#</div>
                 <div class="channel-name"><span>{{ channel.headline }}</span></div>
             </div>

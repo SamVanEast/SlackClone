@@ -13,11 +13,4 @@ export class NavbarService {
   openRight() { this.showNavbarRight = true }
   toggleRight() { this.showNavbarRight = !this.showNavbarRight }
   toggleLeft() { this.showNavbarLeft = !this.showNavbarLeft }
-
-  autoScrollOn() {
-    this.autoScroll = true;
-    setTimeout(() => {
-      this.autoScroll = false;
-    }, 300);
-  }
 }

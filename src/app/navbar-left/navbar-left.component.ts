@@ -26,6 +26,13 @@ export class NavbarLeftComponent implements OnInit {
   constructor(public use: UserService, public nav: NavbarService, private firestore: AngularFirestore, public dialog: MatDialog) {
   }
 
+  autoScrollOn() {
+    this.nav.autoScroll = true;
+    setTimeout(() => {
+      this.nav.autoScroll = false;
+    }, 300);
+  }
+
 
   /**
    * load all chats and set the information to open the general channel by default
