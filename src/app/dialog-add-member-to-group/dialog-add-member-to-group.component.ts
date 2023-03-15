@@ -21,6 +21,9 @@ export class DialogAddMemberToGroupComponent {
   loading = false;
 
 
+  /**
+     * checks whether logged in user is already part of a group; hides user if true 
+     */
   ngOnInit(): void {
     let self = this;
     this.firestore.collection('users').valueChanges({ idField: 'docId' }).subscribe((users: any) => {
@@ -37,6 +40,10 @@ export class DialogAddMemberToGroupComponent {
     });
   }
 
+  /**
+    * checks whether other users are already part of a group; hides them if true 
+    */
+
   checkAllUsers() {
     let self = this;
     this.allUsers.forEach(function (user, i) {
@@ -50,6 +57,9 @@ export class DialogAddMemberToGroupComponent {
     });
   }
 
+/**
+ * pushes data of users and groups in database
+ */
 
   save() {
     this.firestore.collection(this.whichContentShouldLoad[0]).doc(this.whichContentShouldLoad[1]).get().toPromise().then((doc: any) => {
@@ -65,16 +75,26 @@ export class DialogAddMemberToGroupComponent {
     this.dialogRef.close();
   }
 
+  /**
+      * closes dialog 
+      */
+
   closeDialogAddMember() {
     this.dialogRef.close();
   }
 
+  /**
+    * updates users in database 
+    */
   updateCommunicationSections(docData) {
     this.firestore.collection(this.whichContentShouldLoad[0]).doc(this.whichContentShouldLoad[1]).update({
       "participants": docData.participants
     });
   }
 
+  /**
+     * updates groups in database 
+     */
   updateUserCommunicationSections(docData) {
     this.firestore.collection('users').doc(this.memberId).update({
       "communicationSections.groups": docData.communicationSections.groups
