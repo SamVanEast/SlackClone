@@ -3,6 +3,7 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { Editor } from 'ngx-editor';
+import { NavbarService } from 'src/services/navbar.service';
 import { UserService } from 'src/services/user.service';
 import { DialogAddMemberToGroupComponent } from '../dialog-add-member-to-group/dialog-add-member-to-group.component';
 import { DialogMembersComponent } from '../dialog-members/dialog-members.component';
@@ -23,7 +24,7 @@ export class MessagesHistoryComponent {
   user;
   withWhoMakeGroup;
 
-  constructor(public use: UserService, private route: ActivatedRoute, private firestore: AngularFirestore, public dialog: MatDialog, private el: ElementRef, private renderer: Renderer2) {
+  constructor(public use: UserService, private route: ActivatedRoute, private firestore: AngularFirestore, public dialog: MatDialog, private el: ElementRef, private renderer: Renderer2, public nav: NavbarService) {
     this.whichContentShouldLoad = [];
 
   }
@@ -105,7 +106,7 @@ export class MessagesHistoryComponent {
   };
 
   openCreatorProfile(id) {
-    console.log(id);
+    this.nav.whichProfileShouldLoad.next(this.use.currentUserId);
   };
 
   openAddMemberToGroup() {
