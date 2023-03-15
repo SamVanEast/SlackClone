@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { MatDialogRef } from '@angular/material/dialog';
-import { ActivatedRoute } from '@angular/router';
 import { UserService } from 'src/services/user.service';
 import { DialogUpdateContactComponent } from '../dialog-update-contact/dialog-update-contact.component';
 
@@ -14,7 +12,6 @@ export class DialogChangeImgComponent {
   loading = false;
   public selectedImageId;
   isGuest;
-
   public images = [
     {
       img: 'assets/img/blank-profile.png',
@@ -36,8 +33,8 @@ export class DialogChangeImgComponent {
     },
   ];
 
-  constructor(public use: UserService, private route: ActivatedRoute, private firestore: AngularFirestore, private dialogRef: MatDialogRef<DialogUpdateContactComponent>) {
 
+  constructor(public use: UserService, private dialogRef: MatDialogRef<DialogUpdateContactComponent>) {
     if (this.use.currentUserId == 'TzlCRRHBcjQ30Oml2Tb8') {
       this.isGuest = true;
     } else {
@@ -45,14 +42,27 @@ export class DialogChangeImgComponent {
     }
   }
 
+
+  /**
+   * sets which image was selected
+   * @param imageId number in array
+   */
   setSelectedImageId(imageId) {
     this.selectedImageId = imageId;
   }
 
+
+  /**
+   * save selected img and close dialog
+   */
   saveImage() {
     this.dialogRef.close(this.selectedImageId);
   }
 
+
+  /**
+   * close dialog
+   */
   closeDialogImage() {
     this.dialogRef.close();
   }
