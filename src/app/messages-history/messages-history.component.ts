@@ -62,6 +62,11 @@ export class MessagesHistoryComponent {
     this.firestore.collection('users').doc(this.use.currentUserId).valueChanges().subscribe((user: any) => {
       this.user = user;
     });
+
+    this.nav.autoScroll = true;
+    setTimeout(() => {
+      this.nav.autoScroll = false;
+    }, 300);
   }
 
   ngOnDestroy(): void {
