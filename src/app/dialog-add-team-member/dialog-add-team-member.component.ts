@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { MatDialogRef } from '@angular/material/dialog';
-import { ActivatedRoute } from '@angular/router';
 import { directMessage } from 'src/models/directMessage';
 import { UserService } from 'src/services/user.service';
 
@@ -25,12 +24,21 @@ export class DialogAddTeamMemberComponent {
     }
   }
 
+
+  /**
+   * load user information
+   */
   ngOnInit(): void {
     this.firestore.collection('users').valueChanges({ idField: 'docId' }).subscribe((users: any) => {
       this.loadAllUsers(users);
     });
   }
 
+
+  /**
+   * deletes my user information
+   * @param users user information
+   */
   loadAllUsers(users){
     let self = this;
     this.allUsers = users;
@@ -46,10 +54,13 @@ export class DialogAddTeamMemberComponent {
     })
   }
 
+
+  /**
+   * deletes the user with whom you already have a direct message
+   */
   checkAllUsers() {
     let self = this;
     this.allUsers.forEach(function (user, i) {
-
       self.withWhoDirectMessages.forEach((menberOfDirectMessages) => {
         let result = user.docId === menberOfDirectMessages;
         if (result) {
@@ -61,6 +72,9 @@ export class DialogAddTeamMemberComponent {
   }
 
 
+  /**
+   * adds a new direct message
+   */
   save() {
     this.loading = true;
     this.firestore.collection('directMessages').add(directMessage).then((docRef) => {
@@ -70,6 +84,11 @@ export class DialogAddTeamMemberComponent {
     })
   }
 
+
+  /**
+   * downloads the information from the other participant
+   * @param newDirectMessageId id from document
+   */
   loadUser(newDirectMessageId) {
     this.firestore.collection('users').doc(this.memberId).get().toPromise().then((doc: any) => {
       const docData = doc.data();
@@ -79,6 +98,11 @@ export class DialogAddTeamMemberComponent {
     });
   }
 
+
+  /**
+   * loads the information from the user
+   * @param newDirectMessageId id from document
+   */
   pushNewDirectMessageToArray(newDirectMessageId) {
     this.firestore.collection('users').doc(this.use.currentUserId).get().toPromise().then((userDoc) => {
       const currentUser: any = userDoc.data();
@@ -88,6 +112,11 @@ export class DialogAddTeamMemberComponent {
     });
   }
 
+
+  /**
+   * adds the new direct message to the user and close dialog
+   * @param currentDirectMessagesIds id from document
+   */
   updateUser(currentDirectMessagesIds) {
     this.firestore.collection('users').doc(this.use.currentUserId).update({
       'communicationSections.directMessages': currentDirectMessagesIds
@@ -97,20 +126,33 @@ export class DialogAddTeamMemberComponent {
     })
   }
 
+  
+  /**
+   * adds the new direct message to the other participant
+   * @param docData information of other participant
+   */
   updateUserCommunicationSections(docData) {
     this.firestore.collection('users').doc(this.memberId).update({
       "communicationSections.directMessages": docData.communicationSections.directMessages
     });
   }
 
+
+  /**
+   * adds the participants to the new direct message document
+   * @param newDirectMessageId id from document
+   */
   updateParticipantsDirectMessages(newDirectMessageId) {
     this.firestore.collection('directMessages').doc(newDirectMessageId).update({
       "participants": [this.use.currentUserId, this.memberId]
     });
   }
 
+
+  /**
+   * close dialog
+   */
   closeDialogMember() {
     this.dialogRef.close();
   }
-
 }
