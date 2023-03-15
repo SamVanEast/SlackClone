@@ -82,7 +82,7 @@
     align-items: center;
     flex-direction: row;
     padding-left: 16px;
-    padding-top: 16px;
+    padding-bottom: 12px;
 
     div {
         padding-left: 16px;
@@ -95,4 +95,9 @@
     a {
         text-decoration: none;
     }
+}
+
+mat-card-content {
+    padding-top: 12px;
+    padding-bottom: 12px;
 }

@@ -23,6 +23,7 @@ export class NavbarRightComponent {
   public email;
   public phone;
   enteredSearchValue: string = '';
+  isItMe = true;
   // private myVariableSubject = new Subject<string>();
 
   constructor(public use: UserService, public nav: NavbarService, private route: ActivatedRoute, private firestore: AngularFirestore, public dialog: MatDialog) { }
@@ -33,6 +34,7 @@ export class NavbarRightComponent {
 
 
       if (id == this.use.currentUserId) {
+        this.isItMe = true;
         this.firestore.collection('users').doc(id).valueChanges(id).subscribe((user: any) => {
           this.firstName = user.userInfos.firstName;
           this.lastName = user.userInfos.lastName;
@@ -41,19 +43,16 @@ export class NavbarRightComponent {
           this.profileImgSrc = user.userInfos.profileImg;
         });
       }else {
-
+        this.isItMe = false;
+        this.firestore.collection('users').doc(id).valueChanges(id).subscribe((user: any) => {
+          this.firstName = user.userInfos.firstName;
+          this.lastName = user.userInfos.lastName;
+          this.email = user.userInfos.email;
+          this.phone = user.userInfos.phone;
+          this.profileImgSrc = user.userInfos.profileImg;
+        });
       }
     })
-    // }else {
-
-    //   this.firestore.collection('users').doc(this.use.currentUserId).valueChanges().subscribe((user: any) => {
-    //     this.firstName = user.userInfos.firstName;
-    //     this.lastName = user.userInfos.lastName;
-    //     this.email = user.userInfos.email;
-    //     this.phone = user.userInfos.phone;
-    //     this.profileImgSrc = user.userInfos.profileImg;
-    //   });
-    // }
   }
 
   openDialog() {
