@@ -11,6 +11,7 @@ import { UserService } from 'src/services/user.service';
 })
 export class DialogUpdateProfileNameComponent {
   loading = false;
+  isGuest;
 
   firstNameFormControl = new FormControl('', [
     Validators.required,
@@ -21,7 +22,15 @@ export class DialogUpdateProfileNameComponent {
     Validators.pattern(/^[a-zA-Z]+$/),
   ]);
 
-  constructor(public use: UserService, private firestore: AngularFirestore, private dialogRef: MatDialogRef<DialogUpdateProfileNameComponent>) { }
+  constructor(public use: UserService, private firestore: AngularFirestore, private dialogRef: MatDialogRef<DialogUpdateProfileNameComponent>) { 
+
+    if (this.use.currentUserId == 'TzlCRRHBcjQ30Oml2Tb8') {
+      this.isGuest = true;
+    } else {
+      this.isGuest = false;
+    }
+
+  }
 
 
   /**

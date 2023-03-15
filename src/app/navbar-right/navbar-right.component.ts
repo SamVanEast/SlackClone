@@ -21,8 +21,16 @@ export class NavbarRightComponent {
   public email;
   public phone;
   isItMe = true;
+  isGuest;
 
-  constructor(public use: UserService, public nav: NavbarService, private firestore: AngularFirestore, public dialog: MatDialog) { }
+  constructor(public use: UserService, public nav: NavbarService, private firestore: AngularFirestore, public dialog: MatDialog) { 
+
+    if(this.use.currentUserId == 'TzlCRRHBcjQ30Oml2Tb8') {
+      this.isGuest = true;
+    } else {
+      this.isGuest = false;
+    }
+  }
 
 
   /**

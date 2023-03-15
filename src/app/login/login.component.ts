@@ -130,7 +130,7 @@ export class LoginComponent {
 
 
   /**
-   * shows text under input if input is wrong
+   * shows text below input if input is wrong
    */
   showWrongText() {
     this.toggle = true;
@@ -156,7 +156,7 @@ export class LoginComponent {
    * Login for Guest
    */
   guestLogin() {
-    this.router.navigateByUrl('/');
+    this.router.navigateByUrl('/slack/TzlCRRHBcjQ30Oml2Tb8');
   }
 
 
