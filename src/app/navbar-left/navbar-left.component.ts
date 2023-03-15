@@ -1,7 +1,6 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { MatDialog } from '@angular/material/dialog';
-import { ActivatedRoute } from '@angular/router';
 import { NavbarService } from 'src/services/navbar.service';
 import { UserService } from 'src/services/user.service';
 import { DialogAddChannelComponent } from '../dialog-add-channel/dialog-add-channel.component';
@@ -16,7 +15,6 @@ import { DialogAddTeamMemberComponent } from '../dialog-add-team-member/dialog-a
 
 export class NavbarLeftComponent implements OnInit {
   @Input() groupId: string;
-  drawer = true;
   public communicationSections;
   channels = [];
   groups = [];
@@ -25,19 +23,23 @@ export class NavbarLeftComponent implements OnInit {
   withWhoDirectMessages = [];
   @Output() whichContentShouldLoad = new EventEmitter<any>();
 
-  constructor(public use: UserService, public nav: NavbarService, private route: ActivatedRoute, private firestore: AngularFirestore, public dialog: MatDialog) {
+  constructor(public use: UserService, public nav: NavbarService, private firestore: AngularFirestore, public dialog: MatDialog) {
   }
 
+
+  /**
+   * load all chats and set the information to open the general channel by default
+   */
   ngOnInit() {
-    this.route.params.subscribe((params) => {
-      this.use.currentUserId = params['id'];
-    });
-    this.loadMessagesFromFirestore();
+    this.loadCommunicationSectionsFromFirestore();
     this.openMessageHistory('KlTnEdj7XuVLzYnB13Iw', 'channels', 'General');
   }
 
 
-  loadMessagesFromFirestore() {
+  /**
+   * load the information for the user 
+   */
+  loadCommunicationSectionsFromFirestore() {
     this.firestore.collection('users').doc(this.use.currentUserId).valueChanges().subscribe((user: any) => {
       this.communicationSections = user.communicationSections;
       this.loadChannels();
@@ -46,6 +48,10 @@ export class NavbarLeftComponent implements OnInit {
     });
   }
 
+
+  /**
+   * load the information for the channel
+   */
   loadChannels() {
     let channels = [];
     let alreadyUsedIds = [];
@@ -61,6 +67,10 @@ export class NavbarLeftComponent implements OnInit {
     this.channels = channels;
   }
 
+
+  /**
+   * load the information for the groups
+   */
   loadGroups() {
     let groups = [];
     let alreadyUsedIds = [];
@@ -76,6 +86,10 @@ export class NavbarLeftComponent implements OnInit {
     this.groups = groups;
   }
 
+
+  /**
+   * load the information for the direct messages
+   */
   loadDirectMessages() {
     let directMessages = [];
     let alreadyUsedIds = [];
@@ -94,6 +108,11 @@ export class NavbarLeftComponent implements OnInit {
     this.directMessages = directMessages;
   }
 
+
+/**
+ * loads the name for the heading from the other participant
+ * @param participants participants from chat
+ */
   loadUserNameDown(participants) {
     participants.forEach(id => {
       if (id !== this.use.currentUserId) {
@@ -107,26 +126,41 @@ export class NavbarLeftComponent implements OnInit {
         })
       }
     });
-
   }
 
+
+  /**
+   * opens a dialog
+   */
   openDialogChannel() {
     this.dialog.open(DialogAddChannelComponent);
   }
+ 
 
+  /**
+   * opens a dialog
+   */
   openDialogGroups() {
     this.dialog.open(DialogAddGroupComponent);
   }
 
+
+  /**
+   * opens a dialog
+   */
   openDialogMember() {
     const dialog = this.dialog.open(DialogAddTeamMemberComponent);
     dialog.componentInstance.withWhoDirectMessages = this.withWhoDirectMessages;
   }
 
+
+  /**
+   * sets what should be loaded
+   * @param id id of document
+   * @param collection name of collection
+   * @param headline text for headline
+   */
   openMessageHistory(id, collection, headline) {
     this.whichContentShouldLoad.emit([collection, id, headline]);
   }
-
-
-
 }
