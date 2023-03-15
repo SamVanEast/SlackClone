@@ -58,6 +58,10 @@
   margin-bottom: 0.75rem;
   margin-right: 0.75rem;
 
+  @media screen and (max-width: 620px) {
+    width: 100px;
+  }
+
   &:active {
     transform: scale(0.9);
   }
