@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild, HostListener } from '@angular/core';
+import { Component, Input, ElementRef, ViewChild, HostListener } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { MatDialog } from '@angular/material/dialog';
 import { Editor } from 'ngx-editor';
@@ -19,11 +19,11 @@ export class MessagesHistoryComponent {
   editor: Editor | undefined;
   html = '';
   currentDoc;
-  whichContentShouldLoad;
+  @Input() whichContentShouldLoad;
   doc;
   user;
   withWhoMakeGroup;
-  isMobile = false;
+  isMobile = false
 
   constructor(public search: SearchBarService, public use: UserService, private firestore: AngularFirestore, public dialog: MatDialog, public nav: NavbarService, private mobile: Mobile) {
     this.whichContentShouldLoad = [];
@@ -63,17 +63,6 @@ export class MessagesHistoryComponent {
 
   ngAfterViewInit() {
     this.scrollToBottom();
-    this.use.whichContentShouldLoad.subscribe((content) => {
-      this.whichContentShouldLoad = content;
-      if (this.whichContentShouldLoad !== undefined && this.whichContentShouldLoad.length > 0) {
-        this.firestore.collection(this.whichContentShouldLoad[0]).doc(this.whichContentShouldLoad[1]).valueChanges().subscribe((doc: any) => {
-          this.doc = doc;
-          this.withWhoMakeGroup = doc.participants;
-          this.autoScrollOn();
-        });
-      }
-    })
-    this.use.whichContentShouldLoad.next(['channels', 'KlTnEdj7XuVLzYnB13Iw', 'General'])
   }
 
 
@@ -88,6 +77,20 @@ export class MessagesHistoryComponent {
   private scrollToBottom(): void {
     if (this.nav.autoScroll) {
       this.messagesHistoryContent.nativeElement.scrollTop = this.messagesHistoryContent.nativeElement.scrollHeight;
+    }
+  }
+
+
+  /**
+   * load the chat history
+   */
+  ngOnChanges() {
+    if (this.whichContentShouldLoad !== undefined && this.whichContentShouldLoad.length > 0) {
+      this.firestore.collection(this.whichContentShouldLoad[0]).doc(this.whichContentShouldLoad[1]).valueChanges().subscribe((doc: any) => {
+        this.doc = doc;
+        this.withWhoMakeGroup = doc.participants;
+        this.autoScrollOn();
+      });
     }
   }
 
