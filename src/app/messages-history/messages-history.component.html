@@ -26,7 +26,7 @@
     </div>
 
     <div class="ngxEditor__wrapper positioning" *ngIf="editor">
-        <mat-icon class="send-button" (click)="sendMessage()" matTooltip="Send message">outgoing_mail</mat-icon>
+        <mat-icon class="send-button" (click)="sendMessage(); autoScrollOn()" matTooltip="Send message">outgoing_mail</mat-icon>
         <ngx-editor [editor]="editor" [(ngModel)]="html" [disabled]="false" [placeholder]="'Type here...'"></ngx-editor>
     </div>
 </div>

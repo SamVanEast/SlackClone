@@ -23,9 +23,17 @@ export class MessagesHistoryComponent {
   @Input() searchText;
   user;
   withWhoMakeGroup;
+  autoScroll = false;
 
   constructor(public use: UserService, private route: ActivatedRoute, private firestore: AngularFirestore, public dialog: MatDialog, private el: ElementRef, private renderer: Renderer2, public nav: NavbarService) {
     this.whichContentShouldLoad = [];
+  }
+
+  autoScrollOn(){
+    this.autoScroll = true;
+    setTimeout(() => {
+      this.autoScroll = false;
+    }, 1000);
   }
 
   ngAfterViewInit() {
@@ -37,7 +45,9 @@ export class MessagesHistoryComponent {
   }
 
   private scrollToBottom(): void {
-    this.messagesHistoryContent.nativeElement.scrollTop = this.messagesHistoryContent.nativeElement.scrollHeight;
+      if (this.autoScroll) {
+        this.messagesHistoryContent.nativeElement.scrollTop = this.messagesHistoryContent.nativeElement.scrollHeight;
+      }
   }
 
   ngOnChanges() {
@@ -88,7 +98,7 @@ export class MessagesHistoryComponent {
   openCreatorProfile(id) {
     this.nav.openRight();
     this.nav.whichProfileShouldLoad.next(id);
-    
+
   };
 
   openAddMemberToGroup() {
