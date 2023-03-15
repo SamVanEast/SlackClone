@@ -1,5 +1,10 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import { FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
+import {
+  FormControl,
+  FormGroupDirective,
+  NgForm,
+  Validators,
+} from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { Router } from '@angular/router';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
@@ -7,27 +12,34 @@ import { user } from 'src/models/user';
 import { Observable } from 'rxjs';
 import { MatAutocompleteTrigger } from '@angular/material/autocomplete';
 
-
-
 export class MyErrorStateMatcher implements ErrorStateMatcher {
-  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
+  isErrorState(
+    control: FormControl | null,
+    form: FormGroupDirective | NgForm | null
+  ): boolean {
     const isSubmitted = form && form.submitted;
-    return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
+    return !!(
+      control &&
+      control.invalid &&
+      (control.dirty || control.touched || isSubmitted)
+    );
   }
 }
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent {
-
   constructor(private router: Router, private firestore: AngularFirestore) {
     this.user = user;
   }
 
-  emailFormControl = new FormControl('', [Validators.required, Validators.email]);
+  emailFormControl = new FormControl('', [
+    Validators.required,
+    Validators.email,
+  ]);
   allUser = [];
 
   matcher = new MyErrorStateMatcher();
@@ -41,9 +53,6 @@ export class LoginComponent {
   userId: string;
   user;
 
-
-
-
   // Var for create user
   @ViewChild('password') password: ElementRef;
   @ViewChild('passwordRepeat') passwordRepeat: ElementRef;
@@ -52,7 +61,7 @@ export class LoginComponent {
   @ViewChild('userMail') userMail: ElementRef;
   @ViewChild('phoneNumber') phoneNumber: ElementRef;
 
-  // Var for Login 
+  // Var for Login
   @ViewChild('loginEmail') loginEmail: ElementRef;
   @ViewChild('loginPassword') loginPassword: ElementRef;
 
@@ -61,65 +70,96 @@ export class LoginComponent {
   @ViewChild('resetPwRepeat') resetPwRepeat: ElementRef;
   @ViewChild('resetEmail') resetEmail: ElementRef;
 
-  // var for push text 
-
-
-
+  // var for push text
 
   ngOnInit() {
-    this.firestore.collection('users').valueChanges({ idField: 'docId' }).subscribe((user: any) => {
-      this.allUser = user;
-
-    });
+    this.firestore
+      .collection('users')
+      .valueChanges({ idField: 'docId' })
+      .subscribe((user: any) => {
+        this.allUser = user;
+      });
   }
 
-
-
+  /**
+   * Function to generate a new User
+   */
   generateUserDoc() {
-
-    if (this.password.nativeElement.value == this.passwordRepeat.nativeElement.value) {
-
-      this.firestore.collection('users').add(user).then((user) => {
-        this.userId = user.id
-        this.updateChannelParticipants();
-      })
-      this.pushNewUser = true;
-      this.newUser = false;
-      setTimeout(() => {
-        this.pushNewUser = false;
-      }, 3000);
+    if (
+      this.password.nativeElement.value ==
+      this.passwordRepeat.nativeElement.value
+    ) {
+      this.firestore
+        .collection('users')
+        .add(user)
+        .then((user) => {
+          this.userId = user.id;
+          this.updateChannelParticipants();
+        });
+      this.showNewUserPushtext();
     } else {
-      this.toggle = true;
-      setTimeout(() => {
-        this.toggle = false;
-      }, 3000);
+      this.showWrongText();
     }
   }
 
-
+  /**
+   *  add new member to channels
+   */
   updateChannelParticipants() {
     user.communicationSections.channels.forEach((channelId) => {
-      this.firestore.collection('channels').doc(channelId).get().toPromise().then((channelDoc) => {
-        const currentDoc: any = channelDoc.data();
-        const currentParticipants = currentDoc.participants;
-        currentParticipants.push(this.userId);
-        this.firestore.collection('channels').doc(channelId).update({
-          'participants': currentParticipants
-        }).then(() => {
-          console.log('it works')
-        })
-      });
-    })
+      this.firestore
+        .collection('channels')
+        .doc(channelId)
+        .get()
+        .toPromise()
+        .then((channelDoc) => {
+          const currentDoc: any = channelDoc.data();
+          const currentParticipants = currentDoc.participants;
+          currentParticipants.push(this.userId);
+          this.firestore
+            .collection('channels')
+            .doc(channelId)
+            .update({
+              participants: currentParticipants,
+            })
+        });
+    });
   }
 
+  /**
+   * shows text under input if input is wrong
+   */
+  showWrongText() {
+    this.toggle = true;
+      setTimeout(() => {
+        this.toggle = false;
+      }, 3000);
+  }
 
+  /**
+   * shows the Push text if create a new User
+   */
+  showNewUserPushtext(){
+    this.pushNewUser = true;
+    this.newUser = false;
+    setTimeout(() => {
+      this.pushNewUser = false;
+    }, 3000);
+  }
+
+  /**
+   * Login for Guest
+   */
   guestLogin() {
-    this.router.navigateByUrl('/')
+    this.router.navigateByUrl('/');
   }
 
+  /**
+   * Login for User
+   */
   UserLogin() {
-    let inputPassword = this.loginPassword.nativeElement.value
-    let inputEmail = this.loginEmail.nativeElement.value
+    let inputPassword = this.loginPassword.nativeElement.value;
+    let inputEmail = this.loginEmail.nativeElement.value;
 
     for (let i = 0; i < this.allUser.length; i++) {
       const email = this.allUser[i]['userInfos']['email'];
@@ -127,19 +167,18 @@ export class LoginComponent {
       const id = this.allUser[i]['docId'];
 
       if (email === inputEmail && password === inputPassword) {
-        this.router.navigateByUrl(`/slack/${id}`)
-
+        this.router.navigateByUrl(`/slack/${id}`);
       } else {
-        this.toggle = true;
-        setTimeout(() => {
-          this.toggle = false;
-        }, 3000);
+        this.showWrongText();
       }
     }
   }
 
+  /**
+   *  reset password for User 
+   */
   resetPassword() {
-    let inputEmail = this.resetEmail.nativeElement.value
+    let inputEmail = this.resetEmail.nativeElement.value;
 
     for (let i = 0; i < this.allUser.length; i++) {
       const email = this.allUser[i]['userInfos']['email'];
@@ -149,14 +188,15 @@ export class LoginComponent {
         this.changePassword(id);
         break;
       } else if (i === this.allUser.length - 1) {
-        this.toggleReset = true;
-        setTimeout(() => {
-          this.toggleReset = false;
-        }, 3000);
+        this.showWrongText();
       }
     }
   }
 
+  /**
+   *  change Password for User
+   * @param id the id from the User
+   */
   changePassword(id: string) {
     let password = this.resetPw.nativeElement.value;
     let repPassword = this.resetPwRepeat.nativeElement.value;
@@ -170,32 +210,21 @@ export class LoginComponent {
       setTimeout(() => {
         this.pushResetPw = false;
       }, 3000);
-
     } else {
-
-      this.toggle = true;
-      setTimeout(() => {
-        this.toggle = false;
-      }, 3000);
-
+      this.showWrongText();
     }
   }
 
   resetOverview() {
     this.reset = true;
-
   }
 
   NewUserOverview() {
     this.newUser = true;
-
   }
 
   showLogin() {
     this.newUser = false;
     this.reset = false;
   }
-
-
-
 }
