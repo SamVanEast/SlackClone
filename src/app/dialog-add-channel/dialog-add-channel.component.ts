@@ -14,6 +14,9 @@ export class DialogAddChannelComponent {
 
   constructor(public use: UserService, private route: ActivatedRoute, private firestore: AngularFirestore, private dialogRef: MatDialogRef<DialogAddChannelComponent>) { }
 
+/**
+ * closes the dialog
+ */
   closeDialogChannel() {
     this.dialogRef.close();
   }

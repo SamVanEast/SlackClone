@@ -27,6 +27,9 @@ export class DialogAddGroupComponent {
     }
   }
 
+/**
+ * adds new groups to database
+ */
   saveGroup() {
     if (this.group.headline !== '') {
       this.loading = true;
@@ -38,6 +41,11 @@ export class DialogAddGroupComponent {
     this.group.headline = '';
   }
 
+/**
+ * pushes new group into database
+ * @param newGroupId the ID of the new group
+ */
+
   pushNewGroupToArray(newGroupId) {
     this.firestore.collection('users').doc(this.use.currentUserId).get().toPromise().then((userDoc) => {
       const currentUser: any = userDoc.data();
@@ -48,12 +56,22 @@ export class DialogAddGroupComponent {
     });
   }
 
+
+/**
+ * updates users in group
+ * @param newGroupId the ID of the new group
+ */
   updateGroup(newGroupId) {
     this.firestore.collection('groups').doc(newGroupId).update({
       'participants': [this.use.currentUserId]
     }).then(() => {
     })
   }
+
+/**
+ * adds/deletes users to/from groups
+ * @param currentGroups already existing groups
+ */
 
   updateUser(currentGroups) {
     this.firestore.collection('users').doc(this.use.currentUserId).update({
@@ -64,6 +82,9 @@ export class DialogAddGroupComponent {
     })
   }
 
+/**
+ * closes the dialog
+ */
   closeDialogGroup() {
     this.dialogRef.close();
   }
