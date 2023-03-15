@@ -44,9 +44,12 @@ export class HeaderComponent {
   onSearchTextChanged(event: Event) {
     const inputElement = event.target as HTMLInputElement;
     this.search.enteredSearchValue = inputElement.value;
-  }
+      this.nav.autoScroll = true;
+      setTimeout(() => {
+        this.nav.autoScroll = false;
+      }, 300);
+    }
   
-
 
   /**
    * open or close navbar left
