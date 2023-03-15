@@ -19,12 +19,13 @@ export class DialogMembersComponent {
 
   ngOnInit() {
     this.allUsers = [];
-    this.firestore.collection(this.whichContentShouldLoad[0]).doc(this.whichContentShouldLoad[1]).valueChanges().subscribe((doc: any) => {
+    this.firestore.collection(this.whichContentShouldLoad[0]).doc(this.whichContentShouldLoad[1]).valueChanges({ idField: 'docId' }).subscribe((doc: any) => {
       doc.participants.forEach((participant: any) => {
         const participantIds = participant;
 
         this.firestore.collection('users').doc(participant).get().toPromise().then((doc: any) => {
           const user = doc.data();
+          user.docId = participant;
           this.allUsers.push(user);
         });
       });
@@ -34,7 +35,7 @@ export class DialogMembersComponent {
   showMemberProfile(user) {
     this.nav.openRight();
     this.closeDialogMembers();
-    console.log(user);
+    this.nav.whichProfileShouldLoad.next(user.docId);
   }
 
   closeDialogMembers(){

@@ -62,6 +62,7 @@ export class HeaderComponent {
 
   openNavbarRight() {
     this.nav.toggleRight();
+    this.nav.whichProfileShouldLoad.next(this.use.currentUserId);
   }
 }
 

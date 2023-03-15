@@ -12,5 +12,6 @@ export let user = {
         "channels": ['hTdApKhXg8111SoNr2Yq', 'KlTnEdj7XuVLzYnB13Iw'],
         "groups": [],
         "directMessages": []
-    }
+    },
+    "docId": ''
 }

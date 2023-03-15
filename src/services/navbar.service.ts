@@ -1,9 +1,11 @@
 import { Injectable } from '@angular/core';
+import { Subject } from 'rxjs';
 
 @Injectable()
 export class NavbarService {
   showNavbarRight: boolean;
   showNavbarLeft: boolean;
+  whichProfileShouldLoad = new Subject<any>();
 
   constructor() { this.showNavbarRight = false; this.showNavbarLeft = true }
 
