@@ -45,6 +45,10 @@
     display: flex;
     flex-direction: column;
     overflow-y: scroll;
+    
+    @media screen and (max-width: 620px) {
+        padding: 0px 10px 10px 10px;
+    }
 }
 
 .text_field {
@@ -83,10 +87,14 @@
     margin-top: 22px;
     display: flex;
     max-width: 80%;
+
+    @media screen and (max-width: 620px) {
+        max-width: 100%;
+    }
+
     &:first-child {
         margin-top: 12px;
     }
-
     
 }
 
@@ -135,6 +143,12 @@
     height: 100vh;
     display: flex;
     flex-direction: column;
+
+    @media screen and (max-width: 620px) {
+    
+        margin-top: 64px;
+
+    }
 }
 
 

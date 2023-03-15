@@ -36,9 +36,37 @@ h2 {
     padding-top: 0;
 }
 
+h1 {
+    @media screen and (max-width: 620px){
+        padding-top: 26px;
+        word-break: break-all;
+    }
+}
+
 .headline-closeBtn {
     display: flex;
     justify-content: space-between;
     padding-right: 20px;
     padding-top: 15px;
+
+    @media screen and (max-width: 620px) {
+        justify-content: center;
+        padding-right: 0px;
+    }
+
+
+    & {
+        mat-icon {
+            @media screen and (max-width: 620px) {
+                position: absolute;
+                right: 16px;
+                top: 16px;
+                cursor: pointer;
+
+            }
+        }
+    }
 }
+
+
+

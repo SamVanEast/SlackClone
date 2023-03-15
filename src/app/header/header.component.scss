@@ -4,6 +4,16 @@
     display: flex;
     justify-content: space-between;
     border-bottom: 1px solid black;
+    
+    @media screen and (max-width: 620px) {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        z-index: 2;
+        height: 63px !important;
+    }
+
 
     a {
         text-decoration: none;
@@ -17,6 +27,10 @@ mat-icon {
 
 .collapse-menu {
     cursor: pointer;
+
+    @media screen and (max-width: 620px) {
+        display: none;
+    }
 }
 
 .header-left {
@@ -46,6 +60,10 @@ mat-form-field {
     padding: 5px 5px;
     border: 1px solid gray;
 
+    @media screen and (max-width: 620px) {
+        display: none;
+    }
+
     input {
         background: transparent;
         flex: 1;
@@ -54,7 +72,7 @@ mat-form-field {
         padding: 0px 10px;
         font-size: 14px;
         color: white;
-
+        height: 63;
 
     }
 
