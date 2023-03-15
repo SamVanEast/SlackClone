@@ -19,7 +19,7 @@
 
     span {
         padding-left: 24px;
-        overflow: scroll;
+        overflow: auto;
         white-space: nowrap;
 
         @media screen and (max-width: 620px){

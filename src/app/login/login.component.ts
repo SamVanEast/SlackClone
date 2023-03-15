@@ -81,6 +81,7 @@ export class LoginComponent {
       });
   }
 
+
   /**
    * Function to generate a new User
    */
@@ -101,6 +102,7 @@ export class LoginComponent {
       this.showWrongText();
     }
   }
+
 
   /**
    *  add new member to channels
@@ -126,6 +128,7 @@ export class LoginComponent {
     });
   }
 
+
   /**
    * shows text under input if input is wrong
    */
@@ -135,6 +138,7 @@ export class LoginComponent {
         this.toggle = false;
       }, 3000);
   }
+
 
   /**
    * shows the Push text if create a new User
@@ -147,12 +151,14 @@ export class LoginComponent {
     }, 3000);
   }
 
+
   /**
    * Login for Guest
    */
   guestLogin() {
     this.router.navigateByUrl('/');
   }
+
 
   /**
    * Login for User
@@ -174,6 +180,7 @@ export class LoginComponent {
     }
   }
 
+
   /**
    *  reset password for User 
    */
@@ -192,6 +199,7 @@ export class LoginComponent {
       }
     }
   }
+
 
   /**
    *  change Password for User
@@ -215,13 +223,16 @@ export class LoginComponent {
     }
   }
 
+
   resetOverview() {
     this.reset = true;
   }
 
+
   NewUserOverview() {
     this.newUser = true;
   }
+  
 
   showLogin() {
     this.newUser = false;

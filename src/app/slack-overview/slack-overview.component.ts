@@ -18,6 +18,7 @@ export class SlackOverviewComponent {
   searchText: string = '';
   mobileNavBar = true;
   mobileContent = true;
+  navBarRight = true;
   innerWidth: any;
 
   constructor(public use: UserService, private router: Router, private firestore: AngularFirestore, private route: ActivatedRoute,) {
@@ -35,7 +36,8 @@ export class SlackOverviewComponent {
     this.innerWidth = window.innerWidth;
     if(this.innerWidth >= 620) {
       this.mobileNavBar = true;
-      this.mobileContent = true
+      this.mobileContent = true;
+      this.navBarRight = true;
     }
   }
 
