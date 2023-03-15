@@ -14,7 +14,7 @@ import { DialogMembersComponent } from '../dialog-members/dialog-members.compone
   styleUrls: ['./messages-history.component.scss']
 })
 export class MessagesHistoryComponent {
-  @ViewChild('messagesHistoryContent') messagesHistoryContent;
+  @ViewChild('messagesHistoryContent', { static: false }) private messagesHistoryContent: ElementRef;
   editor: Editor | undefined;
   html = '';
   currentDoc;
@@ -26,7 +26,20 @@ export class MessagesHistoryComponent {
 
   constructor(public use: UserService, private route: ActivatedRoute, private firestore: AngularFirestore, public dialog: MatDialog, private el: ElementRef, private renderer: Renderer2, public nav: NavbarService) {
     this.whichContentShouldLoad = [];
+  }
 
+  ngAfterViewInit() {
+    this.scrollToBottom();
+  }
+  
+  ngAfterViewChecked() {
+    this.scrollToBottom();
+  }
+
+  private scrollToBottom(): void {
+    try {
+      this.messagesHistoryContent.nativeElement.scrollTop = this.messagesHistoryContent.nativeElement.scrollHeight;
+    } catch(err) { }
   }
 
   ngOnChanges() {
@@ -34,10 +47,6 @@ export class MessagesHistoryComponent {
       this.firestore.collection(this.whichContentShouldLoad[0]).doc(this.whichContentShouldLoad[1]).valueChanges().subscribe((doc: any) => {
         this.doc = doc;
         this.withWhoMakeGroup = doc.participants;
-        // setInterval(() => {
-          
-          // this.scrollToBottom();
-        // }, 5000);
       });
     }
   }
@@ -52,33 +61,6 @@ export class MessagesHistoryComponent {
   ngOnDestroy(): void {
     this.editor?.destroy();
   }
-
-  // ngAfterViewInit(): void {
-  //   this.scrollToBottom();
-  // }
-
-  // @HostListener('scroll', ['$event'])
-  // onScroll(event: Event) {
-  //   const scrollPosition = this.messagesHistoryContent.nativeElement.scrollTop;
-  //   console.log('scroll position:', scrollPosition);
-  // }
-
-  // scrollToBottom(): void {
-  //   console.log('scrollTop', this.messagesHistoryContent.nativeElement.scrollTop);
-  //   console.log('scrollHeight', this.messagesHistoryContent.nativeElement.scrollHeight);
-  //   console.log(this.messagesHistoryContent);
-    
-  //   const element = this.messagesHistoryContent.nativeElement;
-  //   element.scrollTop = element.scrollHeight - element.clientHeight;
-  //   addEventListener("scroll", (event) => {
-  //     console.log('scrollt');
-      
-  //   });
-  //   let lastChild = document.getElementById('ng-container').lastChild.offsetTop;
-  //   console.log(lastChild);
-    
-
-  // }
 
   sendMessage() {
     var oParser = new DOMParser();
