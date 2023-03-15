@@ -14,52 +14,50 @@ import { UserService } from 'src/services/user.service';
 
 export class HeaderComponent {
   public profileImgSrc = '';
-  userId: string;
-  public firstName;
-  public lastName;
-  public email;
-  public phone;
   enteredSearchValue: string = '';
+  @Output() searchTextChanged: EventEmitter<string> = new EventEmitter<string>();
 
-  constructor(public use: UserService, public nav: NavbarService, private route: ActivatedRoute, public elementRef: ElementRef, private firestore: AngularFirestore, public dialog: MatDialog) { }
+  constructor(public use: UserService, public nav: NavbarService, public elementRef: ElementRef, private firestore: AngularFirestore, public dialog: MatDialog) { }
 
+  /**
+   * load user information 
+   */
   ngOnInit(): void {
-    this.route.params.subscribe((params) => {
-
-      this.use.currentUserId = params['id'];
-
-      this.firestore.collection('users').doc(this.use.currentUserId).valueChanges().subscribe((user: any) => {
-        this.firstName = user.userInfos.firstName;
-        this.lastName = user.userInfos.lastName;
-        this.email = user.userInfos.email;
-        this.phone = user.userInfos.phone;
-      });
-
-      this.firestore.collection('users').doc(this.use.currentUserId).get().subscribe((doc) => {
-        const user:any = doc.data();
-        this.profileImgSrc = user.userInfos.profileImg;
-      });
+    this.firestore.collection('users').doc(this.use.currentUserId).get().subscribe((doc) => {
+      const user: any = doc.data();
+      this.profileImgSrc = user.userInfos.profileImg;
     });
   }
 
-  sub(): void {
-  }
 
+  /**
+   *  
+   *open dialog
+   */
   openImprint() {
     this.dialog.open(ImprintDataprotectionComponent);
   }
 
-  @Output()
-  searchTextChanged: EventEmitter<string> = new EventEmitter<string>();
 
+  /**
+   * ouput search text
+   */
   onSearchTextChanged() {
-    this.searchTextChanged.emit(this.enteredSearchValue); 
+    this.searchTextChanged.emit(this.enteredSearchValue);
   }
 
-  toggleNavbarLeft(){
+
+  /**
+   * open or close navbar left
+   */
+  toggleNavbarLeft() {
     this.nav.toggleLeft();
   }
 
+
+  /**
+   * open or close navbar right and whisch profile should load
+   */
   openNavbarRight() {
     this.nav.toggleRight();
     this.nav.whichProfileShouldLoad.next(this.use.currentUserId);
