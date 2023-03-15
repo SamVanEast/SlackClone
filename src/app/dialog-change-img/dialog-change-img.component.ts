@@ -36,7 +36,7 @@ export class DialogChangeImgComponent {
     },
   ];
 
-  constructor(public use: UserService, private route: ActivatedRoute, private firestore: AngularFirestore, private dialogRef: MatDialogRef<DialogUpdateContactComponent>) {
+  constructor(public use: UserService, private dialogRef: MatDialogRef<DialogUpdateContactComponent>) {
 
     if (this.use.currentUserId == 'TzlCRRHBcjQ30Oml2Tb8') {
       this.isGuest = true;
