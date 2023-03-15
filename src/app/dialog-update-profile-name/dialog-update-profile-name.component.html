@@ -1,7 +1,7 @@
 <mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
 
-<h1 class="title-dialog" mat-dialog-title>Edit name</h1>
-<div mat-dialog-content>
+<h1 *ngIf="!isGuest" class="title-dialog" mat-dialog-title>Edit name</h1>
+<div *ngIf="!isGuest" mat-dialog-content>
   <div>
     <mat-form-field class="mr-16 mt-16" appearance="outline">
       <mat-label>First name</mat-label>
@@ -23,3 +23,16 @@
     <button mat-raised-button color="primary" (click)="saveName()">Save</button>
   </div>
 </div>
+
+<h1 *ngIf="isGuest" class="title-dialog-guest" mat-dialog-title>Permitted</h1>
+<div mat-dialog-content *ngIf="isGuest">
+    <div>
+      <div>
+        <p>You are logged in as guest. In order to user this function, please create a Slack Clone account.</p>
+      </div>
+  
+      <div class="buttons">
+        <button mat-stroked-button (click)="closeDialogName()">Cancel</button>
+      </div>
+    </div>
+  </div>

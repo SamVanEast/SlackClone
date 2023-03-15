@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { MatDialogRef } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
+import { UserService } from 'src/services/user.service';
 import { DialogUpdateContactComponent } from '../dialog-update-contact/dialog-update-contact.component';
 
 @Component({
@@ -12,6 +13,7 @@ import { DialogUpdateContactComponent } from '../dialog-update-contact/dialog-up
 export class DialogChangeImgComponent {
   loading = false;
   public selectedImageId;
+  isGuest;
 
   public images = [
     {
@@ -34,7 +36,14 @@ export class DialogChangeImgComponent {
     },
   ];
 
-  constructor(private route: ActivatedRoute, private firestore: AngularFirestore, private dialogRef: MatDialogRef<DialogUpdateContactComponent>) { }
+  constructor(public use: UserService, private route: ActivatedRoute, private firestore: AngularFirestore, private dialogRef: MatDialogRef<DialogUpdateContactComponent>) {
+
+    if (this.use.currentUserId == 'TzlCRRHBcjQ30Oml2Tb8') {
+      this.isGuest = true;
+    } else {
+      this.isGuest = false;
+    }
+  }
 
   setSelectedImageId(imageId) {
     this.selectedImageId = imageId;
