@@ -10,8 +10,6 @@
   gap: 14px;
 
   @media screen and (max-height: 550px) {
-    padding-left: 12px;
-    padding-right: 12px;
     gap: 0px;
     }
 
@@ -41,6 +39,7 @@ h1 {
 
     @media screen and (max-width: 600px) {
       font-size: 32px;
+      padding-top: 8px;
     }
 }
 
