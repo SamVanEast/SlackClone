@@ -6,9 +6,9 @@
             <div class="addBtn-showMembers" ><mat-icon class="addBtn"  *ngIf="whichContentShouldLoad[0] === 'groups'" (click)="openAddMemberToGroup()" matTooltip="Add member" matTooltipPosition="left">person_add</mat-icon>
             <button mat-raised-button (click)="openDialogMembers()" color="primary">Members</button></div>
         </div>
-        <div class="messages_history_content">
+        <div class="messages_history_content" #messagesHistoryContent id="ng-container">
             
-            <ng-container *ngFor="let message of doc?.messages">
+            <ng-container *ngFor="let message of doc?.messages; let i = index" >
                 <div class="single-post"
                     *ngIf="searchText === '' || message.text.toLowerCase().includes(searchText.toLowerCase()) || message.creator.toLowerCase().includes(searchText.toLowerCase())">
                     <img class="profile-pic" src="{{ message.creatorImg }}">

@@ -1,4 +1,4 @@
-import { Component, Input, HostListener, OnChanges } from '@angular/core';
+import { Component, Input, HostListener, OnChanges, ElementRef, Renderer2, ViewChild } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
@@ -13,6 +13,7 @@ import { DialogMembersComponent } from '../dialog-members/dialog-members.compone
   styleUrls: ['./messages-history.component.scss']
 })
 export class MessagesHistoryComponent {
+  @ViewChild('messagesHistoryContent') messagesHistoryContent;
   editor: Editor | undefined;
   html = '';
   currentDoc;
@@ -22,11 +23,9 @@ export class MessagesHistoryComponent {
   user;
   withWhoMakeGroup;
 
-  constructor(public use: UserService, private route: ActivatedRoute, private firestore: AngularFirestore, public dialog: MatDialog) {
+  constructor(public use: UserService, private route: ActivatedRoute, private firestore: AngularFirestore, public dialog: MatDialog, private el: ElementRef, private renderer: Renderer2) {
     this.whichContentShouldLoad = [];
-    this.route.params.subscribe((params) => {
-      this.use.currentUserId = params['id'];
-    });
+
   }
 
   ngOnChanges() {
@@ -34,6 +33,10 @@ export class MessagesHistoryComponent {
       this.firestore.collection(this.whichContentShouldLoad[0]).doc(this.whichContentShouldLoad[1]).valueChanges().subscribe((doc: any) => {
         this.doc = doc;
         this.withWhoMakeGroup = doc.participants;
+        // setInterval(() => {
+          
+          // this.scrollToBottom();
+        // }, 5000);
       });
     }
   }
@@ -49,10 +52,36 @@ export class MessagesHistoryComponent {
     this.editor?.destroy();
   }
 
+  // ngAfterViewInit(): void {
+  //   this.scrollToBottom();
+  // }
+
+  // @HostListener('scroll', ['$event'])
+  // onScroll(event: Event) {
+  //   const scrollPosition = this.messagesHistoryContent.nativeElement.scrollTop;
+  //   console.log('scroll position:', scrollPosition);
+  // }
+
+  // scrollToBottom(): void {
+  //   console.log('scrollTop', this.messagesHistoryContent.nativeElement.scrollTop);
+  //   console.log('scrollHeight', this.messagesHistoryContent.nativeElement.scrollHeight);
+  //   console.log(this.messagesHistoryContent);
+    
+  //   const element = this.messagesHistoryContent.nativeElement;
+  //   element.scrollTop = element.scrollHeight - element.clientHeight;
+  //   addEventListener("scroll", (event) => {
+  //     console.log('scrollt');
+      
+  //   });
+  //   let lastChild = document.getElementById('ng-container').lastChild.offsetTop;
+  //   console.log(lastChild);
+    
+
+  // }
 
   sendMessage() {
     var oParser = new DOMParser();
-    var oDOM = oParser.parseFromString(this.html, "text/html");
+    var oDOM = oParser.parseFromString(this.html, "text/html"); 
     var text = oDOM.body.innerText;
 
     if (text !== '') {
