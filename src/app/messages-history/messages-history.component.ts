@@ -1,7 +1,6 @@
-import { Component, Input, ElementRef, Renderer2, ViewChild } from '@angular/core';
+import { Component, Input, ElementRef, ViewChild } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { MatDialog } from '@angular/material/dialog';
-import { ActivatedRoute } from '@angular/router';
 import { Editor } from 'ngx-editor';
 import { NavbarService } from 'src/services/navbar.service';
 import { UserService } from 'src/services/user.service';
@@ -25,7 +24,7 @@ export class MessagesHistoryComponent {
   withWhoMakeGroup;
   autoScroll = false;
 
-  constructor(public use: UserService, private route: ActivatedRoute, private firestore: AngularFirestore, public dialog: MatDialog, private el: ElementRef, private renderer: Renderer2, public nav: NavbarService) {
+  constructor(public use: UserService, private firestore: AngularFirestore, public dialog: MatDialog, public nav: NavbarService) {
     this.whichContentShouldLoad = [];
   }
 
