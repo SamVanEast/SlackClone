@@ -53,9 +53,9 @@ export class MessagesHistoryComponent {
       this.firestore.collection(this.whichContentShouldLoad[0]).doc(this.whichContentShouldLoad[1]).valueChanges().subscribe((doc: any) => {
         this.doc = doc;
         this.withWhoMakeGroup = doc.participants;
+        this.autoScrollOn();
       });
     }
-    this.autoScrollOn();
   }
 
   ngOnInit(): void {
