@@ -15,8 +15,14 @@ export class DialogAddTeamMemberComponent {
   loading = false;
   allUsers = [];
   withWhoDirectMessages;
+  isGuest;
 
   constructor(public use: UserService, private firestore: AngularFirestore, private dialogRef: MatDialogRef<DialogAddTeamMemberComponent>) {
+    if(this.use.currentUserId == 'TzlCRRHBcjQ30Oml2Tb8') {
+      this.isGuest = true;
+    } else {
+      this.isGuest = false;
+    }
   }
 
   ngOnInit(): void {
