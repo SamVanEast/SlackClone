@@ -16,9 +16,15 @@ export class DialogAddGroupComponent {
   loading = false;
   group;
   groupsIds = [];
+  isGuest;
 
   constructor(public use: UserService, private route: ActivatedRoute, private firestore: AngularFirestore, private dialogRef: MatDialogRef<DialogAddGroupComponent>) {
     this.group = group;
+    if(this.use.currentUserId == 'TzlCRRHBcjQ30Oml2Tb8') {
+      this.isGuest = true;
+    } else {
+      this.isGuest = false;
+    }
   }
 
   saveGroup() {
