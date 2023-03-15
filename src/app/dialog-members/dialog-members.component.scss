@@ -1,7 +1,12 @@
 .dialogMemberContainer{
     width: 500px;
-    height: 500px;
+    padding-bottom: 12px;
 
+    @media screen and (max-width: 620px){
+        width: 280px;
+
+    }
+ 
     h2{
         margin: 16px;
     }

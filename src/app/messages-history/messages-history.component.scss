@@ -20,6 +20,12 @@
 
     span {
         padding-left: 24px;
+        overflow: scroll;
+        white-space: nowrap;
+
+        @media screen and (max-width: 620px){
+            font-size: 16px;
+        }
     }
 
     button{
@@ -37,6 +43,7 @@
 
 .addBtn {
     cursor: pointer;
+    padding-left: 8px;
 }
 
 .messages_history_content {
