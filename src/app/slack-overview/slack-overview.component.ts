@@ -1,10 +1,5 @@
-import { Component, HostListener, Input, ViewChild } from '@angular/core';
-import { user } from 'src/models/user';
-import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { channels } from 'src/models/channels';
-import { group } from 'src/models/group';
-import { directMessage } from 'src/models/directMessage';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component, HostListener } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { UserService } from 'src/services/user.service';
 
 @Component({
@@ -15,19 +10,20 @@ import { UserService } from 'src/services/user.service';
 
 export class SlackOverviewComponent {
   whichContentShouldLoad;
-  searchText: string = '';
   mobileNavBar = true;
   mobileContent = true;
   navBarRight = true;
   innerWidth: any;
 
-  constructor(public use: UserService, private router: Router, private firestore: AngularFirestore, private route: ActivatedRoute,) {
+  constructor(public use: UserService, private route: ActivatedRoute,) {
     this.route.params.subscribe((params) => {
       this.use.currentUserId= params['id'];
     });
   }  
   
+
   @HostListener('window:resize', ['$event'])
+
 
   /**
    * detects if you are in mobile mode
@@ -41,6 +37,7 @@ export class SlackOverviewComponent {
     }
   }
 
+
   /**
    * stores output variable
    * @param whichContentShouldLoad collection name, doc id and headline name
@@ -49,13 +46,6 @@ export class SlackOverviewComponent {
     this.whichContentShouldLoad = whichContentShouldLoad;
   }
 
-/**
- * stores output variable
- * @param searchValue what to look for
- */
-  onSearchTextEntered(searchValue: string) {
-    this.searchText = searchValue;
-  }
 
   /**
    * open the communication area
@@ -64,6 +54,7 @@ export class SlackOverviewComponent {
     this.mobileNavBar = true;
     this.mobileContent = false;
   }
+
 
   /**
    * open the chat area

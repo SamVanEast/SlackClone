@@ -49,6 +49,7 @@ import { DialogAddMemberToGroupComponent } from './dialog-add-member-to-group/di
 import { NavbarRightComponent } from './navbar-right/navbar-right.component';
 import { NavbarService } from '../services/navbar.service';
 import { UserService } from 'src/services/user.service';
+import { SearchBarService } from 'src/services/searchBar.service';
 
 @NgModule({
   declarations: [
@@ -102,7 +103,7 @@ import { UserService } from 'src/services/user.service';
     ReactiveFormsModule,
     NgxEditorModule,
   ],
-  providers: [NavbarService, UserService],
+  providers: [NavbarService, UserService, SearchBarService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
