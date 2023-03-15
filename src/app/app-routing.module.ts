@@ -7,7 +7,6 @@ const routes: Routes = [
   {path: '', component:  LoginComponent},
   {path: 'slack/:id', component:  SlackOverviewComponent},
   {path: 'slack/login', component:  LoginComponent},
-  {path: 'slack/overview', component:  SlackOverviewComponent},
 ];
 
 @NgModule({
