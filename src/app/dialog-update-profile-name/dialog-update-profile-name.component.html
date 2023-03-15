@@ -2,7 +2,7 @@
 
 <h1 *ngIf="!isGuest" class="title-dialog" mat-dialog-title>Edit name</h1>
 <div *ngIf="!isGuest" mat-dialog-content>
-  <div>
+  <div class="position-input">
     <mat-form-field class="mr-16 mt-16" appearance="outline">
       <mat-label>First name</mat-label>
       <input [attr.disabled]="loading" [formControl]="firstNameFormControl" matInput placeholder="First name">

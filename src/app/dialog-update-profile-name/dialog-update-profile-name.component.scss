@@ -15,3 +15,28 @@
 .title-dialog-guest {
     color: red;
 }
+
+.position-input{
+    
+    @media screen and (max-width: 620px){
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+    }
+    
+}
+
+mat-form-field {
+
+    @media screen and (max-width: 620px){
+        max-width: 310px;
+        width: 100%;
+    }
+}
+
+h1{
+    @media screen and (max-width: 620px){
+        text-align: center;
+    }
+    
+}
