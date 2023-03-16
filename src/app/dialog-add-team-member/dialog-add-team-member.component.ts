@@ -55,7 +55,9 @@ export class DialogAddTeamMemberComponent {
   }
 
 
-
+  /**
+   * check is it a guest, if yes splice him
+   */
   checkIsItGuest() {
     let self = this;
     this.allUsers.forEach(function (user, i) {
