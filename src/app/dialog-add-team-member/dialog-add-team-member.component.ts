@@ -90,12 +90,14 @@ export class DialogAddTeamMemberComponent {
    * adds a new direct message
    */
   save() {
+    if(this.memberId.length > 0) {
     this.loading = true;
     this.firestore.collection('directMessages').add(directMessage).then((docRef) => {
       const newDirectMessageId = docRef.id;
       this.pushNewDirectMessageToArray(newDirectMessageId);
       this.loadUser(newDirectMessageId);
     })
+  }
   }
 
 
