@@ -34,11 +34,27 @@ export class DialogAddMemberToGroupComponent {
           self.allUsers.splice(i, 1)
         }
         if (i === self.allUsers.length - 1) {
-          self.checkAllUsers();
+          self.checkIsItGuest();
         }
       })
     });
   }
+
+
+  /**
+   * check is it a guest, if yes splice him
+   */
+  checkIsItGuest() {
+    let self = this;
+    this.allUsers.forEach(function (user, i) {
+      let result = user.docId === 'TzlCRRHBcjQ30Oml2Tb8';
+      if (result) {
+        self.allUsers.splice(i, 1)
+        self.checkAllUsers();
+      }
+    });
+  }
+
 
   /**
     * checks whether other users are already part of a group; hides them if true 

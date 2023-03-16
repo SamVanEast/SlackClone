@@ -17,7 +17,7 @@ export class DialogAddTeamMemberComponent {
   isGuest;
 
   constructor(public use: UserService, private firestore: AngularFirestore, private dialogRef: MatDialogRef<DialogAddTeamMemberComponent>) {
-    if(this.use.currentUserId == 'TzlCRRHBcjQ30Oml2Tb8') {
+    if (this.use.currentUserId == 'TzlCRRHBcjQ30Oml2Tb8') {
       this.isGuest = true;
     } else {
       this.isGuest = false;
@@ -39,19 +39,33 @@ export class DialogAddTeamMemberComponent {
    * deletes my user information
    * @param users user information
    */
-  loadAllUsers(users){
+  loadAllUsers(users) {
     let self = this;
     this.allUsers = users;
-    this.checkAllUsers();
     this.allUsers.forEach(function (user, i) {
       let result = user.docId === self.use.currentUserId;
       if (result) {
         self.allUsers.splice(i, 1)
       }
       if (i === self.allUsers.length - 1) {
-        self.checkAllUsers();
+        self.checkIsItGuest();
+        console.log('works');
       }
     })
+  }
+
+
+
+  checkIsItGuest() {
+    let self = this;
+    this.allUsers.forEach(function (user, i) {
+      let result = user.docId === 'TzlCRRHBcjQ30Oml2Tb8';
+      console.log(result);
+      if (result) {
+        self.allUsers.splice(i, 1)
+        self.checkAllUsers();
+      }
+    });
   }
 
 
@@ -126,7 +140,7 @@ export class DialogAddTeamMemberComponent {
     })
   }
 
-  
+
   /**
    * adds the new direct message to the other participant
    * @param docData information of other participant
