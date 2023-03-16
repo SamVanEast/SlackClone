@@ -49,7 +49,6 @@ export class DialogAddTeamMemberComponent {
       }
       if (i === self.allUsers.length - 1) {
         self.checkIsItGuest();
-        console.log('works');
       }
     })
   }
@@ -62,7 +61,6 @@ export class DialogAddTeamMemberComponent {
     let self = this;
     this.allUsers.forEach(function (user, i) {
       let result = user.docId === 'TzlCRRHBcjQ30Oml2Tb8';
-      console.log(result);
       if (result) {
         self.allUsers.splice(i, 1)
         self.checkAllUsers();
